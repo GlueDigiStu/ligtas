@@ -1,0 +1,10 @@
+@import "tailwindcss" prefix(x);
+@config "../tailwind.config.mjs";
+/* If you need to add custom paths (critical for WordPress PHP files) */
+@source "../**/*.php";
+
+@theme {
+
+}
+
+
