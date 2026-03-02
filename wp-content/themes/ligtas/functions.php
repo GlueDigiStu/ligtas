@@ -486,6 +486,49 @@ function update_cart() {
 add_filter( 'wp_ajax_nopriv_update_cart', 'update_cart' );
 add_filter( 'wp_ajax_update_cart', 'update_cart' );
 
+function mini_cart_add_and_fetch() {
+    $nonce      = isset( $_POST['nonce'] )      ? $_POST['nonce']            : '';
+    $product_id = isset( $_POST['product_id'] ) ? intval( $_POST['product_id'] ) : 0;
+    $quantity   = isset( $_POST['quantity'] )   ? intval( $_POST['quantity'] )   : 1;
+
+    if ( ! wp_verify_nonce( $nonce, 'mini_cart_nonce' ) || ! $product_id ) {
+        wp_send_json_error( 'Invalid request' );
+    }
+
+    if ( $quantity < 1 ) $quantity = 1;
+
+    $added = WC()->cart->add_to_cart( $product_id, $quantity );
+
+    if ( ! $added ) {
+        wp_send_json_error( 'Could not add to cart' );
+    }
+
+    WC()->cart->calculate_totals();
+
+    $product = wc_get_product( $product_id );
+    $items   = array();
+
+    foreach ( WC()->cart->get_cart() as $cart_item ) {
+        $item_product = $cart_item['data'];
+        $items[] = array(
+            'name'     => $item_product->get_name(),
+            'quantity' => $cart_item['quantity'],
+            'subtotal' => WC()->cart->get_product_subtotal( $item_product, $cart_item['quantity'] ),
+        );
+    }
+
+    wp_send_json_success( array(
+        'product_name' => $product->get_name(),
+        'cart_count'   => WC()->cart->get_cart_contents_count(),
+        'cart_total'   => WC()->cart->get_cart_total(),
+        'cart_url'     => wc_get_cart_url(),
+        'checkout_url' => wc_get_checkout_url(),
+        'items'        => $items,
+    ) );
+}
+add_action( 'wp_ajax_mini_cart_add', 'mini_cart_add_and_fetch' );
+add_action( 'wp_ajax_nopriv_mini_cart_add', 'mini_cart_add_and_fetch' );
+
 
 
 
@@ -743,4 +786,40 @@ add_action('quick_edit_custom_box', 'add_quick_edit_fields', 10, 2);
 add_action( 'init', 'enable_product_page_attributes' );
 function enable_product_page_attributes() {
     add_post_type_support( 'product', 'page-attributes' );
+}
+
+
+add_shortcode('custom_buy_now', 'render_variation_with_quantity');
+
+function render_variation_with_quantity($atts) {
+    $atts = shortcode_atts(array(
+            'id' => 0,
+    ), $atts);
+
+    if (empty($atts['id'])) return '';
+
+    $product = wc_get_product($atts['id']);
+    if (!$product) return 'Product not found';
+
+    // Start Buffering
+    ob_start();
+    ?>
+    <form class="cart" action="<?php echo esc_url($product->add_to_cart_url()); ?>" method="POST" enctype='multipart/form-data'>
+        <div class="custom-buy-wrapper x:flex x:items-center x:justify-center x:flex-col x:lg:flex-row x:gap-4">
+            <?php
+            // Renders the standard WC quantity input
+            woocommerce_quantity_input(array(
+                    'min_value'   => apply_filters('woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product),
+                    'max_value'   => apply_filters('woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product),
+                    'input_value' => isset($_POST['quantity']) ? wc_stock_amount($_POST['quantity']) : $product->get_min_purchase_quantity(),
+            ));
+            ?>
+
+            <button type="submit" name="add-to-cart" value="<?php echo esc_attr($product->get_id()); ?>" class="btn">
+                <?php echo esc_html($product->single_add_to_cart_text()); ?>
+            </button>
+        </div>
+    </form>
+    <?php
+    return ob_get_clean();
 }

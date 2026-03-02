@@ -2,9 +2,32 @@
 @config "../tailwind.config.mjs";
 /* If you need to add custom paths (critical for WordPress PHP files) */
 @source "../**/*.php";
-
+@source "../safelist.txt";
 @theme {
 
 }
 
 
+.custom-buy-wrapper{
+    margin-top: 1rem;
+}
+.custom-buy-wrapper input{
+    width: 100px;
+    border: 2px solid #a27fff;
+    border-radius: 5px;
+    padding-left: 1rem;
+    height: 52px;
+}
+.custom-buy-wrapper .btn{
+    margin-top: 0rem;
+    min-width: 0;
+}
+
+@media(max-width: 480px){
+    .custom-buy-wrapper input{
+        width: 100%;
+    }
+    .custom-buy-wrapper .btn{
+        font-size: 16px;
+    }
+}
