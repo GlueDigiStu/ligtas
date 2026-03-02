@@ -683,9 +683,13 @@ if ($variations_type) {
 
         $(document).on('submit', '.cart', function(e) {
             e.preventDefault();
-            var form     = $(this);
+            var form      = $(this);
+            var btn       = form.find('[type="submit"]');
+            var origText  = btn.text();
             var productId = form.find('[name="add-to-cart"]').val();
             var quantity  = form.find('[name="quantity"]').val() || 1;
+
+            btn.text('Adding…').prop('disabled', true).css('opacity', '0.4');
 
             $.ajax({
                 url: ajaxurl,
@@ -700,6 +704,9 @@ if ($variations_type) {
                     if (response.success) {
                         renderMiniCart(response.data);
                     }
+                },
+                complete: function() {
+                    btn.text(origText).prop('disabled', false).css('opacity', '');
                 }
             });
         });
