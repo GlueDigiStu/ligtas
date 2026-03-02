@@ -529,6 +529,35 @@ function mini_cart_add_and_fetch() {
 add_action( 'wp_ajax_mini_cart_add', 'mini_cart_add_and_fetch' );
 add_action( 'wp_ajax_nopriv_mini_cart_add', 'mini_cart_add_and_fetch' );
 
+function mini_cart_fetch() {
+    $nonce = isset( $_POST['nonce'] ) ? $_POST['nonce'] : '';
+    if ( ! wp_verify_nonce( $nonce, 'mini_cart_nonce' ) ) {
+        wp_send_json_error( 'Invalid request' );
+    }
+
+    WC()->cart->calculate_totals();
+
+    $items = array();
+    foreach ( WC()->cart->get_cart() as $cart_item ) {
+        $item_product = $cart_item['data'];
+        $items[] = array(
+            'name'     => $item_product->get_name(),
+            'quantity' => $cart_item['quantity'],
+            'subtotal' => WC()->cart->get_product_subtotal( $item_product, $cart_item['quantity'] ),
+        );
+    }
+
+    wp_send_json_success( array(
+        'cart_count'   => WC()->cart->get_cart_contents_count(),
+        'cart_total'   => WC()->cart->get_cart_total(),
+        'cart_url'     => wc_get_cart_url(),
+        'checkout_url' => wc_get_checkout_url(),
+        'items'        => $items,
+    ) );
+}
+add_action( 'wp_ajax_mini_cart_fetch', 'mini_cart_fetch' );
+add_action( 'wp_ajax_nopriv_mini_cart_fetch', 'mini_cart_fetch' );
+
 
 
 

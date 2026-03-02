@@ -163,6 +163,7 @@ if ($variations_type) {
                                         </div>
                                     <?php endif; ?>
                                     Gold
+                                    <img style="width: 70px; position: absolute; top: 0; transform: translateY( -100%); right: 0;" src="<?= get_stylesheet_directory_uri(); ?>/images/nebosh_gold.png" alt="">
                                 </td>
                                 <td style="text-align: center;" class="x:text-center x:text-2xl x:font-bold x:relative">
                                     <?php if ($most_popular == 'silver'): ?>
@@ -604,10 +605,15 @@ if ($variations_type) {
 
             jQuery('body').on('click', '.add_varition', function (e) {
                 e.preventDefault();
-                var product = jQuery(this).closest('.course_list_item').data('product');
-                var variation = jQuery(this).closest('.course_list_item').data('variation');
-                var qyt = jQuery(this).closest('.course_list_item').find('[name=qyt]').val();
-                var nonce = jQuery(this).closest('.course_list_item').data('nonce');
+                var btn = jQuery(this);
+                var origText = btn.text();
+                var product = btn.closest('.course_list_item').data('product');
+                var variation = btn.closest('.course_list_item').data('variation');
+                var qyt = btn.closest('.course_list_item').find('[name=qyt]').val();
+                var nonce = btn.closest('.course_list_item').data('nonce');
+
+                btn.text('Adding\u2026').prop('disabled', true).css('opacity', '0.4');
+
                 jQuery.ajax({
                     url: ajaxurl,
                     type: 'post',
@@ -625,10 +631,15 @@ if ($variations_type) {
                             data: {'action': 'update_cart', 'product': product, 'nonce': nonce},
                             success: function (datas) {
                                 jQuery('.course_buy_block').html(datas);
+                                jQuery(document.body).trigger('added_to_cart');
+                            },
+                            complete: function () {
+                                btn.text(origText).prop('disabled', false).css('opacity', '');
                             }
                         });
                     },
                     error: function (xhr, str) {
+                        btn.text(origText).prop('disabled', false).css('opacity', '');
                         alert('Error: ' + xhr.responseCode);
                     }
                 });
@@ -662,93 +673,6 @@ if ($variations_type) {
         });
     </script>
 
-    <!-- Mini Cart Panel -->
-    <div id="mini-cart-panel" style="display:none;position:fixed;top:20px;right:20px;z-index:99999;width:320px;background:#fff;border-radius:10px;box-shadow:0 8px 32px rgba(41,18,97,0.2);padding:24px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-            <h3 style="margin:0;font-size:18px;font-weight:bold;color:#291261;">Added to Cart ✓</h3>
-            <button id="mini-cart-close" style="background:none;border:none;font-size:28px;cursor:pointer;color:#291261;line-height:1;padding:0;">&times;</button>
-        </div>
-        <div id="mini-cart-items" style="margin-bottom:12px;"></div>
-        <div id="mini-cart-total" style="border-top:2px solid #a27fff;padding-top:12px;font-weight:bold;color:#291261;font-size:16px;"></div>
-        <div style="display:flex;gap:12px;margin-top:16px;">
-            <a id="mini-cart-link" href="#" class="btn" style="flex:1;text-align:center;justify-content:center;min-width:0;">View Cart</a>
-            <a id="mini-cart-checkout-link" href="#" class="btn btn_purple" style="flex:1;text-align:center;justify-content:center;min-width:0;">Checkout</a>
-        </div>
-    </div>
-
-    <script>
-    jQuery(document).ready(function($) {
-        var miniCartNonce = '<?php echo wp_create_nonce('mini_cart_nonce'); ?>';
-        var miniCartTimer;
-
-        $(document).on('submit', '.cart', function(e) {
-            e.preventDefault();
-            var form      = $(this);
-            var btn       = form.find('[type="submit"]');
-            var origText  = btn.text();
-            var productId = form.find('[name="add-to-cart"]').val();
-            var quantity  = form.find('[name="quantity"]').val() || 1;
-
-            btn.text('Adding…').prop('disabled', true).css('opacity', '0.4');
-
-            $.ajax({
-                url: ajaxurl,
-                type: 'POST',
-                data: {
-                    action:     'mini_cart_add',
-                    product_id: productId,
-                    quantity:   quantity,
-                    nonce:      miniCartNonce
-                },
-                success: function(response) {
-                    if (response.success) {
-                        renderMiniCart(response.data);
-                    }
-                },
-                complete: function() {
-                    btn.text(origText).prop('disabled', false).css('opacity', '');
-                }
-            });
-        });
-
-        function renderMiniCart(data) {
-            var html = '';
-            $.each(data.items, function(i, item) {
-                html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f0f0f0;">';
-                html += '<span style="color:#291261;font-size:14px;">' + item.name + ' &times; ' + item.quantity + '</span>';
-                html += '<span style="font-weight:bold;font-size:14px;">' + item.subtotal + '</span>';
-                html += '</div>';
-            });
-
-            $('#mini-cart-items').html(html);
-            $('#mini-cart-total').html('Total: ' + data.cart_total);
-            $('.cart_counter').text(data.cart_count);
-            $('#mini-cart-link').attr('href', data.cart_url);
-            $('#mini-cart-checkout-link').attr('href', data.checkout_url);
-
-            $('#mini-cart-panel').fadeIn(300);
-
-            clearTimeout(miniCartTimer);
-            miniCartTimer = setTimeout(function() {
-                $('#mini-cart-panel').fadeOut(300);
-            }, 6000);
-        }
-
-        $('#mini-cart-close').on('click', function() {
-            clearTimeout(miniCartTimer);
-            $('#mini-cart-panel').fadeOut(300);
-        });
-
-        $(document).on('click', function(e) {
-            if ($('#mini-cart-panel').is(':visible') &&
-                !$(e.target).closest('#mini-cart-panel').length &&
-                !$(e.target).closest('.cart').length) {
-                clearTimeout(miniCartTimer);
-                $('#mini-cart-panel').fadeOut(300);
-            }
-        });
-    });
-    </script>
 
 
 <?php
