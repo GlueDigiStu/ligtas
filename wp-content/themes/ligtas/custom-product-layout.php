@@ -59,8 +59,7 @@ $tfp = 'product_cat_' . $term_parent;
                     if($course_overview['virtual_courses']['enable'])
                         $count++;
                     if($course_overview['classroom_courses']['enable'])
-                        $count++;
-?>
+                        $count++; ?>
                     <div class="x:md:absolute x:bottom-2 x:left-2 x:right-2 x:grid x:md:grid-cols-<?= $count ?> x:gap-4">
                         <?php if ($course_overview['online_courses']['enable']): ?>
                             <div class="x:bg-[#291261] x:rounded-[10px] x:p-4">
@@ -108,7 +107,7 @@ $tfp = 'product_cat_' . $term_parent;
                         <?php if (is_array($icon_row['items'])): ?>
                             <?php foreach ($icon_row['items'] as $item): ?>
                                 <div class="x:basis-1/6">
-                                    <?= wp_get_attachment_image($item['icon'], 'full'); ?>
+                                    <?= wp_get_attachment_image($item['icon'], 'full', null, ['class' => 'x:aspect-square x:object-contain']); ?>
                                     <p class="x:font-bold x:text-center x:mt-4"><?= $item['text'] ?></p>
                                 </div>
                             <?php endforeach; ?>

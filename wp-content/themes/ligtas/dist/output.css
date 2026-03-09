@@ -235,6 +235,9 @@
   .x\:hidden {
     display: none !important;
   }
+  .x\:aspect-square {
+    aspect-ratio: 1 / 1 !important;
+  }
   .x\:w-full {
     width: 100% !important;
   }
@@ -305,6 +308,9 @@
   }
   .x\:bg-white {
     background-color: var(--x-color-white) !important;
+  }
+  .x\:object-contain {
+    object-fit: contain !important;
   }
   .x\:p-3 {
     padding: calc(var(--x-spacing) * 3) !important;
