@@ -208,6 +208,9 @@
   .x\:mt-4 {
     margin-top: calc(var(--x-spacing) * 4) !important;
   }
+  .x\:mt-8 {
+    margin-top: calc(var(--x-spacing) * 8) !important;
+  }
   .x\:mt-12 {
     margin-top: calc(var(--x-spacing) * 12) !important;
   }

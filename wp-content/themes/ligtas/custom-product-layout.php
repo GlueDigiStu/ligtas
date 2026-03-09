@@ -103,7 +103,7 @@ $tfp = 'product_cat_' . $term_parent;
 
                     <h2 class="title_section fade_in x:text-center"><?= $icon_row['title'] ?></h2>
                     <p class="x:text-center"><?= $icon_row['subtitle'] ?></p>
-                    <div class="x:flex x:items-end x:justify-center x:gap-4">
+                    <div class="x:flex x:items-end x:justify-center x:gap-4 x:mt-8">
                         <?php if (is_array($icon_row['items'])): ?>
                             <?php foreach ($icon_row['items'] as $item): ?>
                                 <div class="x:basis-1/6">
