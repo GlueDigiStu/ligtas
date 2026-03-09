@@ -244,6 +244,12 @@
   .x\:w-full {
     width: 100% !important;
   }
+  .x\:max-w-37\.5 {
+    max-width: calc(var(--x-spacing) * 37.5) !important;
+  }
+  .x\:max-w-\[150px\] {
+    max-width: 150px !important;
+  }
   .x\:min-w-0 {
     min-width: calc(var(--x-spacing) * 0) !important;
   }

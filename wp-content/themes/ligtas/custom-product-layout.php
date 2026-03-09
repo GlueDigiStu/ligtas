@@ -106,7 +106,7 @@ $tfp = 'product_cat_' . $term_parent;
                     <div class="x:flex x:items-end x:justify-center x:gap-4 x:mt-8 x:flex-wrap">
                         <?php if (is_array($icon_row['items'])): ?>
                             <?php foreach ($icon_row['items'] as $item): ?>
-                                <div class="x:md:basis-1/6 x:basis-1/2">
+                                <div class="x:md:basis-1/6 x:basis-1/2 x:max-w-37.5">
                                     <?= wp_get_attachment_image($item['icon'], 'full', null, ['class' => 'x:aspect-square x:object-contain']); ?>
                                     <p class="x:font-bold x:text-center x:mt-4"><?= $item['text'] ?></p>
                                 </div>
