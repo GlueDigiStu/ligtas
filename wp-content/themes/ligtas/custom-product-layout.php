@@ -103,10 +103,10 @@ $tfp = 'product_cat_' . $term_parent;
 
                     <h2 class="title_section fade_in x:text-center"><?= $icon_row['title'] ?></h2>
                     <p class="x:text-center"><?= $icon_row['subtitle'] ?></p>
-                    <div class="x:flex x:items-end x:justify-center x:gap-4 x:mt-8">
+                    <div class="x:flex x:items-end x:justify-center x:gap-4 x:mt-8 x:flex-wrap">
                         <?php if (is_array($icon_row['items'])): ?>
                             <?php foreach ($icon_row['items'] as $item): ?>
-                                <div class="x:basis-1/6">
+                                <div class="x:md:basis-1/6 x:basis-1/2">
                                     <?= wp_get_attachment_image($item['icon'], 'full', null, ['class' => 'x:aspect-square x:object-contain']); ?>
                                     <p class="x:font-bold x:text-center x:mt-4"><?= $item['text'] ?></p>
                                 </div>

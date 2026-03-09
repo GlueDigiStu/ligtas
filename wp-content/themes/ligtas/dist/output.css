@@ -247,6 +247,9 @@
   .x\:min-w-0 {
     min-width: calc(var(--x-spacing) * 0) !important;
   }
+  .x\:basis-1\/2 {
+    flex-basis: calc(1/2 * 100%) !important;
+  }
   .x\:basis-1\/6 {
     flex-basis: calc(1/6 * 100%) !important;
   }
@@ -259,6 +262,9 @@
   }
   .x\:flex-col {
     flex-direction: column !important;
+  }
+  .x\:flex-wrap {
+    flex-wrap: wrap !important;
   }
   .x\:items-center {
     align-items: center !important;
@@ -379,6 +385,11 @@
   .x\:md\:col-span-3 {
     @media (width >= 48rem) {
       grid-column: span 3 / span 3 !important;
+    }
+  }
+  .x\:md\:basis-1\/6 {
+    @media (width >= 48rem) {
+      flex-basis: calc(1/6 * 100%) !important;
     }
   }
   .x\:md\:grid-cols-1 {
