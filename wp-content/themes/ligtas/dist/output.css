@@ -345,6 +345,10 @@
   .x\:text-center {
     text-align: center !important;
   }
+  .x\:\!text-sm {
+    font-size: var(--x-text-sm) !important;
+    line-height: var(--tw-leading, var(--x-text-sm--line-height)) !important;
+  }
   .x\:text-2xl {
     font-size: var(--x-text-2xl) !important;
     line-height: var(--tw-leading, var(--x-text-2xl--line-height)) !important;

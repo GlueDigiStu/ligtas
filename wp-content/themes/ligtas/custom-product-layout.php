@@ -174,7 +174,7 @@ if ($variations_type) {
                                          src="<?= get_stylesheet_directory_uri(); ?>/images/nebosh_gold.png" alt="">
 
                                     <?php if ($gold = get_field('gold')) { ?>
-                                        <p><?= $gold ?></p>
+                                        <p class="x:!text-sm"><?= $gold ?></p>
                                     <?php } ?>
                                 </td>
                                 <td style="text-align: center;" class="x:text-center x:text-2xl x:font-bold x:relative">
@@ -185,7 +185,7 @@ if ($variations_type) {
                                     <?php endif; ?>
                                     Silver
                                     <?php if ($silver = get_field('silver')) { ?>
-                                        <p><?= $silver ?></p>
+                                        <p class="x:!text-sm"><?= $silver ?></p>
                                     <?php } ?>
                                 </td>
                                 <td style="text-align: center;" class="x:text-center x:text-2xl x:font-bold x:relative">
@@ -196,7 +196,7 @@ if ($variations_type) {
                                     <?php endif; ?>
                                     Bronze
                                     <?php if ($bronze = get_field('bronze')) { ?>
-                                        <p><?= $bronze ?></p>
+                                        <p class="x:!text-sm"><?= $bronze ?></p>
                                     <?php } ?>
                                 </td>
                             </tr>
