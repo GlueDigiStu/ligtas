@@ -247,17 +247,11 @@
   .x\:max-w-37\.5 {
     max-width: calc(var(--x-spacing) * 37.5) !important;
   }
-  .x\:max-w-\[150px\] {
-    max-width: 150px !important;
-  }
   .x\:min-w-0 {
     min-width: calc(var(--x-spacing) * 0) !important;
   }
   .x\:basis-1\/2 {
     flex-basis: calc(1/2 * 100%) !important;
-  }
-  .x\:basis-1\/6 {
-    flex-basis: calc(1/6 * 100%) !important;
   }
   .x\:-translate-y-full {
     --tw-translate-y: -100% !important;
@@ -341,6 +335,12 @@
   }
   .x\:pt-\[36px\] {
     padding-top: 36px !important;
+  }
+  .x\:pb-12 {
+    padding-bottom: calc(var(--x-spacing) * 12) !important;
+  }
+  .x\:pb-20 {
+    padding-bottom: calc(var(--x-spacing) * 20) !important;
   }
   .x\:text-center {
     text-align: center !important;
