@@ -54,11 +54,11 @@ $tfp = 'product_cat_' . $term_parent;
                     <?php $course_overview = get_field('course_overview_panels'); ?>
 
                     <?php $count = 0;
-                    if($course_overview['online_courses']['enable'])
+                    if ($course_overview['online_courses']['enable'])
                         $count++;
-                    if($course_overview['virtual_courses']['enable'])
+                    if ($course_overview['virtual_courses']['enable'])
                         $count++;
-                    if($course_overview['classroom_courses']['enable'])
+                    if ($course_overview['classroom_courses']['enable'])
                         $count++; ?>
                     <div class="x:md:absolute x:bottom-2 x:left-2 x:right-2 x:grid x:md:grid-cols-<?= $count ?> x:gap-4">
                         <?php if ($course_overview['online_courses']['enable']): ?>
@@ -67,7 +67,8 @@ $tfp = 'product_cat_' . $term_parent;
 
                                 <p class="x:text-center x:text-sm x:text-white">Prices from</p>
                                 <p class="x:text-white x:text-[22px] x:text-center x:mb-4"><?= $course_overview['online_courses']['price'] ?></p>
-                                <a class="btn fade_in x:w-full x:text-center x:justify-center x:min-w-0" href="#online-courses">Find
+                                <a class="btn fade_in x:w-full x:text-center x:justify-center x:min-w-0"
+                                   href="#online-courses">Find
                                     out more</a>
                             </div>
                         <?php endif; ?>
@@ -77,7 +78,8 @@ $tfp = 'product_cat_' . $term_parent;
 
                                 <p class="x:text-center x:text-sm x:text-white">Prices from</p>
                                 <p class="x:text-white x:text-[22px] x:text-center x:mb-4"><?= $course_overview['virtual_courses']['price'] ?></p>
-                                <a class="btn fade_in x:w-full x:text-center x:justify-center x:min-w-0" href="#virtual-courses">Find
+                                <a class="btn fade_in x:w-full x:text-center x:justify-center x:min-w-0"
+                                   href="#virtual-courses">Find
                                     out more</a>
                             </div>
                         <?php endif; ?>
@@ -132,13 +134,13 @@ foreach ($product->get_available_variations() as $variations) {
 }
 if ($variations_type) {
     ?>
-<style>
-    @media(max-width: 500px){
-        #online-courses td{
-            width: 150px;
+    <style>
+        @media (max-width: 500px) {
+            #online-courses td {
+                width: 150px;
+            }
         }
-    }
-</style>
+    </style>
     <?php $most_popular = get_field('most_popular'); ?>
     <div id="online-courses" class="content_section  pbm_no">
         <div class="container">
@@ -150,6 +152,9 @@ if ($variations_type) {
                             <img src="<?php bloginfo('template_url'); ?>/images/course_icon_1.svg" alt="">
 
                             Our Online Course Options
+                            <?php if ($online_courses_text = get_field('online_courses')) { ?>
+                                <p><?= $online_courses_text ?></p>
+                            <?php } ?>
 
                         </h3>
                         <table class=" x:w-full x:mx-auto x:mt-20 details_table">
@@ -163,7 +168,12 @@ if ($variations_type) {
                                         </div>
                                     <?php endif; ?>
                                     Gold
-                                    <img style="width: 70px; position: absolute; top: 0; transform: translateY( -100%); right: 0;" src="<?= get_stylesheet_directory_uri(); ?>/images/nebosh_gold.png" alt="">
+                                    <img style="width: 70px; position: absolute; top: 0; transform: translateY( -100%); right: 0;"
+                                         src="<?= get_stylesheet_directory_uri(); ?>/images/nebosh_gold.png" alt="">
+
+                                    <?php if ($gold = get_field('gold')) { ?>
+                                        <p><?= $gold ?></p>
+                                    <?php } ?>
                                 </td>
                                 <td style="text-align: center;" class="x:text-center x:text-2xl x:font-bold x:relative">
                                     <?php if ($most_popular == 'silver'): ?>
@@ -172,6 +182,9 @@ if ($variations_type) {
                                         </div>
                                     <?php endif; ?>
                                     Silver
+                                    <?php if ($silver = get_field('silver')) { ?>
+                                        <p><?= $silver ?></p>
+                                    <?php } ?>
                                 </td>
                                 <td style="text-align: center;" class="x:text-center x:text-2xl x:font-bold x:relative">
                                     <?php if ($most_popular == 'bronze'): ?>
@@ -180,6 +193,9 @@ if ($variations_type) {
                                         </div>
                                     <?php endif; ?>
                                     Bronze
+                                    <?php if ($bronze = get_field('bronze')) { ?>
+                                        <p><?= $bronze ?></p>
+                                    <?php } ?>
                                 </td>
                             </tr>
 
@@ -250,71 +266,74 @@ if ($variations_type) {
             <img src="<?php bloginfo('template_url'); ?>/images/course_icon_1.svg" alt="">
 
             Our Virtual Course Options
+            <?php if ($virtual_courses_text = get_field('virtual_courses')) { ?>
+                <p><?= $virtual_courses_text ?></p>
+            <?php } ?>
         </h3>
-<div class="x:py-20">
+        <div class="x:py-20">
 
-        <div class="swiper classroom-course-swiper ">
-            <div class="swiper-wrapper">
+            <div class="swiper classroom-course-swiper ">
+                <div class="swiper-wrapper">
 
 
-                <?php
-                foreach ($product->get_available_variations() as $variations) {
-                    if (get_field('type', $variations['variation_id']) == 'Virtual') {
-                        ?>
-                        <div class="swiper-slide course_list_item x:mt-0  x:border-4 x:border-[#a27fff] x:bg-[#fff] x:p-4 x:rounded-[10px]"
-                             data-product="<?php echo $product->get_id(); ?>"
-                             data-variation="<?php echo $variations['variation_id']; ?>"
-                             data-nonce="<?php echo wp_create_nonce('add_varition'); ?>">
-                            <div class="course_list_info">
-                                <div class="course_list_details">
-                                    <?php echo $variations['variation_description']; ?>
-                                </div>
-                            </div>
-                            <div class="">
-                                <p class="course_list_price x:text-center x:mb-4">
-                                    <?php
-                                    if (!empty($variations['price_html'])) {
-                                        echo $variations['price_html'];
-                                    } else {
-                                        $variation_obj = wc_get_product($variations['variation_id']);
-                                        echo wc_price($variation_obj->get_price());
-                                    }
-                                    ?>
-                                </p>
-                                <div class="course_list_right">
-                                    <div class="quantity_counter x:hidden">
-                                        <button class="counter_decrement decrement"></button>
-                                        <input class="counter_value value" type="number" name="qyt" value="1">
-                                        <button class="counter_increment increment"></button>
+                    <?php
+                    foreach ($product->get_available_variations() as $variations) {
+                        if (get_field('type', $variations['variation_id']) == 'Virtual') {
+                            ?>
+                            <div class="swiper-slide course_list_item x:mt-0  x:border-4 x:border-[#a27fff] x:bg-[#fff] x:p-4 x:rounded-[10px]"
+                                 data-product="<?php echo $product->get_id(); ?>"
+                                 data-variation="<?php echo $variations['variation_id']; ?>"
+                                 data-nonce="<?php echo wp_create_nonce('add_varition'); ?>">
+                                <div class="course_list_info">
+                                    <div class="course_list_details">
+                                        <?php echo $variations['variation_description']; ?>
                                     </div>
-                                    <a class="btn btn_purple add_varition x:mx-auto" href="#">Add to cart
-                                        <svg class="svg_arrow_btn">
-                                            <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_btn"></use>
-                                        </svg>
-                                    </a>
+                                </div>
+                                <div class="">
+                                    <p class="course_list_price x:text-center x:mb-4">
+                                        <?php
+                                        if (!empty($variations['price_html'])) {
+                                            echo $variations['price_html'];
+                                        } else {
+                                            $variation_obj = wc_get_product($variations['variation_id']);
+                                            echo wc_price($variation_obj->get_price());
+                                        }
+                                        ?>
+                                    </p>
+                                    <div class="course_list_right">
+                                        <div class="quantity_counter x:hidden">
+                                            <button class="counter_decrement decrement"></button>
+                                            <input class="counter_value value" type="number" name="qyt" value="1">
+                                            <button class="counter_increment increment"></button>
+                                        </div>
+                                        <a class="btn btn_purple add_varition x:mx-auto" href="#">Add to cart
+                                            <svg class="svg_arrow_btn">
+                                                <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_btn"></use>
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php }
-                } ?>
+                        <?php }
+                    } ?>
+                </div>
             </div>
-        </div>
 
-        <div class="classroom_nav">
-            <div class="classroom_arrow classroom_prev" tabindex="0" role="button" aria-label="Previous slide"
-                 aria-controls="swiper-wrapper-fbb8af61117135d7">
-                <svg class="svg_arrow_prev">
-                    <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_prev"></use>
-                </svg>
-            </div>
-            <div class="classroom_arrow classroom_next" tabindex="0" role="button" aria-label="Next slide"
-                 aria-controls="swiper-wrapper-fbb8af61117135d7">
-                <svg class="svg_arrow_next">
-                    <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_next"></use>
-                </svg>
+            <div class="classroom_nav">
+                <div class="classroom_arrow classroom_prev" tabindex="0" role="button" aria-label="Previous slide"
+                     aria-controls="swiper-wrapper-fbb8af61117135d7">
+                    <svg class="svg_arrow_prev">
+                        <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_prev"></use>
+                    </svg>
+                </div>
+                <div class="classroom_arrow classroom_next" tabindex="0" role="button" aria-label="Next slide"
+                     aria-controls="swiper-wrapper-fbb8af61117135d7">
+                    <svg class="svg_arrow_next">
+                        <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_next"></use>
+                    </svg>
+                </div>
             </div>
         </div>
-</div>
 
     </div>
 <?php } ?>
@@ -346,6 +365,10 @@ if ($variations_type) {
                     </svg>
                     Our Classroom Based Course Options
                 </h3>
+
+                <?php if ($classroom_courses_text = get_field('classroom_courses')) { ?>
+                    <p><?= $classroom_courses_text ?></p>
+                <?php } ?>
 
                 <div class="swiper classroom-course-swiper">
                     <div class="swiper-wrapper">
@@ -432,8 +455,9 @@ if ($variations_type) {
                 <?php if (count($coa) > 1) : ?>
                     <ul class="x:md:col-span-1 x:sticky x:top-0 sidebar-links x:pt-[36px]">
                         <?php foreach ($coa as $key => $item) : ?>
-                            <li class="x:mb-8"><a class="x:text-xl x:font-bold <?= $key == 0 ? 'x:border-b x:border-[#a27fff]' : '' ?>"
-                                                  href="#<?= $key ?>"><?= $item['section'] ?></a></li>
+                            <li class="x:mb-8"><a
+                                        class="x:text-xl x:font-bold <?= $key == 0 ? 'x:border-b x:border-[#a27fff]' : '' ?>"
+                                        href="#<?= $key ?>"><?= $item['section'] ?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 <?php endif; ?>
