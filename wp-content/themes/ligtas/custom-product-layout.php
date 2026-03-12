@@ -266,10 +266,12 @@ if ($variations_type) {
             <img src="<?php bloginfo('template_url'); ?>/images/course_icon_1.svg" alt="">
 
             Our Virtual Course Options
-            <?php if ($virtual_courses_text = get_field('virtual_courses')) { ?>
-                <p><?= $virtual_courses_text ?></p>
-            <?php } ?>
+
         </h3>
+
+        <?php if ($virtual_courses_text = get_field('virtual_courses')) { ?>
+            <p><?= $virtual_courses_text ?></p>
+        <?php } ?>
         <div class="x:py-20">
 
             <div class="swiper classroom-course-swiper ">
