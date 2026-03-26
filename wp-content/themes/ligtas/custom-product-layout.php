@@ -126,13 +126,9 @@ $tfp = 'product_cat_' . $term_parent;
 
 
 <?php
-$variations_type = 0;
-foreach ($product->get_available_variations() as $variations) {
-    if (get_field('type', $variations['variation_id']) == 'Online') {
-        $variations_type = 1;
-    }
-}
-if ($variations_type) {
+$enable_online_courses = get_field('enable_online_courses');
+
+if ($enable_online_courses):
     ?>
     <style>
         @media (max-width: 500px) {
@@ -159,107 +155,137 @@ if ($variations_type) {
                         <?php if ($online_courses_text = get_field('online_courses')) { ?>
                             <p><?= $online_courses_text ?></p>
                         <?php } ?>
-                        <table class=" x:w-full x:mx-auto x:mt-20 details_table">
-                            <tbody>
-                            <tr>
-                                <td></td>
-                                <td style="text-align: center;" class="x:text-center x:text-2xl x:font-bold x:relative">
-                                    <?php if ($most_popular == 'gold'): ?>
-                                        <div class="x:rounded-t-full x:bg-[#a27fff] x:text-sm x:font-normal x:text-white x:p-3 x:absolute x:top-0 x:-translate-y-full x:left-0 x:right-0">
-                                            Most Popular
-                                        </div>
-                                    <?php endif; ?>
-                                    Gold
-                                    <img style="width: 70px; position: absolute; top: 0; transform: translateY( -100%); right: 0;"
-                                         src="<?= get_stylesheet_directory_uri(); ?>/images/nebosh_gold.png" alt="">
+                        <?php
+                        $variations_type = 0;
+                        foreach ($product->get_available_variations() as $variations) {
+                            if (get_field('type', $variations['variation_id']) == 'Online') {
+                                $variations_type = 1;
+                            }
+                        }
+                        if ($variations_type) {
+                            ?>
+                            <table class=" x:w-full x:mx-auto x:mt-20 details_table">
+                                <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td style="text-align: center;"
+                                        class="x:text-center x:text-2xl x:font-bold x:relative">
+                                        <?php if ($most_popular == 'gold'): ?>
+                                            <div class="x:rounded-t-full x:bg-[#a27fff] x:text-sm x:font-normal x:text-white x:p-3 x:absolute x:top-0 x:-translate-y-full x:left-0 x:right-0">
+                                                Most Popular
+                                            </div>
+                                        <?php endif; ?>
+                                        Gold
+                                        <img style="width: 70px; position: absolute; top: 0; transform: translateY( -100%); right: 0;"
+                                             src="<?= get_stylesheet_directory_uri(); ?>/images/nebosh_gold.png" alt="">
 
-                                    <?php if ($gold = get_field('gold')) { ?>
-                                        <p class="x:!text-sm"><?= $gold ?></p>
-                                    <?php } ?>
-                                </td>
-                                <td style="text-align: center;" class="x:text-center x:text-2xl x:font-bold x:relative">
-                                    <?php if ($most_popular == 'silver'): ?>
-                                        <div class="x:rounded-t-full x:bg-[#a27fff] x:text-sm x:font-normal x:text-white x:p-3 x:absolute x:top-0 x:-translate-y-full x:left-0 x:right-0">
-                                            Most Popular
-                                        </div>
-                                    <?php endif; ?>
-                                    Silver
-                                    <?php if ($silver = get_field('silver')) { ?>
-                                        <p class="x:!text-sm"><?= $silver ?></p>
-                                    <?php } ?>
-                                </td>
-                                <td style="text-align: center;" class="x:text-center x:text-2xl x:font-bold x:relative">
-                                    <?php if ($most_popular == 'bronze'): ?>
-                                        <div class="x:rounded-t-full x:bg-[#a27fff] x:text-sm x:font-normal x:text-white x:p-3 x:absolute x:top-0 x:-translate-y-full x:left-0 x:right-0">
-                                            Most Popular
-                                        </div>
-                                    <?php endif; ?>
-                                    Bronze
-                                    <?php if ($bronze = get_field('bronze')) { ?>
-                                        <p class="x:!text-sm"><?= $bronze ?></p>
-                                    <?php } ?>
-                                </td>
-                            </tr>
+                                        <?php if ($gold = get_field('gold')) { ?>
+                                            <p class="x:!text-sm"><?= $gold ?></p>
+                                        <?php } ?>
+                                    </td>
+                                    <td style="text-align: center;"
+                                        class="x:text-center x:text-2xl x:font-bold x:relative">
+                                        <?php if ($most_popular == 'silver'): ?>
+                                            <div class="x:rounded-t-full x:bg-[#a27fff] x:text-sm x:font-normal x:text-white x:p-3 x:absolute x:top-0 x:-translate-y-full x:left-0 x:right-0">
+                                                Most Popular
+                                            </div>
+                                        <?php endif; ?>
+                                        Silver
+                                        <?php if ($silver = get_field('silver')) { ?>
+                                            <p class="x:!text-sm"><?= $silver ?></p>
+                                        <?php } ?>
+                                    </td>
+                                    <td style="text-align: center;"
+                                        class="x:text-center x:text-2xl x:font-bold x:relative">
+                                        <?php if ($most_popular == 'bronze'): ?>
+                                            <div class="x:rounded-t-full x:bg-[#a27fff] x:text-sm x:font-normal x:text-white x:p-3 x:absolute x:top-0 x:-translate-y-full x:left-0 x:right-0">
+                                                Most Popular
+                                            </div>
+                                        <?php endif; ?>
+                                        Bronze
+                                        <?php if ($bronze = get_field('bronze')) { ?>
+                                            <p class="x:!text-sm"><?= $bronze ?></p>
+                                        <?php } ?>
+                                    </td>
+                                </tr>
 
-                            <?php $comparison_table = get_field('comparison_table'); ?>
+                                <?php $comparison_table = get_field('comparison_table'); ?>
 
-                            <?php if (is_array($comparison_table)): ?>
+                                <?php if (is_array($comparison_table)): ?>
 
 
-                                <?php foreach ($comparison_table as $item): ?>
+                                    <?php foreach ($comparison_table as $item): ?>
 
-                                    <tr>
-                                        <td><?= $item['feature'] ?></td>
-                                        <td style="text-align: center;"><?php if ($item['gold']) { ?>✓<?php } ?></td>
-                                        <td style="text-align: center;"><?php if ($item['silver']) { ?>✓<?php } ?></td>
-                                        <td style="text-align: center;"><?php if ($item['bronze']) { ?>✓<?php } ?></td>
-                                    </tr>
+                                        <tr>
+                                            <td><?= $item['feature'] ?></td>
+                                            <td style="text-align: center;"><?php if ($item['gold']) { ?>✓<?php } ?></td>
+                                            <td style="text-align: center;"><?php if ($item['silver']) { ?>✓<?php } ?></td>
+                                            <td style="text-align: center;"><?php if ($item['bronze']) { ?>✓<?php } ?></td>
+                                        </tr>
 
-                                <?php endforeach; ?>
-                            <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
 
-                            <tr>
-                                <td></td>
-                                <td class="x:text-center x:md:text-2xl x:text-lg x:font-bold">
-                                    <?= get_field('gold_price') ?>
+                                <tr>
+                                    <td></td>
+                                    <td class="x:text-center x:md:text-2xl x:text-lg x:font-bold">
+                                        <?= get_field('gold_price') ?>
 
-                                    <?php echo do_shortcode("[custom_buy_now id=" . get_field('gold_code') . "]") ?>
+                                        <?php echo do_shortcode("[custom_buy_now id=" . get_field('gold_code') . "]") ?>
 
-                                </td>
-                                <td class="x:text-center x:md:text-2xl x:text-lg x:font-bold">
-                                    <?= get_field('silver_price') ?>
+                                    </td>
+                                    <td class="x:text-center x:md:text-2xl x:text-lg x:font-bold">
+                                        <?= get_field('silver_price') ?>
 
-                                    <?php echo do_shortcode("[custom_buy_now id=" . get_field('silver_code') . "]") ?>
+                                        <?php echo do_shortcode("[custom_buy_now id=" . get_field('silver_code') . "]") ?>
 
-                                </td>
-                                <td class="x:text-center x:md:text-2xl x:text-lg x:font-bold">
-                                    <?= get_field('bronze_price') ?>
+                                    </td>
+                                    <td class="x:text-center x:md:text-2xl x:text-lg x:font-bold">
+                                        <?= get_field('bronze_price') ?>
 
-                                    <?php echo do_shortcode("[custom_buy_now id=" . get_field('bronze_code') . "]") ?>
+                                        <?php echo do_shortcode("[custom_buy_now id=" . get_field('bronze_code') . "]") ?>
 
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
-
+            <?php if ($cta = get_field('online_courses_cta')): ?>
+<!--            <div class="container">-->
+                <div class="x:flex x:flex-wrap x:justify-between x:pt-12">
+                    <div class="x:text-3xl">
+                        <?= $cta ?>
+                    </div>
+                    <?php if ($btn = get_field('online_courses_cta_button')): ?>
+                        <div class="x:md:basis-1/6">
+                            <?php if (is_array($btn)): ?>
+                                <div class="x:ml-auto x:flex">
+                                    <a class="btn x:text-center x:inline-block x:ml-auto" href="<?= $btn['url'] ?>"
+                                       target="<?= $btn['target'] ?>"><?= $btn['title'] ?></a>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+<!--            </div>-->
+            <?php endif; ?>
         </div>
     </div>
-<?php } ?>
+<?php
+
+endif;
+?>
 
 
 <?php
-$variations_type = 0;
-foreach ($product->get_available_variations() as $variations) {
-    if (get_field('type', $variations['variation_id']) == 'Virtual') {
-        $variations_type = 1;
-    }
-}
-if ($variations_type) {
-    ?>
+
+$enable_virtual_courses = get_field('enable_virtual_courses');
+if ($enable_virtual_courses):?>
+
 
     <div id="online-courses" class="container x:pt-8">
         <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
@@ -274,84 +300,108 @@ if ($variations_type) {
         <?php if ($virtual_courses_text = get_field('virtual_courses')) { ?>
             <p class="x:pb-12"><?= $virtual_courses_text ?></p>
         <?php } ?>
-        <div class="x:pb-20">
 
-            <div class="swiper classroom-course-swiper ">
-                <div class="swiper-wrapper">
+        <?php $variations_type = 0;
+        foreach ($product->get_available_variations() as $variations) {
+            if (get_field('type', $variations['variation_id']) == 'Virtual') {
+                $variations_type = 1;
+            }
+        }
+        if ($variations_type) {
+            ?>
+            <div class="x:pb-20">
+
+                <div class="swiper classroom-course-swiper ">
+                    <div class="swiper-wrapper">
 
 
-                    <?php
-                    foreach ($product->get_available_variations() as $variations) {
-                        if (get_field('type', $variations['variation_id']) == 'Virtual') {
-                            ?>
-                            <div class="swiper-slide course_list_item x:mt-0  x:border-4 x:border-[#a27fff] x:bg-[#fff] x:p-4 x:rounded-[10px]"
-                                 data-product="<?php echo $product->get_id(); ?>"
-                                 data-variation="<?php echo $variations['variation_id']; ?>"
-                                 data-nonce="<?php echo wp_create_nonce('add_varition'); ?>">
-                                <div class="course_list_info">
-                                    <div class="course_list_details">
-                                        <?php echo $variations['variation_description']; ?>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <p class="course_list_price x:text-center x:mb-4">
-                                        <?php
-                                        if (!empty($variations['price_html'])) {
-                                            echo $variations['price_html'];
-                                        } else {
-                                            $variation_obj = wc_get_product($variations['variation_id']);
-                                            echo wc_price($variation_obj->get_price());
-                                        }
-                                        ?>
-                                    </p>
-                                    <div class="course_list_right">
-                                        <div class="quantity_counter x:hidden">
-                                            <button class="counter_decrement decrement"></button>
-                                            <input class="counter_value value" type="number" name="qyt" value="1">
-                                            <button class="counter_increment increment"></button>
+                        <?php
+                        foreach ($product->get_available_variations() as $variations) {
+                            if (get_field('type', $variations['variation_id']) == 'Virtual') {
+                                ?>
+                                <div class="swiper-slide course_list_item x:mt-0  x:border-4 x:border-[#a27fff] x:bg-[#fff] x:p-4 x:rounded-[10px]"
+                                     data-product="<?php echo $product->get_id(); ?>"
+                                     data-variation="<?php echo $variations['variation_id']; ?>"
+                                     data-nonce="<?php echo wp_create_nonce('add_varition'); ?>">
+                                    <div class="course_list_info">
+                                        <div class="course_list_details">
+                                            <?php echo $variations['variation_description']; ?>
                                         </div>
-                                        <a class="btn btn_purple add_varition x:mx-auto" href="#">Add to cart
-                                            <svg class="svg_arrow_btn">
-                                                <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_btn"></use>
-                                            </svg>
-                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <p class="course_list_price x:text-center x:mb-4">
+                                            <?php
+                                            if (!empty($variations['price_html'])) {
+                                                echo $variations['price_html'];
+                                            } else {
+                                                $variation_obj = wc_get_product($variations['variation_id']);
+                                                echo wc_price($variation_obj->get_price());
+                                            }
+                                            ?>
+                                        </p>
+                                        <div class="course_list_right">
+                                            <div class="quantity_counter x:hidden">
+                                                <button class="counter_decrement decrement"></button>
+                                                <input class="counter_value value" type="number" name="qyt" value="1">
+                                                <button class="counter_increment increment"></button>
+                                            </div>
+                                            <a class="btn btn_purple add_varition x:mx-auto" href="#">Add to cart
+                                                <svg class="svg_arrow_btn">
+                                                    <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_btn"></use>
+                                                </svg>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php }
-                    } ?>
+                            <?php }
+                        } ?>
+                    </div>
+                </div>
+
+                <div class="classroom_nav">
+                    <div class="classroom_arrow classroom_prev" tabindex="0" role="button" aria-label="Previous slide"
+                         aria-controls="swiper-wrapper-fbb8af61117135d7">
+                        <svg class="svg_arrow_prev">
+                            <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_prev"></use>
+                        </svg>
+                    </div>
+                    <div class="classroom_arrow classroom_next" tabindex="0" role="button" aria-label="Next slide"
+                         aria-controls="swiper-wrapper-fbb8af61117135d7">
+                        <svg class="svg_arrow_next">
+                            <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_next"></use>
+                        </svg>
+                    </div>
                 </div>
             </div>
 
-            <div class="classroom_nav">
-                <div class="classroom_arrow classroom_prev" tabindex="0" role="button" aria-label="Previous slide"
-                     aria-controls="swiper-wrapper-fbb8af61117135d7">
-                    <svg class="svg_arrow_prev">
-                        <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_prev"></use>
-                    </svg>
-                </div>
-                <div class="classroom_arrow classroom_next" tabindex="0" role="button" aria-label="Next slide"
-                     aria-controls="swiper-wrapper-fbb8af61117135d7">
-                    <svg class="svg_arrow_next">
-                        <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_next"></use>
-                    </svg>
-                </div>
-            </div>
-        </div>
+        <?php } ?>
 
+        <?php if ($cta = get_field('virtual_courses_cta')): ?>
+            <div class="x:flex x:flex-wrap x:justify-between x:pb-12">
+                <div class="x:text-3xl">
+                    <?= $cta ?>
+                </div>
+                <?php if ($btn = get_field('virtual_courses_cta_button')): ?>
+                    <div class="x:md:basis-1/6">
+                        <?php if (is_array($btn)): ?>
+                        <div class="x:ml-auto x:flex">
+                            <a class="btn x:text-center x:inline-block x:ml-auto" href="<?= $btn['url'] ?>"
+                               target="<?= $btn['target'] ?>"><?= $btn['title'] ?></a>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
     </div>
-<?php } ?>
-
+<?php endif; ?>
 
 <?php
-$variations_type = 0;
-foreach ($product->get_available_variations() as $variations) {
-    if (get_field('type', $variations['variation_id']) == 'Classroom') {
-        $variations_type = 1;
-    }
-}
-if ($variations_type) {
-    ?>
+
+$enable_classroom_courses = get_field('enable_classroom_courses');
+
+if ($enable_classroom_courses):?>
+
     <div id="classroom-courses" class="x:bg-[#a27fff]">
         <div class="container">
             <div class="x:py-20">
@@ -373,6 +423,15 @@ if ($variations_type) {
                 <?php if ($classroom_courses_text = get_field('classroom_courses')) { ?>
                     <p class="x:pb-12"><?= $classroom_courses_text ?></p>
                 <?php } ?>
+                <?php
+                $variations_type = 0;
+                foreach ($product->get_available_variations() as $variations) {
+                    if (get_field('type', $variations['variation_id']) == 'Classroom') {
+                        $variations_type = 1;
+                    }
+                }
+                if ($variations_type) {
+                ?>
 
                 <div class="swiper classroom-course-swiper">
                     <div class="swiper-wrapper">
@@ -437,9 +496,29 @@ if ($variations_type) {
                 </div>
             </div>
         </div>
-    </div>
-<?php } ?>
+        <?php } ?>
 
+        <?php if ($cta = get_field('classroom_courses_cta')): ?>
+        <div class="container">
+            <div class="x:flex x:flex-wrap x:justify-between x:pb-12">
+                <div class="x:text-3xl">
+                    <?= $cta ?>
+                </div>
+                <?php if ($btn = get_field('classroom_courses_cta_button')): ?>
+                    <div class="x:md:basis-1/6">
+                        <?php if (is_array($btn)): ?>
+                            <div class="x:ml-auto x:flex">
+                                <a class="btn x:bg-white x:text-[#a27fff] x:text-center x:inline-block x:ml-auto" href="<?= $btn['url'] ?>"
+                                   target="<?= $btn['target'] ?>"><?= $btn['title'] ?></a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
 
     <style>
         details[open] .switch_nav_arrow {
