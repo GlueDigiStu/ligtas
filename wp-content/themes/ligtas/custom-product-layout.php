@@ -256,7 +256,7 @@ if ($enable_online_courses):
             </div>
             <?php if ($cta = get_field('online_courses_cta')): ?>
 <!--            <div class="x:flex x:items-start x:gap-4">-->
-                <div class="x:flex x:flex-wrap x:justify-start x:gap-4 x:pt-12">
+                <div class="x:flex x:flex-wrap x:justify-start x:items-center x:gap-4 x:pt-12">
                     <div class="typical_text">
                         <?= $cta ?>
                     </div>
@@ -287,7 +287,7 @@ $enable_virtual_courses = get_field('enable_virtual_courses');
 if ($enable_virtual_courses):?>
 
 
-    <div id="online-courses" class="container x:pt-8">
+    <div id="virtual-courses" class="container x:pt-8 x:mt-12">
         <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
 
 
@@ -309,7 +309,7 @@ if ($enable_virtual_courses):?>
         }
         if ($variations_type) {
             ?>
-            <div class="x:pb-20">
+            <div class="x:pb-8">
 
                 <div class="swiper classroom-course-swiper ">
                     <div class="swiper-wrapper">
@@ -377,7 +377,7 @@ if ($enable_virtual_courses):?>
         <?php } ?>
 
         <?php if ($cta = get_field('virtual_courses_cta')): ?>
-            <div class="x:flex x:flex-wrap x:justify-start x:gap-4 x:pb-12">
+            <div class="x:flex x:flex-wrap x:justify-start  x:items-center x:gap-4 x:pb-20">
                 <div class="typical_text">
                     <?= $cta ?>
                 </div>
@@ -404,7 +404,7 @@ if ($enable_classroom_courses):?>
 
     <div id="classroom-courses" class="x:bg-[#a27fff]">
         <div class="container">
-            <div class="x:py-20">
+            <div class="x:pt-20 x:pb-8">
                 <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
 
                     <svg width="32" height="29" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -500,7 +500,7 @@ if ($enable_classroom_courses):?>
 
         <?php if ($cta = get_field('classroom_courses_cta')): ?>
         <div class="container">
-            <div class="x:flex x:flex-wrap x:justify-start x:gap-4 x:pb-12">
+            <div class="x:flex x:flex-wrap x:justify-start  x:items-center x:gap-4 x:pb-20">
                 <div class="typical_text">
                     <?= $cta ?>
                 </div>

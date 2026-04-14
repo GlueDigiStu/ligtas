@@ -353,8 +353,14 @@
   .x\:pt-12 {
     padding-top: calc(var(--x-spacing) * 12) !important;
   }
+  .x\:pt-20 {
+    padding-top: calc(var(--x-spacing) * 20) !important;
+  }
   .x\:pt-\[36px\] {
     padding-top: 36px !important;
+  }
+  .x\:pb-8 {
+    padding-bottom: calc(var(--x-spacing) * 8) !important;
   }
   .x\:pb-12 {
     padding-bottom: calc(var(--x-spacing) * 12) !important;
