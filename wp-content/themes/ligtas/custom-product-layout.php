@@ -136,6 +136,17 @@ if ($enable_online_courses):
                 width: 150px;
             }
         }
+
+        .nebosh-gold-badge{
+            width: 70px; position: absolute; top: 0; transform: translateY( -100%); right: 0;
+        }
+
+        @media(max-width: 768px){
+            .nebosh-gold-badge{
+                width: 50px;
+                right: -30px;
+            }
+        }
     </style>
     <?php $most_popular = get_field('most_popular'); ?>
     <div id="online-courses" class="  pbm_no">
@@ -176,7 +187,7 @@ if ($enable_online_courses):
                                             </div>
                                         <?php endif; ?>
                                         Gold
-                                        <img style="width: 70px; position: absolute; top: 0; transform: translateY( -100%); right: 0;"
+                                        <img class="nebosh-gold-badge"
                                              src="<?= get_stylesheet_directory_uri(); ?>/images/nebosh_gold.png" alt="">
 
                                         <?php if ($gold = get_field('gold')) { ?>
