@@ -280,11 +280,17 @@
   .x\:items-end {
     align-items: flex-end !important;
   }
+  .x\:items-start {
+    align-items: flex-start !important;
+  }
   .x\:justify-between {
     justify-content: space-between !important;
   }
   .x\:justify-center {
     justify-content: center !important;
+  }
+  .x\:justify-start {
+    justify-content: flex-start !important;
   }
   .x\:gap-2 {
     gap: calc(var(--x-spacing) * 2) !important;
@@ -337,9 +343,6 @@
   }
   .x\:p-4 {
     padding: calc(var(--x-spacing) * 4) !important;
-  }
-  .x\:py-12 {
-    padding-block: calc(var(--x-spacing) * 12) !important;
   }
   .x\:py-20 {
     padding-block: calc(var(--x-spacing) * 20) !important;

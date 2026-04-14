@@ -138,7 +138,7 @@ if ($enable_online_courses):
         }
     </style>
     <?php $most_popular = get_field('most_popular'); ?>
-    <div id="online-courses" class="content_section  pbm_no">
+    <div id="online-courses" class="  pbm_no">
         <div class="container">
             <div class="">
                 <div class="">
@@ -255,9 +255,9 @@ if ($enable_online_courses):
                 </div>
             </div>
             <?php if ($cta = get_field('online_courses_cta')): ?>
-<!--            <div class="container">-->
-                <div class="x:flex x:flex-wrap x:justify-between x:pt-12">
-                    <div class="x:text-3xl">
+<!--            <div class="x:flex x:items-start x:gap-4">-->
+                <div class="x:flex x:flex-wrap x:justify-start x:gap-4 x:pt-12">
+                    <div class="typical_text">
                         <?= $cta ?>
                     </div>
                     <?php if ($btn = get_field('online_courses_cta_button')): ?>
@@ -377,8 +377,8 @@ if ($enable_virtual_courses):?>
         <?php } ?>
 
         <?php if ($cta = get_field('virtual_courses_cta')): ?>
-            <div class="x:flex x:flex-wrap x:justify-between x:pb-12">
-                <div class="x:text-3xl">
+            <div class="x:flex x:flex-wrap x:justify-start x:gap-4 x:pb-12">
+                <div class="typical_text">
                     <?= $cta ?>
                 </div>
                 <?php if ($btn = get_field('virtual_courses_cta_button')): ?>
@@ -500,8 +500,8 @@ if ($enable_classroom_courses):?>
 
         <?php if ($cta = get_field('classroom_courses_cta')): ?>
         <div class="container">
-            <div class="x:flex x:flex-wrap x:justify-between x:pb-12">
-                <div class="x:text-3xl">
+            <div class="x:flex x:flex-wrap x:justify-start x:gap-4 x:pb-12">
+                <div class="typical_text">
                     <?= $cta ?>
                 </div>
                 <?php if ($btn = get_field('classroom_courses_cta_button')): ?>
