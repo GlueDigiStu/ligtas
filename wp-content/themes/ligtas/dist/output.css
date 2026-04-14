@@ -261,6 +261,9 @@
   .x\:basis-1\/2 {
     flex-basis: calc(1/2 * 100%) !important;
   }
+  .x\:basis-full {
+    flex-basis: 100% !important;
+  }
   .x\:-translate-y-full {
     --tw-translate-y: -100% !important;
     translate: var(--tw-translate-x) var(--tw-translate-y) !important;
@@ -428,6 +431,16 @@
   .x\:md\:col-span-3 {
     @media (width >= 48rem) {
       grid-column: span 3 / span 3 !important;
+    }
+  }
+  .x\:md\:basis-1\/3 {
+    @media (width >= 48rem) {
+      flex-basis: calc(1/3 * 100%) !important;
+    }
+  }
+  .x\:md\:basis-1\/5 {
+    @media (width >= 48rem) {
+      flex-basis: calc(1/5 * 100%) !important;
     }
   }
   .x\:md\:basis-1\/6 {
