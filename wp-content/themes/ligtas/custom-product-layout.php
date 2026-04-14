@@ -255,7 +255,7 @@ if ($enable_online_courses):
                 </div>
             </div>
             <?php if ($cta = get_field('online_courses_cta')): ?>
-<!--            <div class="x:flex x:items-start x:gap-4">-->
+                <!--            <div class="x:flex x:items-start x:gap-4">-->
                 <div class="x:flex x:flex-wrap x:justify-start x:items-center x:gap-4 x:pt-12">
                     <div class="typical_text">
                         <?= $cta ?>
@@ -271,7 +271,7 @@ if ($enable_online_courses):
                         </div>
                     <?php endif; ?>
                 </div>
-<!--            </div>-->
+                <!--            </div>-->
             <?php endif; ?>
         </div>
     </div>
@@ -288,18 +288,20 @@ if ($enable_virtual_courses):?>
 
 
     <div id="virtual-courses" class="container x:pt-8 x:mt-12">
-        <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
+        <div class="typical_text">
+            <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
 
 
-            <img src="<?php bloginfo('template_url'); ?>/images/course_icon_1.svg" alt="">
+                <img src="<?php bloginfo('template_url'); ?>/images/course_icon_1.svg" alt="">
 
-            Our Virtual Course Options
+                Our Virtual Course Options
 
-        </h3>
+            </h3>
 
-        <?php if ($virtual_courses_text = get_field('virtual_courses')) { ?>
-            <p class="x:pb-12"><?= $virtual_courses_text ?></p>
-        <?php } ?>
+            <?php if ($virtual_courses_text = get_field('virtual_courses')) { ?>
+                <p class="x:pb-12"><?= $virtual_courses_text ?></p>
+            <?php } ?>
+        </div>
 
         <?php $variations_type = 0;
         foreach ($product->get_available_variations() as $variations) {
@@ -384,10 +386,10 @@ if ($enable_virtual_courses):?>
                 <?php if ($btn = get_field('virtual_courses_cta_button')): ?>
                     <div class="x:md:basis-1/6">
                         <?php if (is_array($btn)): ?>
-                        <div class="x:ml-auto x:flex">
-                            <a class="btn x:text-center x:inline-block x:ml-auto" href="<?= $btn['url'] ?>"
-                               target="<?= $btn['target'] ?>"><?= $btn['title'] ?></a>
-                        </div>
+                            <div class="x:ml-auto x:flex">
+                                <a class="btn x:text-center x:inline-block x:ml-auto" href="<?= $btn['url'] ?>"
+                                   target="<?= $btn['target'] ?>"><?= $btn['title'] ?></a>
+                            </div>
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
@@ -405,24 +407,30 @@ if ($enable_classroom_courses):?>
     <div id="classroom-courses" class="x:bg-[#a27fff]">
         <div class="container">
             <div class="x:pt-20 x:pb-8">
-                <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
+                <div class="typical_text">
+                    <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
 
-                    <svg width="32" height="29" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18.7895 18.4893C18.943 18.5742 19.0734 18.6975 19.1687 18.8477C19.2787 19.0214 19.337 19.2238 19.337 19.4305C19.337 19.6371 19.2787 19.8396 19.1687 20.0132C19.0587 20.1869 18.9016 20.3244 18.7163 20.4085L18.7895 18.4893ZM18.7895 18.4893V18.4671L18.7165 18.4337L10.4555 14.6555L10.4554 14.6554C10.3221 14.5947 10.1778 14.5632 10.0318 14.5632C9.88578 14.5632 9.74148 14.5947 9.60821 14.6554L9.60807 14.6555L1.34747 18.4335C1.34743 18.4335 1.34739 18.4335 1.34735 18.4336C1.16199 18.5177 1.00496 18.6552 0.894951 18.8288C0.784942 19.0025 0.726562 19.2049 0.726562 19.4116C0.726562 19.6183 0.784942 19.8207 0.894951 19.9944C1.00498 20.168 1.16206 20.3056 1.34747 20.3897L1.34805 20.3899L2.90088 21.0851L2.6418 21.1784L2.55916 21.2081V21.296V27.4355C2.55916 27.5928 2.61983 27.7443 2.72893 27.8566C2.83815 27.969 2.98705 28.0328 3.1431 28.0328C3.29914 28.0328 3.44805 27.969 3.55726 27.8566C3.66636 27.7443 3.72704 27.5928 3.72704 27.4355V21.9674L10.0721 19.5235L10.35 19.4165L10.079 19.2931L8.95921 18.7831L8.9114 18.7613L8.8624 18.7802L4.43227 20.4898L2.06671 19.4069L10.0272 15.7662L17.9876 19.4069L10.0271 23.0477L6.71958 21.5411L6.67188 21.5194L6.62296 21.5382L5.55362 21.9488V21.9458L5.38415 22.0103L4.46626 22.3598L4.38574 22.3905V22.4766V25.4709V25.5228L4.42259 25.5595L4.69795 25.8334L4.69791 25.8334L4.70057 25.8359C6.15901 27.2045 8.04965 27.985 10.0242 28.0327L10.0242 28.0329L10.0299 28.0327C11.9976 27.9907 13.8841 27.2207 15.3442 25.8647L15.3443 25.8648L15.3473 25.8617L15.6227 25.5878L15.6595 25.5512V25.4992V21.8014L18.7161 20.4086L18.7895 18.4893ZM5.55362 22.3161L9.59904 24.13C9.59915 24.13 9.59926 24.1301 9.59937 24.1301C9.73254 24.1908 9.87673 24.2222 10.0226 24.2222C10.1685 24.2222 10.3127 24.1908 10.4459 24.1301C10.446 24.1301 10.4461 24.13 10.4462 24.13L14.4824 22.3202V25.0193C13.2481 26.1465 11.6676 26.7905 10.018 26.8382C8.36852 26.7905 6.78801 26.1465 5.55362 25.0193V22.3161Z"
-                              fill="#291261" stroke="#291261" stroke-width="0.25"/>
-                        <path d="M18.7367 26.439H26.2282C28.4374 26.439 30.2282 24.6481 30.2282 22.439V5.46875C30.2282 3.25961 28.4374 1.46875 26.2282 1.46875H6.32031C4.11117 1.46875 2.32031 3.25961 2.32031 5.46875V14.1348"
-                              stroke="#291261" stroke-width="2"/>
-                        <line x1="5.25781" y1="5.60974" x2="28.0248" y2="5.60974" stroke="#291261" stroke-width="2"/>
-                        <line x1="5.25781" y1="10.7507" x2="28.0248" y2="10.7507" stroke="#291261" stroke-width="2"/>
-                        <line x1="23.6172" y1="15.1572" x2="28.0237" y2="15.1572" stroke="#291261" stroke-width="2"/>
-                        <line x1="23.6172" y1="20.2981" x2="28.0237" y2="20.2981" stroke="#291261" stroke-width="2"/>
-                    </svg>
-                    Our Classroom Based Course Options
-                </h3>
+                        <svg width="32" height="29" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.7895 18.4893C18.943 18.5742 19.0734 18.6975 19.1687 18.8477C19.2787 19.0214 19.337 19.2238 19.337 19.4305C19.337 19.6371 19.2787 19.8396 19.1687 20.0132C19.0587 20.1869 18.9016 20.3244 18.7163 20.4085L18.7895 18.4893ZM18.7895 18.4893V18.4671L18.7165 18.4337L10.4555 14.6555L10.4554 14.6554C10.3221 14.5947 10.1778 14.5632 10.0318 14.5632C9.88578 14.5632 9.74148 14.5947 9.60821 14.6554L9.60807 14.6555L1.34747 18.4335C1.34743 18.4335 1.34739 18.4335 1.34735 18.4336C1.16199 18.5177 1.00496 18.6552 0.894951 18.8288C0.784942 19.0025 0.726562 19.2049 0.726562 19.4116C0.726562 19.6183 0.784942 19.8207 0.894951 19.9944C1.00498 20.168 1.16206 20.3056 1.34747 20.3897L1.34805 20.3899L2.90088 21.0851L2.6418 21.1784L2.55916 21.2081V21.296V27.4355C2.55916 27.5928 2.61983 27.7443 2.72893 27.8566C2.83815 27.969 2.98705 28.0328 3.1431 28.0328C3.29914 28.0328 3.44805 27.969 3.55726 27.8566C3.66636 27.7443 3.72704 27.5928 3.72704 27.4355V21.9674L10.0721 19.5235L10.35 19.4165L10.079 19.2931L8.95921 18.7831L8.9114 18.7613L8.8624 18.7802L4.43227 20.4898L2.06671 19.4069L10.0272 15.7662L17.9876 19.4069L10.0271 23.0477L6.71958 21.5411L6.67188 21.5194L6.62296 21.5382L5.55362 21.9488V21.9458L5.38415 22.0103L4.46626 22.3598L4.38574 22.3905V22.4766V25.4709V25.5228L4.42259 25.5595L4.69795 25.8334L4.69791 25.8334L4.70057 25.8359C6.15901 27.2045 8.04965 27.985 10.0242 28.0327L10.0242 28.0329L10.0299 28.0327C11.9976 27.9907 13.8841 27.2207 15.3442 25.8647L15.3443 25.8648L15.3473 25.8617L15.6227 25.5878L15.6595 25.5512V25.4992V21.8014L18.7161 20.4086L18.7895 18.4893ZM5.55362 22.3161L9.59904 24.13C9.59915 24.13 9.59926 24.1301 9.59937 24.1301C9.73254 24.1908 9.87673 24.2222 10.0226 24.2222C10.1685 24.2222 10.3127 24.1908 10.4459 24.1301C10.446 24.1301 10.4461 24.13 10.4462 24.13L14.4824 22.3202V25.0193C13.2481 26.1465 11.6676 26.7905 10.018 26.8382C8.36852 26.7905 6.78801 26.1465 5.55362 25.0193V22.3161Z"
+                                  fill="#291261" stroke="#291261" stroke-width="0.25"/>
+                            <path d="M18.7367 26.439H26.2282C28.4374 26.439 30.2282 24.6481 30.2282 22.439V5.46875C30.2282 3.25961 28.4374 1.46875 26.2282 1.46875H6.32031C4.11117 1.46875 2.32031 3.25961 2.32031 5.46875V14.1348"
+                                  stroke="#291261" stroke-width="2"/>
+                            <line x1="5.25781" y1="5.60974" x2="28.0248" y2="5.60974" stroke="#291261"
+                                  stroke-width="2"/>
+                            <line x1="5.25781" y1="10.7507" x2="28.0248" y2="10.7507" stroke="#291261"
+                                  stroke-width="2"/>
+                            <line x1="23.6172" y1="15.1572" x2="28.0237" y2="15.1572" stroke="#291261"
+                                  stroke-width="2"/>
+                            <line x1="23.6172" y1="20.2981" x2="28.0237" y2="20.2981" stroke="#291261"
+                                  stroke-width="2"/>
+                        </svg>
+                        Our Classroom Based Course Options
+                    </h3>
 
-                <?php if ($classroom_courses_text = get_field('classroom_courses')) { ?>
-                    <p class="x:pb-12"><?= $classroom_courses_text ?></p>
-                <?php } ?>
+                    <?php if ($classroom_courses_text = get_field('classroom_courses')) { ?>
+                        <p class="x:pb-12"><?= $classroom_courses_text ?></p>
+                    <?php } ?>
+                </div>
                 <?php
                 $variations_type = 0;
                 foreach ($product->get_available_variations() as $variations) {
@@ -499,23 +507,24 @@ if ($enable_classroom_courses):?>
         <?php } ?>
 
         <?php if ($cta = get_field('classroom_courses_cta')): ?>
-        <div class="container">
-            <div class="x:flex x:flex-wrap x:justify-start  x:items-center x:gap-4 x:pb-20">
-                <div class="typical_text">
-                    <?= $cta ?>
-                </div>
-                <?php if ($btn = get_field('classroom_courses_cta_button')): ?>
-                    <div class="x:md:basis-1/6">
-                        <?php if (is_array($btn)): ?>
-                            <div class="x:ml-auto x:flex">
-                                <a class="btn x:bg-white x:text-[#a27fff] x:text-center x:inline-block x:ml-auto" href="<?= $btn['url'] ?>"
-                                   target="<?= $btn['target'] ?>"><?= $btn['title'] ?></a>
-                            </div>
-                        <?php endif; ?>
+            <div class="container">
+                <div class="x:flex x:flex-wrap x:justify-start  x:items-center x:gap-4 x:pb-20">
+                    <div class="typical_text">
+                        <?= $cta ?>
                     </div>
-                <?php endif; ?>
+                    <?php if ($btn = get_field('classroom_courses_cta_button')): ?>
+                        <div class="x:md:basis-1/6">
+                            <?php if (is_array($btn)): ?>
+                                <div class="x:ml-auto x:flex">
+                                    <a class="btn x:bg-white x:text-[#a27fff] x:text-center x:inline-block x:ml-auto"
+                                       href="<?= $btn['url'] ?>"
+                                       target="<?= $btn['target'] ?>"><?= $btn['title'] ?></a>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
-        </div>
         <?php endif; ?>
     </div>
 <?php endif; ?>
