@@ -236,6 +236,53 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         ));
     }
     add_action('wp_enqueue_scripts', 'course_enqueue_cart_assets');
+
+    /**
+     * Show recipient details as line-item meta in the checkout order table.
+     *
+     * Feeds the rows WooCommerce renders beneath each product in the checkout
+     * "Your order" table (and the mini-cart) so customers can confirm what they
+     * submitted. Skipped on the main cart page, where the editable recipient
+     * boxes already display this information.
+     */
+    function course_display_recipients_item_data($item_data, $cart_item) {
+        if (function_exists('is_cart') && is_cart()) {
+            return $item_data;
+        }
+
+        if (empty($cart_item['course_recipients']) || !is_array($cart_item['course_recipients'])) {
+            return $item_data;
+        }
+
+        $recipients = $cart_item['course_recipients'];
+        $multiple   = count($recipients) > 1;
+
+        foreach ($recipients as $index => $recipient) {
+            $first = isset($recipient['first_name']) ? $recipient['first_name'] : '';
+            $last  = isset($recipient['last_name']) ? $recipient['last_name'] : '';
+            $email = isset($recipient['email']) ? $recipient['email'] : '';
+
+            $name  = trim($first . ' ' . $last);
+
+            if ('' === $name && '' === $email) {
+                continue;
+            }
+
+            $value = $name;
+            if ('' !== $email) {
+                $value .= ('' !== $name) ? ' (' . $email . ')' : $email;
+            }
+
+            $item_data[] = array(
+                'key'     => $multiple ? sprintf(__('Recipient %d', 'woocommerce'), $index + 1) : __('Recipient', 'woocommerce'),
+                'value'   => $value,
+                'display' => esc_html($value),
+            );
+        }
+
+        return $item_data;
+    }
+    add_filter('woocommerce_get_item_data', 'course_display_recipients_item_data', 10, 2);
     
     /**
      * Handle quantity changes
