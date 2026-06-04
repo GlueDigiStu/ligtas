@@ -90,81 +90,152 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     add_action('woocommerce_after_cart_item_name', 'course_add_recipient_fields_after_cart_item_name', 10, 2);
     
     /**
-     * Update recipient fields when cart is updated
+     * Persist the posted recipient fields into the cart contents.
+     *
+     * Shared by the standard "Update cart" submit and the AJAX save that runs
+     * when a customer clicks "Proceed to checkout". Reads recipient_first_name,
+     * recipient_last_name and recipient_email out of $_POST (each keyed by cart
+     * item key then recipient index) and writes them onto the matching cart line.
+     *
+     * Does not call set_session() — callers persist when appropriate.
+     */
+    function course_persist_recipients_from_post() {
+        $cart = WC()->cart;
+
+        if (!$cart) {
+            return;
+        }
+
+        // Map each POST array to the recipient sub-key it populates.
+        $field_map = array(
+            'recipient_first_name' => 'first_name',
+            'recipient_last_name'  => 'last_name',
+            'recipient_email'      => 'email',
+        );
+
+        foreach ($field_map as $post_key => $recipient_key) {
+            if (!isset($_POST[$post_key]) || !is_array($_POST[$post_key])) {
+                continue;
+            }
+
+            foreach (wp_unslash($_POST[$post_key]) as $cart_item_key => $values) {
+                $cart_item_key = sanitize_text_field($cart_item_key);
+
+                // Ignore anything that doesn't map to a real cart line.
+                if (!isset($cart->cart_contents[$cart_item_key]) || !is_array($values)) {
+                    continue;
+                }
+
+                if (!isset($cart->cart_contents[$cart_item_key]['course_recipients'])) {
+                    $cart->cart_contents[$cart_item_key]['course_recipients'] = array();
+                }
+
+                foreach ($values as $index => $value) {
+                    $index = absint($index);
+
+                    if (!isset($cart->cart_contents[$cart_item_key]['course_recipients'][$index])) {
+                        $cart->cart_contents[$cart_item_key]['course_recipients'][$index] = array();
+                    }
+
+                    $clean = ('email' === $recipient_key) ? sanitize_email($value) : sanitize_text_field($value);
+                    $cart->cart_contents[$cart_item_key]['course_recipients'][$index][$recipient_key] = $clean;
+                }
+            }
+        }
+    }
+
+    /**
+     * Update recipient fields when the cart is updated via the "Update cart" button.
      */
     function course_update_recipient_fields() {
         // Only proceed if the update_cart button was clicked
         if (!isset($_POST['update_cart'])) {
             return;
         }
-        
-        // Process first names
-        if (isset($_POST['recipient_first_name']) && is_array($_POST['recipient_first_name'])) {
-            foreach ($_POST['recipient_first_name'] as $cart_item_key => $values) {
-                if (isset(WC()->cart->cart_contents[$cart_item_key])) {
-                    // Initialize recipients array if it doesn't exist
-                    if (!isset(WC()->cart->cart_contents[$cart_item_key]['course_recipients'])) {
-                        WC()->cart->cart_contents[$cart_item_key]['course_recipients'] = array();
-                    }
-                    
-                    // Store each recipient's first name
-                    foreach ($values as $index => $value) {
-                        // Initialize this recipient if needed
-                        if (!isset(WC()->cart->cart_contents[$cart_item_key]['course_recipients'][$index])) {
-                            WC()->cart->cart_contents[$cart_item_key]['course_recipients'][$index] = array();
-                        }
-                        
-                        WC()->cart->cart_contents[$cart_item_key]['course_recipients'][$index]['first_name'] = sanitize_text_field($value);
-                    }
-                }
-            }
-        }
-        
-        // Process last names
-        if (isset($_POST['recipient_last_name']) && is_array($_POST['recipient_last_name'])) {
-            foreach ($_POST['recipient_last_name'] as $cart_item_key => $values) {
-                if (isset(WC()->cart->cart_contents[$cart_item_key])) {
-                    // Initialize recipients array if it doesn't exist
-                    if (!isset(WC()->cart->cart_contents[$cart_item_key]['course_recipients'])) {
-                        WC()->cart->cart_contents[$cart_item_key]['course_recipients'] = array();
-                    }
-                    
-                    // Store each recipient's last name
-                    foreach ($values as $index => $value) {
-                        // Initialize this recipient if needed
-                        if (!isset(WC()->cart->cart_contents[$cart_item_key]['course_recipients'][$index])) {
-                            WC()->cart->cart_contents[$cart_item_key]['course_recipients'][$index] = array();
-                        }
-                        
-                        WC()->cart->cart_contents[$cart_item_key]['course_recipients'][$index]['last_name'] = sanitize_text_field($value);
-                    }
-                }
-            }
-        }
-        
-        // Process emails
-        if (isset($_POST['recipient_email']) && is_array($_POST['recipient_email'])) {
-            foreach ($_POST['recipient_email'] as $cart_item_key => $values) {
-                if (isset(WC()->cart->cart_contents[$cart_item_key])) {
-                    // Initialize recipients array if it doesn't exist
-                    if (!isset(WC()->cart->cart_contents[$cart_item_key]['course_recipients'])) {
-                        WC()->cart->cart_contents[$cart_item_key]['course_recipients'] = array();
-                    }
-                    
-                    // Store each recipient's email
-                    foreach ($values as $index => $value) {
-                        // Initialize this recipient if needed
-                        if (!isset(WC()->cart->cart_contents[$cart_item_key]['course_recipients'][$index])) {
-                            WC()->cart->cart_contents[$cart_item_key]['course_recipients'][$index] = array();
-                        }
-                        
-                        WC()->cart->cart_contents[$cart_item_key]['course_recipients'][$index]['email'] = sanitize_email($value);
-                    }
-                }
-            }
-        }
+
+        course_persist_recipients_from_post();
     }
     add_action('woocommerce_update_cart_action_cart_updated', 'course_update_recipient_fields', 20);
+
+    /**
+     * AJAX: save recipient details, then report whether the cart is ready for checkout.
+     *
+     * Fired by the cart-page script when the customer clicks "Proceed to
+     * checkout". This removes the need to press "Update cart" first — the
+     * details are persisted to the session here, and the existing
+     * woocommerce_checkout_process validation remains the server-side backstop.
+     */
+    function course_ajax_save_recipients() {
+        check_ajax_referer('course_save_recipients', 'nonce');
+
+        if (!WC()->cart) {
+            wp_send_json_error(array('message' => __('Your cart is unavailable. Please refresh and try again.', 'woocommerce')));
+        }
+
+        course_persist_recipients_from_post();
+        WC()->cart->set_session();
+
+        // Mirror the checkout validation so the redirect can't dead-end.
+        $errors = array();
+
+        foreach (WC()->cart->get_cart() as $cart_item) {
+            $product_name = $cart_item['data']->get_name();
+
+            if (!isset($cart_item['course_recipients']) || !is_array($cart_item['course_recipients'])) {
+                $errors[] = sprintf(__('Please enter recipient information for "%s".', 'woocommerce'), $product_name);
+                continue;
+            }
+
+            foreach ($cart_item['course_recipients'] as $index => $recipient) {
+                if (empty($recipient['first_name']) || empty($recipient['last_name']) || empty($recipient['email']) || !is_email($recipient['email'])) {
+                    $errors[] = sprintf(__('Please complete valid recipient details for recipient %1$d of "%2$s".', 'woocommerce'), $index + 1, $product_name);
+                }
+            }
+        }
+
+        if (!empty($errors)) {
+            wp_send_json_error(array('errors' => $errors));
+        }
+
+        wp_send_json_success();
+    }
+    add_action('wp_ajax_course_save_recipients', 'course_ajax_save_recipients');
+    add_action('wp_ajax_nopriv_course_save_recipients', 'course_ajax_save_recipients');
+
+    /**
+     * Enqueue the cart-page script that gates "Proceed to checkout".
+     */
+    function course_enqueue_cart_assets() {
+        if (!function_exists('is_cart') || !is_cart()) {
+            return;
+        }
+
+        wp_enqueue_style(
+            'course-cart-recipients',
+            plugins_url('assets/css/cart-recipients.css', __FILE__),
+            array(),
+            '1.1.0'
+        );
+
+        wp_enqueue_script(
+            'course-cart-recipients',
+            plugins_url('assets/js/cart-recipients.js', __FILE__),
+            array('jquery'),
+            '1.1.0',
+            true
+        );
+
+        wp_localize_script('course-cart-recipients', 'CourseRecipients', array(
+            'ajaxUrl'  => admin_url('admin-ajax.php'),
+            'nonce'    => wp_create_nonce('course_save_recipients'),
+            'messages' => array(
+                'incomplete'   => __('Please complete the recipient details for every course before proceeding to checkout.', 'woocommerce'),
+                'invalidEmail' => __('Please enter a valid email address for every recipient before proceeding to checkout.', 'woocommerce'),
+                'saveFailed'   => __('Sorry, we couldn\'t save the recipient details. Please try again.', 'woocommerce'),
+            ),
+        ));
+    }
+    add_action('wp_enqueue_scripts', 'course_enqueue_cart_assets');
     
     /**
      * Handle quantity changes
@@ -226,7 +297,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     function course_save_recipient_info_to_order_items($item, $cart_item_key, $values) {
         if (isset($values['course_recipients']) && is_array($values['course_recipients'])) {
             // Save the entire recipients array
-			error_log(print_r($values, true));
             $item->add_meta_data('_course_recipients', $values['course_recipients']);
             
             // Also save individual recipients

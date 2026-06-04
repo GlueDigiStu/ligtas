@@ -1194,12 +1194,12 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "table",
+            "layout": "block",
             "pagination": 0,
             "min": 0,
             "max": 0,
             "collapsed": "",
-            "button_label": "Add Row",
+            "button_label": "Add Section",
             "rows_per_page": 20,
             "sub_fields": [
                 {
@@ -1239,11 +1239,10 @@
                         "id": ""
                     },
                     "layout": "table",
-                    "pagination": 0,
                     "min": 0,
                     "max": 0,
                     "collapsed": "",
-                    "button_label": "Add Row",
+                    "button_label": "Add FAQ Item",
                     "rows_per_page": 20,
                     "sub_fields": [
                         {
@@ -1289,6 +1288,49 @@
                             "media_upload": 1,
                             "delay": 0,
                             "parent_repeater": "field_697b493df6916"
+                        },
+                        {
+                            "key": "field_6a2154e9e8446",
+                            "label": "Buttons",
+                            "name": "buttons",
+                            "aria-label": "",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "layout": "table",
+                            "pagination": 0,
+                            "min": 0,
+                            "max": 0,
+                            "collapsed": "",
+                            "button_label": "Add Row",
+                            "rows_per_page": 20,
+                            "sub_fields": [
+                                {
+                                    "key": "field_6a2154efe8447",
+                                    "label": "Link",
+                                    "name": "link",
+                                    "aria-label": "",
+                                    "type": "link",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "array",
+                                    "allow_in_bindings": 0,
+                                    "parent_repeater": "field_6a2154e9e8446"
+                                }
+                            ],
+                            "parent_repeater": "field_697b493df6916"
                         }
                     ],
                     "parent_repeater": "field_697b491cf6914"
@@ -1317,5 +1359,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1780559552
+    "modified": 1780569553
 }

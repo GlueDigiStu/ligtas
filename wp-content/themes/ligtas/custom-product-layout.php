@@ -597,6 +597,14 @@ if ($enable_classroom_courses):?>
                                 </summary>
                                 <div class="content x:pt-8">
                                     <?= $faq['answer'] ?>
+                                    <?php if(is_array($faq['buttons']) && count($faq['buttons']) > 0): ?>
+                                        <div class="x:mt-8 ">
+                                            <?php foreach ($faq['buttons'] as $btn): ?>
+                                                <p><a class="btn" href="<?= $btn['link']['url'] ?>"
+                                                   target="<?= $btn['link']['target'] ?>"><?= $btn['link']['title'] ?></a></p>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </details>
                         <?php endforeach; ?>

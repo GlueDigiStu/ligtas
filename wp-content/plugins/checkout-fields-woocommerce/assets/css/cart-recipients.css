@@ -1,0 +1,18 @@
+/* Highlight recipient fields that failed validation at "Proceed to checkout". */
+.course-recipient-field input.course-field-error {
+	border-color: #e2401c;
+	box-shadow: 0 0 0 1px #e2401c;
+	outline: none;
+}
+
+/* Error notice injected above the proceed button. */
+.course-recipients-error {
+	margin-bottom: 1em;
+}
+
+/* Saving state on the proceed button while details persist. */
+.wc-proceed-to-checkout a.checkout-button.course-saving {
+	opacity: 0.6;
+	pointer-events: none;
+	cursor: progress;
+}
