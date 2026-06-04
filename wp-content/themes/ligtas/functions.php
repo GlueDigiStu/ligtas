@@ -1,12 +1,15 @@
 <?php
-if (isset($_GET['URL'])) {
-        global $wp_query;
-        $wp_query->set_404();
-        status_header(404);
+add_action('template_redirect', function () {
+    // Case-insensitive: matches ?URL=, ?url=, ?Url=, etc.
+    $param_keys = array_map('strtolower', array_keys($_GET));
+
+    if (in_array('url', $param_keys, true)) {
+        status_header(410);
         nocache_headers();
-        include(get_404_template());
+        include get_404_template();
         exit;
     }
+});
 function my_custom_enqueue_scripts() {
     // Enqueue jQuery (built-in WordPress version)
     wp_enqueue_script('jquery');
