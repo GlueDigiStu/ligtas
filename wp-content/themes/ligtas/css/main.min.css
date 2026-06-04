@@ -790,10 +790,10 @@ body {
 .typical_text th:first-child {
     padding-left: 0;
 }
-.typical_text td:last-child,
+/*.typical_text td:last-child,
 .typical_text th:last-child {
     border-right: none;
-}
+}*/
 .typical_text th {
     text-align: left;
     padding-top: 0;

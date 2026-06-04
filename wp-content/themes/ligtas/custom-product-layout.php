@@ -138,7 +138,7 @@ if ($enable_online_courses):
         }
 
         .nebosh-gold-badge{
-            width: 70px; position: absolute; top: 0; transform: translateY( -100%); right: 0;
+            width: 70px; position: absolute; top: 25px; transform: translateY( -100%); right: 0;
         }
 
         @media(max-width: 768px){
@@ -157,10 +157,8 @@ if ($enable_online_courses):
                         <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
 
                             <img src="<?php bloginfo('template_url'); ?>/images/course_icon_1.svg" alt="">
-
-                            Our Online Course Options
-
-
+<?php $online_courses_title = get_field('online_courses_title'); ?>
+                            <?= $online_courses_title ?: 'Our Online Course Options'?>
                         </h3>
 
                         <?php if ($online_courses_text = get_field('online_courses')) { ?>
@@ -175,7 +173,7 @@ if ($enable_online_courses):
                         }
                         if ($variations_type) {
                             ?>
-                            <table class=" x:w-full x:mx-auto x:mt-20 details_table">
+                            <table class=" x:w-full x:mx-auto x:mt-20 details_table x:[&_a]:text-[#a27fff]">
                                 <tbody>
                                 <tr>
                                     <td></td>
@@ -184,6 +182,9 @@ if ($enable_online_courses):
                                         <?php if ($most_popular == 'gold'): ?>
                                             <div class="x:rounded-t-full x:bg-[#a27fff] x:text-sm x:font-normal x:text-white x:p-3 x:absolute x:top-0 x:-translate-y-full x:left-0 x:right-0">
                                                 Most Popular
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="x:rounded-t-full x:bg-[#f5f5f5] x:text-sm x:font-normal x:h-11 x:text-white x:p-3 x:absolute x:top-0 x:-translate-y-full x:left-0 x:right-0">
                                             </div>
                                         <?php endif; ?>
                                         Gold
@@ -200,6 +201,9 @@ if ($enable_online_courses):
                                             <div class="x:rounded-t-full x:bg-[#a27fff] x:text-sm x:font-normal x:text-white x:p-3 x:absolute x:top-0 x:-translate-y-full x:left-0 x:right-0">
                                                 Most Popular
                                             </div>
+                                        <?php else: ?>
+                                            <div class="x:rounded-t-full x:bg-[#f5f5f5] x:text-sm x:font-normal x:h-11 x:text-white x:p-3 x:absolute x:top-0 x:-translate-y-full x:left-0 x:right-0">
+                                            </div>
                                         <?php endif; ?>
                                         Silver
                                         <?php if ($silver = get_field('silver')) { ?>
@@ -211,6 +215,9 @@ if ($enable_online_courses):
                                         <?php if ($most_popular == 'bronze'): ?>
                                             <div class="x:rounded-t-full x:bg-[#a27fff] x:text-sm x:font-normal x:text-white x:p-3 x:absolute x:top-0 x:-translate-y-full x:left-0 x:right-0">
                                                 Most Popular
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="x:rounded-t-full x:bg-[#f5f5f5] x:text-sm x:font-normal x:h-11 x:text-white x:p-3 x:absolute x:top-0 x:-translate-y-full x:left-0 x:right-0">
                                             </div>
                                         <?php endif; ?>
                                         Bronze
@@ -275,7 +282,7 @@ if ($enable_online_courses):
                         <div class="x:md:basis-1/6">
                             <?php if (is_array($btn)): ?>
                                 <div class="x:ml-auto x:flex">
-                                    <a class="btn x:text-center x:inline-block x:ml-auto" href="<?= $btn['url'] ?>"
+                                    <a class="btn x:text-center x:inline-block" href="<?= $btn['url'] ?>"
                                        target="<?= $btn['target'] ?>"><?= $btn['title'] ?></a>
                                 </div>
                             <?php endif; ?>
@@ -304,8 +311,8 @@ if ($enable_virtual_courses):?>
 
 
                 <img src="<?php bloginfo('template_url'); ?>/images/course_icon_1.svg" alt="">
-
-                Our Virtual Course Options
+<?php $virtual_courses_title = get_field('virtual_courses_title'); ?>
+                <?= $virtual_courses_title ?: 'Our Virtual Course Options' ?>
 
             </h3>
 
@@ -398,7 +405,7 @@ if ($enable_virtual_courses):?>
                     <div class="x:md:basis-1/6">
                         <?php if (is_array($btn)): ?>
                             <div class="x:ml-auto x:flex">
-                                <a class="btn x:text-center x:inline-block x:ml-auto" href="<?= $btn['url'] ?>"
+                                <a class="btn x:text-center x:inline-block" href="<?= $btn['url'] ?>"
                                    target="<?= $btn['target'] ?>"><?= $btn['title'] ?></a>
                             </div>
                         <?php endif; ?>
@@ -415,7 +422,7 @@ $enable_classroom_courses = get_field('enable_classroom_courses');
 
 if ($enable_classroom_courses):?>
 
-    <div id="classroom-courses" class="x:bg-[#a27fff]">
+    <div id="classroom-courses" class="x:bg-[#f5f5f5]">
         <div class="container">
             <div class="x:pt-20 x:pb-8">
                 <div class="typical_text">
@@ -435,7 +442,9 @@ if ($enable_classroom_courses):?>
                             <line x1="23.6172" y1="20.2981" x2="28.0237" y2="20.2981" stroke="#291261"
                                   stroke-width="2"/>
                         </svg>
-                        Our Classroom Based Course Options
+
+                        <?php $classroom_courses_title = get_field('classroom_courses_title'); ?>
+                            <?= $classroom_courses_title ?: 'Our Classroom Based Course Options'?>
                     </h3>
 
                     <?php if ($classroom_courses_text = get_field('classroom_courses')) { ?>
@@ -527,7 +536,7 @@ if ($enable_classroom_courses):?>
                         <div class="x:md:basis-1/6">
                             <?php if (is_array($btn)): ?>
                                 <div class="x:ml-auto x:flex">
-                                    <a class="btn x:bg-white x:text-[#a27fff] x:text-center x:inline-block x:ml-auto"
+                                    <a class="btn  x:text-center x:inline-block"
                                        href="<?= $btn['url'] ?>"
                                        target="<?= $btn['target'] ?>"><?= $btn['title'] ?></a>
                                 </div>
@@ -544,11 +553,20 @@ if ($enable_classroom_courses):?>
         details[open] .switch_nav_arrow {
             transform: rotate(90deg);
         }
+
+        .content ul{
+            list-style: disc;
+            padding-left: 20px;
+        }
+        .content p + p{
+            margin-top: 16px;
+        }
     </style>
     <div class="bg_grey x:py-20">
     <div class="container">
         <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
-            Course Overview
+            <?php $course_overview_title = get_field('course_overview_title'); ?>
+            <?= $course_overview_title ?: 'Course Overview'?>
         </h3>
 
         <?php $coa = get_field('course_overview_accordion'); ?>
@@ -577,7 +595,7 @@ if ($enable_classroom_courses):?>
                                         </svg>
                                     </div>
                                 </summary>
-                                <div class="content">
+                                <div class="content x:pt-8">
                                     <?= $faq['answer'] ?>
                                 </div>
                             </details>

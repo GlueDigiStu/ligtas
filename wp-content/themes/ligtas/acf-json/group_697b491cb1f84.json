@@ -824,6 +824,27 @@
             "ui": 1
         },
         {
+            "key": "field_6a21274a96425",
+            "label": "Online Courses Title",
+            "name": "online_courses_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_69b2a3e018dcf",
             "label": "Online Courses Helper Text",
             "name": "online_courses",
@@ -920,6 +941,27 @@
             "ui_on_text": "",
             "ui_off_text": "",
             "ui": 1
+        },
+        {
+            "key": "field_6a21275a96426",
+            "label": "Virtual Courses Title",
+            "name": "virtual_courses_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_69b2a3ec18dd0",
@@ -1020,6 +1062,27 @@
             "ui": 1
         },
         {
+            "key": "field_6a2127c196427",
+            "label": "Classroom Courses Title",
+            "name": "classroom_courses_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_69b2a46f8ebb9",
             "label": "Classroom Courses",
             "name": "classroom_courses",
@@ -1095,6 +1158,27 @@
             "placement": "left",
             "endpoint": 0,
             "selected": 0
+        },
+        {
+            "key": "field_6a21283a39c27",
+            "label": "Course Overview Title",
+            "name": "course_overview_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_697b491cf6914",
@@ -1231,5 +1315,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1776154736
+    "modified": 1780557894
 }
