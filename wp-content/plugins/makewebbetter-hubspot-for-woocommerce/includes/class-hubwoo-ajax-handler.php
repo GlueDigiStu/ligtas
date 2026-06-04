@@ -798,6 +798,8 @@ if ( ! class_exists( 'HubWooAjaxHandler' ) ) {
 				$delete_meta = 'yes' == $data['delete_meta'] ? true : false;
 			}
 
+			HubWooConnectionMananager::get_instance()->remove_installed_app();
+			
 			$hubwoo->hubwoo_switch_account( true, $delete_meta );
 			echo wp_json_encode( true );
 			wp_die();
@@ -2006,19 +2008,19 @@ if ( ! class_exists( 'HubWooAjaxHandler' ) ) {
 					);
 				}
 
-				$state = $hubwoo_guest_order->get_billing_state();
-				if ( ! empty( $state ) ) {
-					$guest_user_properties[] = array(
-						'property' => 'state',
-						'value'    => $state,
-					);
-				}
-
 				$country = $hubwoo_guest_order->get_billing_country();
 				if ( ! empty( $country ) ) {
 					$guest_user_properties[] = array(
 						'property' => 'country',
 						'value'    => Hubwoo::map_country_by_abbr( $country ),
+					);
+				}
+
+				$state = $hubwoo_guest_order->get_billing_state();
+				if ( ! empty( $state ) && ! empty( $country ) ) {
+					$guest_user_properties[] = array(
+						'property' => 'state',
+						'value'    => Hubwoo::map_state_by_abbr( $state, $country ),
 					);
 				}
 

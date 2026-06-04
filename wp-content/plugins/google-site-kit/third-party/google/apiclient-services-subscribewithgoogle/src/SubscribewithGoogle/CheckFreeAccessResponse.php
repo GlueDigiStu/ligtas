@@ -20,11 +20,15 @@ namespace Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle;
 class CheckFreeAccessResponse extends \Google\Site_Kit_Dependencies\Google\Model
 {
     /**
+     * True if free access should be allowed, false otherwise.
+     *
      * @var bool
      */
     public $isAllowed;
     /**
-     * @param bool
+     * True if free access should be allowed, false otherwise.
+     *
+     * @param bool $isAllowed
      */
     public function setIsAllowed($isAllowed)
     {
@@ -39,4 +43,4 @@ class CheckFreeAccessResponse extends \Google\Site_Kit_Dependencies\Google\Model
     }
 }
 // Adding a class alias for backwards compatibility with the previous class name.
-\class_alias(\Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\CheckFreeAccessResponse::class, 'Google\\Site_Kit_Dependencies\\Google_Service_SubscribewithGoogle_CheckFreeAccessResponse');
+class_alias(CheckFreeAccessResponse::class, 'Google\Site_Kit_Dependencies\Google_Service_SubscribewithGoogle_CheckFreeAccessResponse');

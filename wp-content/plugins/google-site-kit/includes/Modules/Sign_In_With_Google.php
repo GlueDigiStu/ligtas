@@ -66,6 +66,11 @@ final class Sign_In_With_Google extends Module implements Module_With_Inline_Dat
 
 	use Method_Proxy_Trait;
 	use Module_With_Assets_Trait;
+	/**
+	 * Declare the type of the `Module_Settings` subclass to be used by the trait.
+	 *
+	 * @use Module_With_Settings_Trait<Settings>
+	 */
 	use Module_With_Settings_Trait;
 	use Module_With_Tag_Trait;
 	use Module_With_Inline_Data_Trait;
@@ -521,7 +526,7 @@ final class Sign_In_With_Google extends Module implements Module_With_Inline_Dat
 			 *
 			 * @param array $args Optional arguments to customize button attributes.
 			 */
-			do_action( 'googlesitekit_render_sign_in_with_google_button' );
+			do_action( 'googlesitekit_render_sign_in_with_google_button', array() );
 			$content .= ob_get_clean();
 		}
 		return $content;
@@ -691,8 +696,15 @@ final class Sign_In_With_Google extends Module implements Module_With_Inline_Dat
 	 * Registers the Sign in with Google tag.
 	 *
 	 * @since 1.159.0
+	 * @since 1.180.0 Skip on the WordPress email verification interstitial.
 	 */
 	public function register_tag() {
+		// Skip on the WordPress email verification interstitial (wp-login.php?action=confirm_admin_email).
+		$is_wp_login = false !== stripos( wp_login_url(), $_SERVER['SCRIPT_NAME'] ?? '' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		if ( $is_wp_login && 'confirm_admin_email' === $this->context->input()->filter( INPUT_GET, 'action' ) ) {
+			return;
+		}
+
 		$settings  = $this->get_settings()->get();
 		$client_id = $settings['clientID'];
 
@@ -709,7 +721,7 @@ final class Sign_In_With_Google extends Module implements Module_With_Inline_Dat
 		}
 
 		$tag->set_settings( $this->get_settings()->get() );
-		$tag->set_is_wp_login( false !== stripos( wp_login_url(), $_SERVER['SCRIPT_NAME'] ?? '' ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		$tag->set_is_wp_login( $is_wp_login );
 		$tag->set_redirect_to( $this->context->input()->filter( INPUT_GET, 'redirect_to' ) );
 		$tag->register();
 	}

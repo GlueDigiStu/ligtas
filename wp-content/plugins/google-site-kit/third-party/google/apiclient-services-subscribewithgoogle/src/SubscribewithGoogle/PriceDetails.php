@@ -20,18 +20,20 @@ namespace Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle;
 class PriceDetails extends \Google\Site_Kit_Dependencies\Google\Collection
 {
     protected $collection_key = 'taxDetails';
-    protected $pretaxAmountType = \Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Money::class;
+    protected $pretaxAmountType = Money::class;
     protected $pretaxAmountDataType = '';
-    protected $taxAmountType = \Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Money::class;
+    protected $taxAmountType = Money::class;
     protected $taxAmountDataType = '';
-    protected $taxDetailsType = \Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\TaxDetails::class;
+    protected $taxDetailsType = TaxDetails::class;
     protected $taxDetailsDataType = 'array';
-    protected $totalAmountType = \Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Money::class;
+    protected $totalAmountType = Money::class;
     protected $totalAmountDataType = '';
     /**
-     * @param Money
+     * The tax-exclusive amount.
+     *
+     * @param Money $pretaxAmount
      */
-    public function setPretaxAmount(\Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Money $pretaxAmount)
+    public function setPretaxAmount(Money $pretaxAmount)
     {
         $this->pretaxAmount = $pretaxAmount;
     }
@@ -43,9 +45,11 @@ class PriceDetails extends \Google\Site_Kit_Dependencies\Google\Collection
         return $this->pretaxAmount;
     }
     /**
-     * @param Money
+     * The amount of tax to collect.
+     *
+     * @param Money $taxAmount
      */
-    public function setTaxAmount(\Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Money $taxAmount)
+    public function setTaxAmount(Money $taxAmount)
     {
         $this->taxAmount = $taxAmount;
     }
@@ -57,7 +61,9 @@ class PriceDetails extends \Google\Site_Kit_Dependencies\Google\Collection
         return $this->taxAmount;
     }
     /**
-     * @param TaxDetails[]
+     * The tax details of the state.
+     *
+     * @param TaxDetails[] $taxDetails
      */
     public function setTaxDetails($taxDetails)
     {
@@ -71,9 +77,11 @@ class PriceDetails extends \Google\Site_Kit_Dependencies\Google\Collection
         return $this->taxDetails;
     }
     /**
-     * @param Money
+     * The total cost, including tax.
+     *
+     * @param Money $totalAmount
      */
-    public function setTotalAmount(\Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Money $totalAmount)
+    public function setTotalAmount(Money $totalAmount)
     {
         $this->totalAmount = $totalAmount;
     }
@@ -86,4 +94,4 @@ class PriceDetails extends \Google\Site_Kit_Dependencies\Google\Collection
     }
 }
 // Adding a class alias for backwards compatibility with the previous class name.
-\class_alias(\Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\PriceDetails::class, 'Google\\Site_Kit_Dependencies\\Google_Service_SubscribewithGoogle_PriceDetails');
+class_alias(PriceDetails::class, 'Google\Site_Kit_Dependencies\Google_Service_SubscribewithGoogle_PriceDetails');

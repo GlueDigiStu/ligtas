@@ -11,6 +11,7 @@
 namespace Google\Site_Kit\Core\Email_Reporting;
 
 use Google\Site_Kit\Context;
+use Google\Site_Kit\Core\Golinks\Golinks;
 
 /**
  * Class for mapping email report sections and their layout configuration.
@@ -18,7 +19,6 @@ use Google\Site_Kit\Context;
  * @since 1.168.0
  */
 class Sections_Map {
-
 	/**
 	 * Plugin context.
 	 *
@@ -69,16 +69,38 @@ class Sections_Map {
 	protected $payload;
 
 	/**
+	 * Golinks instance.
+	 *
+	 * @since 1.174.0
+	 * @var Golinks
+	 */
+	protected $golinks;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 1.168.0
+	 * @since 1.174.0 Added golinks dependency.
 	 *
 	 * @param Context $context Plugin context.
 	 * @param array   $payload The payload data to be used in sections.
+	 * @param Golinks $golinks Golinks instance.
 	 */
-	public function __construct( Context $context, $payload ) {
+	public function __construct( Context $context, $payload, Golinks $golinks ) {
 		$this->context = $context;
 		$this->payload = $payload;
+		$this->golinks = $golinks;
+	}
+
+	/**
+	 * Gets the dashboard golink URL.
+	 *
+	 * @since 1.174.0
+	 *
+	 * @return string Dashboard URL.
+	 */
+	protected function get_dashboard_url() {
+		return $this->golinks->get_url( 'dashboard' );
 	}
 
 	/**
@@ -95,48 +117,10 @@ class Sections_Map {
 	 */
 	public function get_sections() {
 		return array_merge(
-			$this->get_business_growth_section(),
 			$this->get_visitors_section(),
 			$this->get_traffic_sources_section(),
 			$this->get_attention_section(),
-			$this->get_growth_drivers_section(),
 			$this->get_growth_drivers_section()
-		);
-	}
-
-	/**
-	 * Gets the business growth section.
-	 *
-	 * @since 1.168.0
-	 *
-	 * @return array Section configuration array.
-	 */
-	protected function get_business_growth_section() {
-		$section_parts = array(
-			'total_conversion_events' => array(
-				'data' => $this->payload['total_conversion_events'] ?? array(),
-			),
-			'products_added_to_cart'  => array(
-				'data' => $this->payload['products_added_to_cart'] ?? array(),
-			),
-			'purchases'               => array(
-				'data' => $this->payload['purchases'] ?? array(),
-			),
-		);
-
-		$section_parts = $this->filter_section_parts( $section_parts );
-		if ( empty( $section_parts ) ) {
-			return array();
-		}
-
-		return array(
-			'is_my_site_helping_my_business_grow' => array(
-				'title'            => esc_html__( 'Is my site helping my business grow?', 'google-site-kit' ),
-				'icon'             => 'conversions',
-				'section_template' => 'section-conversions',
-				'dashboard_url'    => $this->context->admin_url( 'dashboard' ),
-				'section_parts'    => $section_parts,
-			),
 		);
 	}
 
@@ -193,7 +177,7 @@ class Sections_Map {
 				'title'            => esc_html__( 'How many people are finding and visiting my site?', 'google-site-kit' ),
 				'icon'             => 'visitors',
 				'section_template' => 'section-metrics',
-				'dashboard_url'    => $this->context->admin_url( 'dashboard' ),
+				'dashboard_url'    => $this->get_dashboard_url(),
 				'section_parts'    => $section_parts,
 			),
 		);
@@ -226,7 +210,7 @@ class Sections_Map {
 				'title'            => esc_html__( 'How are people finding me?', 'google-site-kit' ),
 				'icon'             => 'search',
 				'section_template' => 'section-page-metrics',
-				'dashboard_url'    => $this->context->admin_url( 'dashboard' ),
+				'dashboard_url'    => $this->get_dashboard_url(),
 				'section_parts'    => $section_parts,
 			),
 		);
@@ -265,7 +249,7 @@ class Sections_Map {
 				'title'            => esc_html__( 'What’s grabbing their attention?', 'google-site-kit' ),
 				'icon'             => 'views',
 				'section_template' => 'section-page-metrics',
-				'dashboard_url'    => $this->context->admin_url( 'dashboard' ),
+				'dashboard_url'    => $this->get_dashboard_url(),
 				'section_parts'    => $section_parts,
 			),
 		);
@@ -298,7 +282,7 @@ class Sections_Map {
 				'title'            => esc_html__( 'What is driving growth and bringing more visitors?', 'google-site-kit' ),
 				'icon'             => 'growth',
 				'section_template' => 'section-page-metrics',
-				'dashboard_url'    => $this->context->admin_url( 'dashboard' ),
+				'dashboard_url'    => $this->get_dashboard_url(),
 				'section_parts'    => $section_parts,
 			),
 		);

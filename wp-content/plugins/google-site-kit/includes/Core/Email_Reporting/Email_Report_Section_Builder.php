@@ -98,14 +98,11 @@ class Email_Report_Section_Builder {
 		$this->search_console_builder   = new Search_Console_Report_Data_Builder( $this->search_console_processor );
 		$this->label_translations       = array(
 			// Analytics 4.
-			'totalUsers'         => __( 'Total Visitors', 'google-site-kit' ),
-			'newUsers'           => __( 'New Visitors', 'google-site-kit' ),
-			'eventCount'         => __( 'Total conversion events', 'google-site-kit' ),
-			'addToCarts'         => __( 'Products added to cart', 'google-site-kit' ),
-			'ecommercePurchases' => __( 'Purchases', 'google-site-kit' ),
+			'totalUsers'  => __( 'Total visitors', 'google-site-kit' ),
+			'newUsers'    => __( 'New visitors', 'google-site-kit' ),
 			// Search Console.
-			'impressions'        => __( 'Total impressions in Search', 'google-site-kit' ),
-			'clicks'             => __( 'Total clicks from Search', 'google-site-kit' ),
+			'impressions' => __( 'Total impressions from Search', 'google-site-kit' ),
+			'clicks'      => __( 'Total clicks from Search', 'google-site-kit' ),
 		);
 	}
 
@@ -132,10 +129,17 @@ class Email_Report_Section_Builder {
 		$this->current_period_length = $this->calculate_period_length_from_date_range( $log_date_range );
 
 		try {
-			foreach ( $this->extract_sections_from_payloads( $module_slug, $raw_sections_payloads ) as $section_payload ) {
+			$section_payloads = $this->extract_sections_from_payloads( $module_slug, $raw_sections_payloads );
+
+			if ( is_wp_error( $section_payloads ) ) {
+				// Surface payload build failures directly so callers receive the original module error context.
+				return $section_payloads;
+			}
+
+			foreach ( $section_payloads as $section_payload ) {
 				list( $labels, $values, $trends, $event_names ) = $this->normalize_section_payload_components( $section_payload );
 
-				$date_range = $log_date_range ? $log_date_range : $this->report_processor->compute_date_range( $section_payload['date_range'] ?? null );
+				$date_range = $log_date_range ?: $this->report_processor->compute_date_range( $section_payload['date_range'] ?? null );
 
 				$section = new Email_Report_Data_Section_Part(
 					$section_payload['section_key'] ?? 'section',
@@ -339,7 +343,7 @@ class Email_Report_Section_Builder {
 	 *
 	 * @param string $module_slug Module slug.
 	 * @param array  $raw_sections_payloads Raw section payloads.
-	 * @return array[] Structured section payloads.
+	 * @return array[]|\WP_Error Structured section payloads, or WP_Error on module payload failure.
 	 */
 	protected function extract_sections_from_payloads( $module_slug, $raw_sections_payloads ) {
 		$sections = array();
@@ -361,6 +365,9 @@ class Email_Report_Section_Builder {
 			}
 
 			$module_sections = $this->build_module_section_payloads( $module_slug, $payload_group );
+			if ( is_wp_error( $module_sections ) ) {
+				return $module_sections;
+			}
 
 			foreach ( $module_sections as $section ) {
 				if ( $group_title ) {
@@ -387,7 +394,6 @@ class Email_Report_Section_Builder {
 	protected function build_module_section_payloads( $module_key, $module_payload ) {
 		switch ( $module_key ) {
 			case 'analytics-4':
-			case 'adsense':
 				return $this->analytics_builder->build_sections_from_module_payload( $module_payload );
 			case 'search-console':
 				return $this->search_console_builder->build_sections_from_module_payload( $module_payload, $this->current_period_length );

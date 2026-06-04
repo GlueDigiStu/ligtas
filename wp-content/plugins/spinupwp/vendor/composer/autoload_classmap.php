@@ -18,4 +18,5 @@ return array(
     'SpinupWp\\MagicLogin' => $baseDir . '/src/MagicLogin.php',
     'SpinupWp\\Plugin' => $baseDir . '/src/Plugin.php',
     'SpinupWp\\SiteHealth' => $baseDir . '/src/SiteHealth.php',
+    'SpinupWp\\SubdomainUrlRewriter' => $baseDir . '/src/SubdomainUrlRewriter.php',
 );

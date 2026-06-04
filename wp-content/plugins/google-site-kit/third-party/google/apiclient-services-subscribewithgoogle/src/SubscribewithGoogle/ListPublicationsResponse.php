@@ -21,13 +21,17 @@ class ListPublicationsResponse extends \Google\Site_Kit_Dependencies\Google\Coll
 {
     protected $collection_key = 'publications';
     /**
+     * A token to retrieve the next page of results.
+     *
      * @var string
      */
     public $nextPageToken;
-    protected $publicationsType = \Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Publication::class;
+    protected $publicationsType = Publication::class;
     protected $publicationsDataType = 'array';
     /**
-     * @param string
+     * A token to retrieve the next page of results.
+     *
+     * @param string $nextPageToken
      */
     public function setNextPageToken($nextPageToken)
     {
@@ -41,7 +45,10 @@ class ListPublicationsResponse extends \Google\Site_Kit_Dependencies\Google\Coll
         return $this->nextPageToken;
     }
     /**
-     * @param Publication[]
+     * 0-N publications that match the request. Only publications that have at
+     * least one verified domain owned by the user will be returned.
+     *
+     * @param Publication[] $publications
      */
     public function setPublications($publications)
     {
@@ -56,4 +63,4 @@ class ListPublicationsResponse extends \Google\Site_Kit_Dependencies\Google\Coll
     }
 }
 // Adding a class alias for backwards compatibility with the previous class name.
-\class_alias(\Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\ListPublicationsResponse::class, 'Google\\Site_Kit_Dependencies\\Google_Service_SubscribewithGoogle_ListPublicationsResponse');
+class_alias(ListPublicationsResponse::class, 'Google\Site_Kit_Dependencies\Google_Service_SubscribewithGoogle_ListPublicationsResponse');

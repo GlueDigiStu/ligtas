@@ -19,16 +19,20 @@ namespace Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle;
 
 class TaxDetails extends \Google\Site_Kit_Dependencies\Google\Model
 {
-    protected $amountType = \Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Money::class;
+    protected $amountType = Money::class;
     protected $amountDataType = '';
     /**
+     * The tax category.
+     *
      * @var string
      */
     public $taxCategory;
     /**
-     * @param Money
+     * The amount of tax to collect.
+     *
+     * @param Money $amount
      */
-    public function setAmount(\Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Money $amount)
+    public function setAmount(Money $amount)
     {
         $this->amount = $amount;
     }
@@ -40,7 +44,9 @@ class TaxDetails extends \Google\Site_Kit_Dependencies\Google\Model
         return $this->amount;
     }
     /**
-     * @param string
+     * The tax category.
+     *
+     * @param string $taxCategory
      */
     public function setTaxCategory($taxCategory)
     {
@@ -55,4 +61,4 @@ class TaxDetails extends \Google\Site_Kit_Dependencies\Google\Model
     }
 }
 // Adding a class alias for backwards compatibility with the previous class name.
-\class_alias(\Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\TaxDetails::class, 'Google\\Site_Kit_Dependencies\\Google_Service_SubscribewithGoogle_TaxDetails');
+class_alias(TaxDetails::class, 'Google\Site_Kit_Dependencies\Google_Service_SubscribewithGoogle_TaxDetails');

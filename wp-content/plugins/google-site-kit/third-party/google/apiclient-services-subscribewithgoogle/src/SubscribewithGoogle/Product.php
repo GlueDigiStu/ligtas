@@ -20,11 +20,15 @@ namespace Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle;
 class Product extends \Google\Site_Kit_Dependencies\Google\Model
 {
     /**
+     * Identifier for a product recognized by SwG. Ex: "basic" or "premium"
+     *
      * @var string
      */
     public $name;
     /**
-     * @param string
+     * Identifier for a product recognized by SwG. Ex: "basic" or "premium"
+     *
+     * @param string $name
      */
     public function setName($name)
     {
@@ -39,4 +43,4 @@ class Product extends \Google\Site_Kit_Dependencies\Google\Model
     }
 }
 // Adding a class alias for backwards compatibility with the previous class name.
-\class_alias(\Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Product::class, 'Google\\Site_Kit_Dependencies\\Google_Service_SubscribewithGoogle_Product');
+class_alias(Product::class, 'Google\Site_Kit_Dependencies\Google_Service_SubscribewithGoogle_Product');

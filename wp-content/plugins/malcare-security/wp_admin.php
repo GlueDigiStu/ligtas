@@ -112,6 +112,7 @@ class MCWPAdmin {
 				MCHelper::safePregMatch("/bv_account_details$/", $hook)) {
 			wp_enqueue_style('bootstrap', plugins_url('css/bootstrap.min.css', __FILE__), array(), $this->bvinfo->version);
 			wp_enqueue_style('bvplugin', plugins_url('css/bvplugin.min.css', __FILE__), array(), $this->bvinfo->version);
+			wp_enqueue_script('mc-connection-key', plugins_url('js/connection-key.js', __FILE__), array(), $this->bvinfo->version, true);
 		}
 	}
 
@@ -122,7 +123,9 @@ class MCWPAdmin {
 			array($this, 'showAccountDetailsPage'));
 
 		$brand = $this->bvinfo->getPluginWhitelabelInfo();
-		if (!is_array($brand) || (!array_key_exists('hide', $brand) && !array_key_exists('hide_from_menu', $brand))) {
+		$can_whitelabel = $this->bvinfo->canWhiteLabel();
+		$hide_from_menu = is_array($brand) && (array_key_exists('hide', $brand) || array_key_exists('hide_from_menu', $brand));
+		if (!$can_whitelabel || !$hide_from_menu) {
 			$bname = $this->bvinfo->getBrandName();
 			$icon = $this->bvinfo->getBrandIcon();
 
@@ -273,7 +276,7 @@ class MCWPAdmin {
 			return;
 		}
 
-		$assets = @unserialize($serialized_assets);
+		$assets = maybe_unserialize($serialized_assets);
 		if ($assets === false || !is_array($assets)) {
 			return;
 		}

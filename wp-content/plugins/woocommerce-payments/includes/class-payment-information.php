@@ -183,9 +183,9 @@ class Payment_Information {
 	}
 
 	/**
-	 * Returns the payment method ID.
+	 * Returns the payment method ID or confirmation token.
 	 *
-	 * @return string The payment method ID.
+	 * @return string The payment method ID or confirmation token.
 	 */
 	public function get_payment_method(): string {
 		// Use the token if we have it.
@@ -194,6 +194,17 @@ class Payment_Information {
 		}
 
 		return $this->payment_method;
+	}
+
+	/**
+	 * Returns whether the payment is using a confirmation token or a payment method.
+	 *
+	 * @see https://docs.stripe.com/payments/mobile/migration-confirmation-tokens
+	 *
+	 * @return bool True if using a confirmation token, false otherwise.
+	 */
+	public function is_using_confirmation_token(): bool {
+		return 0 === strpos( $this->get_payment_method(), 'ctoken_' );
 	}
 
 	/**
@@ -277,8 +288,10 @@ class Payment_Information {
 		$payment_information = new Payment_Information( $payment_method, $order, $payment_type, $token, $payment_initiated_by, $manual_capture, $cvc_confirmation, $fingerprint, $payment_method_stripe_id );
 
 		if ( self::PAYMENT_METHOD_ERROR === $payment_method ) {
-			$error_message = $request['wcpay-payment-method-error-message'] ?? __( "We're not able to process this payment. Please try again later.", 'woocommerce-payments' );
-			$error_code    = $request['wcpay-payment-method-error-code'] ?? 'unknown-error';
+			$error_message = empty( $request['wcpay-payment-method-error-message'] )
+				? __( "We're not able to process this payment. Please try again later.", 'woocommerce-payments' )
+				: $request['wcpay-payment-method-error-message'];
+			$error_code    = empty( $request['wcpay-payment-method-error-code'] ) ? 'unknown-error' : $request['wcpay-payment-method-error-code'];
 			$error         = new \WP_Error( $error_code, $error_message );
 			$payment_information->set_error( $error );
 		}
@@ -287,14 +300,15 @@ class Payment_Information {
 	}
 
 	/**
-	 * Extracts the payment method from the provided request.
+	 * Extracts the payment method or confirmation token from the provided request.
 	 *
 	 * @param array $request Associative array containing payment request information.
 	 *
 	 * @return string
 	 */
 	public static function get_payment_method_from_request( array $request ): string {
-		foreach ( [ 'wcpay-payment-method', 'wcpay-payment-method-sepa' ] as $key ) {
+		// Check for confirmation token first (new ECE flow), then fall back to payment method (legacy flow).
+		foreach ( [ 'wcpay-confirmation-token', 'wcpay-payment-method', 'wcpay-payment-method-sepa' ] as $key ) {
 			if ( ! empty( $request[ $key ] ) ) {
 				$normalized = wc_clean( $request[ $key ] );
 				return is_string( $normalized ) ? $normalized : '';

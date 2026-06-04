@@ -240,7 +240,7 @@ if (!class_exists('EPS_Redirects_Plugin_Options')) {
     public function add_options_page()
     {
       if (in_array($this->plugin->config('menu_location'), $this->menu_locations)) {
-        $capability = apply_filters('eps_301_redirects_capability', 'manage_options');        
+        $capability = apply_filters('eps_301_redirects_capability', 'manage_options');
         $location = ($capability == 'manage_options' ? $this->plugin->config('menu_location') : 'menu');
         $func = sprintf("add_%s_page", $location);
         return $func($this->plugin->name, $this->plugin->name, apply_filters('eps_301_redirects_capability', 'manage_options'), $this->plugin->config('page_slug'), array($this, 'do_admin_page'));
@@ -294,6 +294,16 @@ if (!class_exists('EPS_Redirects_Plugin_Options')) {
 
     <p class="text-center"><a href="#" class="open-301-pro-dialog button button-buy" data-pro-feature="sidebar-box">Get PRO Now</a></p>
     </div>
+
+    <?php
+    if (!defined('WPCAPTCHA_PLUGIN_FILE')) {
+            echo '<div id="wpcaptcha-ad" class="sidebar-box">';
+            echo '<p class="text-center"><b>Having problems with spam or bots? AI scapers giving you troubles?<br><u>Fix all your spam problems with one plugin!</u></b></p>';
+            echo '<p class="text-center"><a href="#" class="textcenter install-wpcaptcha"><img style="max-width: 90%;" src="' . esc_url(EPS_REDIRECT_URL) . '/images/wp-captcha-logo.png" alt="Advanced Google ReCaptcha" title="Advanced Google ReCaptcha"></a></p>';
+            echo '<p class="text-center"><br><a href="#" class="install-wpcaptcha button button-primary">Install &amp; activate the free Google ReCaptcha plugin</a></p><p><a href="https://wordpress.org/plugins/advanced-google-recaptcha/" target="_blank">Advanced Google ReCaptcha</a> is a free WP plugin maintained by the same team as 301 Redirects. It has <b>+200,000 users, 5-star rating</b>, and is hosted on the official WP repository.</p>';
+            echo '</div>';
+        }
+    ?>
 
     <div class="sidebar-box">
     <p>Please <a href="https://wordpress.org/support/plugin/eps-301-redirects/reviews/?filter=5#new-post" target="_blank">rate the plugin ★★★★★</a> to <b>keep it up-to-date &amp; maintained</b>. It only takes a second to rate. Thank you! 👋</p>
@@ -404,14 +414,14 @@ function pro_dialog() {
   $out .= '</tr>';
 
   $out .= '<tr class="prices">';
-  $out .= '<td class="center"><del>$79 /year</del><br><span>$49</span> /lifetime</td>';
-  $out .= '<td class="center"><del>$159 /year</del><br><span>$59</span> /lifetime</td>';
+  $out .= '<td class="center"><del>$79 /year</del><br><span>$59</span> /lifetime</td>';
+  $out .= '<td class="center"><del>$159 /year</del><br><span>$69</span> /lifetime</td>';
   $out .= '<td class="center"><del>$299 /year</del><br><span>$99</span> /lifetime</td>';
   $out .= '</tr>';
 
   $out .= '<tr>';
-  $out .= '<td><span class="dashicons dashicons-yes"></span><b>1 Site License</b> ($49 per site)</td>';
-  $out .= '<td><span class="dashicons dashicons-yes"></span><b>5 Sites License</b> ($12 per site)</td>';
+  $out .= '<td><span class="dashicons dashicons-yes"></span><b>1 Site License</b> ($59 per site)</td>';
+  $out .= '<td><span class="dashicons dashicons-yes"></span><b>5 Sites License</b> ($13 per site)</td>';
   $out .= '<td><span class="dashicons dashicons-yes"></span><b>100 Sites License</b> ($1 per site)</td>';
   $out .= '</tr>';
 
@@ -492,9 +502,9 @@ function pro_dialog() {
   $out .= '</tr>';
 
   $out .= '<tr>';
-  $out .= '<td><span>one-time payment</span><a class="button button-buy" data-href-org="https://wp301redirects.com/buy/?product=personal-launch&ref=pricing-table" href="https://wp301redirects.com/buy/?product=personal-launch&ref=pricing-table" target="_blank">BUY NOW</a><br>or <a target="_blank" class="button-buy" data-href-org="https://wp301redirects.com/buy/?product=personal-monthly&ref=pricing-table" href="https://wp301redirects.com/buy/?product=personal-monthly&ref=pricing-table">only $5.99 <small>/month</small></a></td>';
-  $out .= '<td><span>one-time payment</span><a class="button button-buy" data-href-org="https://wp301redirects.com/buy/?product=team-launch&ref=pricing-table" href="https://wp301redirects.com/buy/?product=team-launch&ref=pricing-table" target="_blank">BUY NOW</a></td>';
-  $out .= '<td><span>one-time payment</span><a class="button button-buy" data-href-org="https://wp301redirects.com/buy/?product=agency-launch&ref=pricing-table" href="https://wp301redirects.com/buy/?product=agency-launch&ref=pricing-table" target="_blank">BUY NOW</a></td>';
+  $out .= '<td><span>One-time payment</span><a class="button button-buy" data-href-org="https://wp301redirects.com/buy/?product=personal-repo&ref=pricing-table" href="https://wp301redirects.com/buy/?product=personal-repo&ref=pricing-table" target="_blank">BUY NOW</a></td>';
+  $out .= '<td><span>One-time payment</span><a class="button button-buy" data-href-org="https://wp301redirects.com/buy/?product=team-repo&ref=pricing-table" href="https://wp301redirects.com/buy/?product=team-repo&ref=pricing-table" target="_blank">BUY NOW</a></td>';
+  $out .= '<td><span>One-time payment</span><a class="button button-buy" data-href-org="https://wp301redirects.com/buy/?product=agency-launch&ref=pricing-table" href="https://wp301redirects.com/buy/?product=agency-launch&ref=pricing-table" target="_blank">BUY NOW</a></td>';
   $out .= '</tr>';
 
   $out .= '</table>';

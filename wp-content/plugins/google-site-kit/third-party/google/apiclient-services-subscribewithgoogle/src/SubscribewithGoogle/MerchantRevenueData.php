@@ -20,17 +20,25 @@ namespace Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle;
 class MerchantRevenueData extends \Google\Site_Kit_Dependencies\Google\Model
 {
     /**
+     * Exchange rate used when converting buyer amounts to payout amounts in
+     * merchant currency.
+     *
      * @var float
      */
     public $currencyConversionRate;
     /**
+     * Whether merchant revenue data is available at this time.
+     *
      * @var bool
      */
     public $isMerchantRevenueDataAvailable;
-    protected $merchantAmountType = \Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Money::class;
+    protected $merchantAmountType = Money::class;
     protected $merchantAmountDataType = '';
     /**
-     * @param float
+     * Exchange rate used when converting buyer amounts to payout amounts in
+     * merchant currency.
+     *
+     * @param float $currencyConversionRate
      */
     public function setCurrencyConversionRate($currencyConversionRate)
     {
@@ -44,7 +52,9 @@ class MerchantRevenueData extends \Google\Site_Kit_Dependencies\Google\Model
         return $this->currencyConversionRate;
     }
     /**
-     * @param bool
+     * Whether merchant revenue data is available at this time.
+     *
+     * @param bool $isMerchantRevenueDataAvailable
      */
     public function setIsMerchantRevenueDataAvailable($isMerchantRevenueDataAvailable)
     {
@@ -58,9 +68,12 @@ class MerchantRevenueData extends \Google\Site_Kit_Dependencies\Google\Model
         return $this->isMerchantRevenueDataAvailable;
     }
     /**
-     * @param Money
+     * Amount paid to the merchant for this invoice line at merchant currency
+     * after fees and taxes applied.
+     *
+     * @param Money $merchantAmount
      */
-    public function setMerchantAmount(\Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Money $merchantAmount)
+    public function setMerchantAmount(Money $merchantAmount)
     {
         $this->merchantAmount = $merchantAmount;
     }
@@ -73,4 +86,4 @@ class MerchantRevenueData extends \Google\Site_Kit_Dependencies\Google\Model
     }
 }
 // Adding a class alias for backwards compatibility with the previous class name.
-\class_alias(\Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\MerchantRevenueData::class, 'Google\\Site_Kit_Dependencies\\Google_Service_SubscribewithGoogle_MerchantRevenueData');
+class_alias(MerchantRevenueData::class, 'Google\Site_Kit_Dependencies\Google_Service_SubscribewithGoogle_MerchantRevenueData');

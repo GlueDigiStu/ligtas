@@ -8,6 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Config {
 
+	const OPTION_LOCKOUTS   = 'lockouts';
+	const OPTION_LOGGED     = 'logged';
+	const OPTION_ACTIVE_APP = 'active_app';
+
 	private static $default_options = array(
 		'gdpr'                          => 0,
 		'gdpr_message'                  => '',
@@ -57,6 +61,8 @@ class Config {
 		'hide_dashboard_widget'         => false,
 		'show_warning_badge'            => true,
 		'onboarding_popup_shown'        => false,
+		/* Last known plugin header Version (from file), persisted on activate/update. */
+		'plugin_version'                => '',
 		'custom_error_message'          => '',
 
 		'logged'                        => array(),
@@ -64,6 +70,16 @@ class Config {
 		'retries'                       => array(),
 		'lockouts'                      => array(),
 		'auto_update_choice'            => null,
+
+		/* MFA Rescue Codes */
+		'mfa_rescue_codes'              => array(),
+		'mfa_rescue_download_token'     => '',
+
+		/* MFA Flow (after failed login: handshake, verify, email code) */
+		'mfa_enabled'                   => 0,
+		'mfa_provider'                  => 'llar',
+		'mfa_provider_config'           => array(),
+		'mfa_roles'                     => array( 'administrator' ),
 	);
 
 	private static $disable_autoload_options = array(

@@ -20,11 +20,19 @@ namespace Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle;
 class CancelUserEntitlementsPlanRequest extends \Google\Site_Kit_Dependencies\Google\Model
 {
     /**
+     * Whether the subscription should be cancelled immediately, instead of
+     * waiting for the end of the next cycle. This value can only be false for
+     * subscriptions in the WAITING_TO_RECUR state.
+     *
      * @var bool
      */
     public $cancelImmediately;
     /**
-     * @param bool
+     * Whether the subscription should be cancelled immediately, instead of
+     * waiting for the end of the next cycle. This value can only be false for
+     * subscriptions in the WAITING_TO_RECUR state.
+     *
+     * @param bool $cancelImmediately
      */
     public function setCancelImmediately($cancelImmediately)
     {
@@ -39,4 +47,4 @@ class CancelUserEntitlementsPlanRequest extends \Google\Site_Kit_Dependencies\Go
     }
 }
 // Adding a class alias for backwards compatibility with the previous class name.
-\class_alias(\Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\CancelUserEntitlementsPlanRequest::class, 'Google\\Site_Kit_Dependencies\\Google_Service_SubscribewithGoogle_CancelUserEntitlementsPlanRequest');
+class_alias(CancelUserEntitlementsPlanRequest::class, 'Google\Site_Kit_Dependencies\Google_Service_SubscribewithGoogle_CancelUserEntitlementsPlanRequest');

@@ -573,7 +573,7 @@ class WPForms_About {
 									<?php
 									printf( /* translators: %s - number of templates. */
 										esc_html__( '%s customizable form templates', 'wpforms-lite' ),
-										'2000+'
+										'2100+'
 									);
 									?>
 								</li>
@@ -1165,18 +1165,21 @@ class WPForms_About {
 					'status' => 'full',
 					'text'   => [
 						'<strong>' . esc_html__( 'Complete Entry Management inside WordPress', 'wpforms-lite' ) . '</strong>',
+						esc_html__( 'View, Edit, Import, and Export', 'wpforms-lite' ),
 					],
 				],
 				'plus'  => [
 					'status' => 'full',
 					'text'   => [
 						'<strong>' . esc_html__( 'Complete Entry Management inside WordPress', 'wpforms-lite' ) . '</strong>',
+						esc_html__( 'View, Edit, Import, and Export', 'wpforms-lite' ),
 					],
 				],
 				'pro'   => [
 					'status' => 'full',
 					'text'   => [
 						'<strong>' . esc_html__( 'Complete Entry Management inside WordPress', 'wpforms-lite' ) . '</strong>',
+						esc_html__( 'View, Edit, Import, and Export', 'wpforms-lite' ),
 					],
 				],
 			],
@@ -1261,7 +1264,7 @@ class WPForms_About {
 						'<strong>' .
 						sprintf( /* translators: %s - number of templates. */
 							esc_html__( 'All Form Templates including Bonus %s pre-made form templates', 'wpforms-lite' ),
-							'2000+'
+							'2100+'
 						) .
 						'</strong>',
 					],
@@ -1328,6 +1331,7 @@ class WPForms_About {
 								'MailerLite',
 								'MailPoet',
 								'Kit',
+								'Klaviyo',
 								'Slack',
 								'Twilio',
 							]
@@ -1350,6 +1354,7 @@ class WPForms_About {
 								'MailerLite',
 								'MailPoet',
 								'Kit',
+								'Klaviyo',
 								'Slack',
 								'Twilio',
 								'Make',
@@ -1384,6 +1389,7 @@ class WPForms_About {
 								'MailerLite',
 								'MailPoet',
 								'Kit',
+								'Klaviyo',
 								'Slack',
 								'Twilio',
 								'Pipedrive',
@@ -1420,6 +1426,7 @@ class WPForms_About {
 								'MailerLite',
 								'MailPoet',
 								'Kit',
+								'Klaviyo',
 								'Slack',
 								'Twilio',
 								'Pipedrive',
@@ -1456,6 +1463,7 @@ class WPForms_About {
 								'MailerLite',
 								'MailPoet',
 								'Kit',
+								'Klaviyo',
 								'Slack',
 								'Twilio',
 								'Pipedrive',
@@ -1479,21 +1487,21 @@ class WPForms_About {
 					'status' => 'partial',
 					'text'   => [
 						'<strong>' . esc_html__( 'Limited Payment Forms', 'wpforms-lite' ) . '</strong>',
-						esc_html__( 'Accept payments using Stripe and Square only', 'wpforms-lite' ),
+						esc_html__( 'Accept payments using PayPal Commerce, Stripe, and Square only', 'wpforms-lite' ),
 					],
 				],
 				'basic'    => [
 					'status' => 'partial',
 					'text'   => [
 						'<strong>' . esc_html__( 'Limited Payment Forms', 'wpforms-lite' ) . '</strong>',
-						esc_html__( 'Accept payments using Stripe and Square only', 'wpforms-lite' ),
+						esc_html__( 'Accept payments using PayPal Commerce, Stripe, and Square only', 'wpforms-lite' ),
 					],
 				],
 				'plus'     => [
 					'status' => 'partial',
 					'text'   => [
 						'<strong>' . esc_html__( 'Limited Payment Forms', 'wpforms-lite' ) . '</strong>',
-						esc_html__( 'Accept payments using Stripe and Square only', 'wpforms-lite' ),
+						esc_html__( 'Accept payments using PayPal Commerce, Stripe, and Square only', 'wpforms-lite' ),
 					],
 				],
 				'pro'      => [

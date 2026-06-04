@@ -275,6 +275,9 @@ class Requirements {
 		'wpforms-hubspot/wpforms-hubspot.php'                           => [
 			self::LICENSE => self::TOP,
 		],
+		'wpforms-klaviyo/wpforms-klaviyo.php'                           => [
+			self::LICENSE => self::PLUS_PRO_AND_TOP,
+		],
 		'wpforms-lead-forms/wpforms-lead-forms.php'                     => [],
 		'wpforms-mailchimp/wpforms-mailchimp.php'                       => [
 			self::EXT     => 'curl',
@@ -334,6 +337,9 @@ class Requirements {
 		'wpforms-zapier/wpforms-zapier.php'                             => [],
 		'wpforms-zoho-crm/wpforms-zoho-crm.php'                         => [
 			self::LICENSE => self::TOP,
+		],
+		'wpforms-lindris/wpforms-lindris.php'                           => [
+			self::LICENSE => [],
 		],
 	];
 	// phpcs:enable WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned, WordPress.Arrays.MultipleStatementAlignment.LongIndexSpaceBeforeDoubleArrow

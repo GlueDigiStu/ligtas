@@ -2,8 +2,8 @@
 Contributors: WebFactory
 Tags: 301 redirect, redirect, 404 error log, redirection, redirects
 Requires at least: 4.0
-Tested up to: 6.9
-Stable tag: 2.83
+Tested up to: 7.0
+Stable tag: 2.84
 Requires PHP: 5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -14,8 +14,10 @@ Manage 301 & 302 redirects. Simple redirection & redirects validation. Includes 
 
 <a href="https://wp301redirects.com/?ref=wporg">301 Redirects</a> helps you manage and create 301, 302, 307 redirects for WordPress site to **improve SEO & visitor experience**. 301 Redirects is easy to use. Perfect for new sites or repairing links after reorganizing your old content, or when your site has content that expires and you wish to avoid sending visitors to a 404 error page and want to create redirection instead. Use the 404 error log to identify problematic links & create new redirections.
 
+**Having problems with spam, bots, or AI scrapers? Have a look at our <a href="https://wordpress.org/plugins/advanced-google-recaptcha/">free Captcha plugin</a> used on over 200,000 sites.**
+
 301 Redirects GUI is located in WP Admin - Settings - 301 Redirects
-404 Error Log widget can be found in the WP Admin - Dashboard
+404 Error Log widget can be found in the WP Admin - Dashboard - 404 Error Log
 
 **Features**
 
@@ -67,6 +69,10 @@ Install our free <a href="https://wordpress.org/plugins/wp-force-ssl/">WP Force 
 
 
 == Changelog ==
+= 2.84 =
+* 2026/04/08
+* minor fixes
+
 = 2.83 =
 * 2026/01/09
 * increased maximum URL length to 1024 characters

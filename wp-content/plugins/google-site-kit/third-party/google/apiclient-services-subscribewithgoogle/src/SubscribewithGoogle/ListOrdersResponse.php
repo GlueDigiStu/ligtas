@@ -21,13 +21,17 @@ class ListOrdersResponse extends \Google\Site_Kit_Dependencies\Google\Collection
 {
     protected $collection_key = 'orders';
     /**
+     * A token to retrieve the next page of results.
+     *
      * @var string
      */
     public $nextPageToken;
-    protected $ordersType = \Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Order::class;
+    protected $ordersType = Order::class;
     protected $ordersDataType = 'array';
     /**
-     * @param string
+     * A token to retrieve the next page of results.
+     *
+     * @param string $nextPageToken
      */
     public function setNextPageToken($nextPageToken)
     {
@@ -41,7 +45,9 @@ class ListOrdersResponse extends \Google\Site_Kit_Dependencies\Google\Collection
         return $this->nextPageToken;
     }
     /**
-     * @param Order[]
+     * Orders for a given publication.
+     *
+     * @param Order[] $orders
      */
     public function setOrders($orders)
     {
@@ -56,4 +62,4 @@ class ListOrdersResponse extends \Google\Site_Kit_Dependencies\Google\Collection
     }
 }
 // Adding a class alias for backwards compatibility with the previous class name.
-\class_alias(\Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\ListOrdersResponse::class, 'Google\\Site_Kit_Dependencies\\Google_Service_SubscribewithGoogle_ListOrdersResponse');
+class_alias(ListOrdersResponse::class, 'Google\Site_Kit_Dependencies\Google_Service_SubscribewithGoogle_ListOrdersResponse');

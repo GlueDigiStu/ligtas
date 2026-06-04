@@ -69,6 +69,7 @@ class EPS_Redirects_Plugin
     add_action('eps_redirects_panels_left', array($this, 'admin_panel_cache'));
     add_action('admin_notices', array($this, 'show_review_notice'));
     add_action('admin_action_301_dismiss_notice', array($this, 'dismiss_notice'));
+    add_action('admin_action_install_wpcaptcha', array($this, 'install_wpcaptcha'));
 
     // Actions
     add_action('admin_init',            array($this, 'check_plugin_actions'));
@@ -101,6 +102,80 @@ class EPS_Redirects_Plugin
 
   public static function _deactivation()
   { }
+
+  // auto download / install / activate WP Captcha plugin
+    public function install_wpcaptcha()
+    {
+        check_ajax_referer('install_wpcaptcha');
+
+        if (false === current_user_can('manage_options')) {
+            wp_die('Sorry, you have to be an admin to run this action.');
+        }
+
+        $plugin_slug = 'advanced-google-recaptcha/advanced-google-recaptcha.php';
+        $plugin_zip = 'https://downloads.wordpress.org/plugin/advanced-google-recaptcha.latest-stable.zip';
+
+        @include_once ABSPATH . 'wp-admin/includes/plugin.php';
+        @include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+        @include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+        @include_once ABSPATH . 'wp-admin/includes/file.php';
+        @include_once ABSPATH . 'wp-admin/includes/misc.php';
+        echo '<style>
+		body{
+			font-family: sans-serif;
+			font-size: 14px;
+			line-height: 1.5;
+			color: #444;
+		}
+		</style>';
+
+        echo '<div style="margin: 20px; color:#444;">';
+        echo 'If things are not done in a minute <a target="_parent" href="' . esc_url(admin_url('plugin-install.php?s=google%20recaptcha%20webfactory&tab=search&type=term')) . '">install the plugin manually via Plugins page</a><br><br>';
+        echo 'Starting ...<br><br>';
+
+        wp_cache_flush();
+        $upgrader = new Plugin_Upgrader();
+        echo 'Check if Advanced Google ReCaptcha is already installed ... <br />';
+        if (self::is_plugin_installed($plugin_slug)) {
+            echo 'Advanced Google ReCaptcha is already installed! <br /><br />Making sure it\'s the latest version.<br />';
+            $upgrader->upgrade($plugin_slug);
+            $installed = true;
+        } else {
+            echo 'Installing Advanced Google ReCaptcha.<br />';
+            $installed = $upgrader->install($plugin_zip);
+        }
+        wp_cache_flush();
+
+        if (!is_wp_error($installed) && $installed) {
+            echo 'Activating Advanced Google ReCaptcha.<br />';
+            $activate = activate_plugin($plugin_slug);
+
+            if (is_null($activate)) {
+                echo 'Advanced Google ReCaptcha Activated.<br />';
+
+                echo '<script>setTimeout(function() { top.location = "options-general.php?page=eps_redirects"; }, 1000);</script>';
+                echo '<br>If you are not redirected in a few seconds - <a href="options-general.php?page=eps_redirects" target="_parent">click here</a>.';
+            }
+        } else {
+            echo 'Could not install Advanced Google ReCaptcha. You\'ll have to <a target="_parent" href="' . esc_url(admin_url('plugin-install.php?s=google%20recaptcha%20webfactory&tab=search&type=term')) . '">download and install manually</a>.';
+        }
+
+        echo '</div>';
+    } // install_wpcaptcha
+
+    public function is_plugin_installed($slug)
+    {
+        if (!function_exists('get_plugins')) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+        $all_plugins = get_plugins();
+
+        if (!empty($all_plugins[$slug])) {
+            return true;
+        } else {
+            return false;
+        }
+    } // is_plugin_installed
 
   // handle dismiss button for notices
   static function dismiss_notice()
@@ -136,7 +211,10 @@ class EPS_Redirects_Plugin
   {
     global $wpdb;
     $table_name = $wpdb->prefix . "redirects";
-    
+
+    // disabled
+    return false;
+
     if (empty($_GET['page']) || sanitize_text_field(wp_unslash($_GET['page'])) != 'eps_redirects') { //phpcs:ignore
         return;
     }
@@ -288,8 +366,6 @@ class EPS_Redirects_Plugin
 
     if (is_admin() && isset($_GET['page']) && sanitize_text_field(wp_unslash($_GET['page'])) == $EPS_Redirects_Plugin->config('page_slug')) { //phpcs:ignore
       unset($pointers['welcome']);
-      
-      $notices = get_option('301-redirects-notices', array());
 
       wp_enqueue_script('jquery');
 
@@ -304,12 +380,9 @@ class EPS_Redirects_Plugin
         'nonce_save_redirect' => wp_create_nonce('eps_301_save_redirect'),
         'nonce_delete_entry' => wp_create_nonce('eps_301_delete_entry'),
         'nonce_get_inline_edit_entry' => wp_create_nonce('eps_301_get_inline_edit_entry'),
-        'auto_open_pro_dialog' => empty($notices['dismiss_auto_pro_modal']),
+        'wpcaptcha_install_url' => add_query_arg(array('action' => 'install_wpcaptcha', '_wpnonce' => wp_create_nonce('install_wpcaptcha'), 'rnd' => wp_rand()), admin_url('admin.php')),
       );
       wp_localize_script('eps_redirect_script', 'eps_301', $js_vars);
-
-      $notices['dismiss_auto_pro_modal'] = true;
-      update_option('301-redirects-notices', $notices);
     }
 
     global $wp_rewrite;
@@ -505,7 +578,7 @@ class EPS_Redirects_Plugin
     }
 
 	$this->wp_init_filesystem();
-        
+
     $new_redirects = array();
 
     $counter = array(
@@ -813,10 +886,10 @@ class EPS_Redirects_Plugin
      */
     static function is_plugin_page()
     {
-        if ( !function_exists( 'get_current_screen' ) ) { 
-            require_once ABSPATH . '/wp-admin/includes/screen.php'; 
-        } 
-         
+        if ( !function_exists( 'get_current_screen' ) ) {
+            require_once ABSPATH . '/wp-admin/includes/screen.php';
+        }
+
         $current_screen = get_current_screen();
 
         if (!empty($current_screen->id) && $current_screen->id == 'tools_page_wp-reset') {

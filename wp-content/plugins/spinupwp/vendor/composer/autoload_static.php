@@ -11,14 +11,14 @@ class ComposerStaticInita5abb26a347fc40977ca46c39480b5aa
     );
 
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'S' =>
         array (
             'SpinupWp\\' => 9,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'SpinupWp\\' => 
+        'SpinupWp\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
@@ -37,6 +37,7 @@ class ComposerStaticInita5abb26a347fc40977ca46c39480b5aa
         'SpinupWp\\MagicLogin' => __DIR__ . '/../..' . '/src/MagicLogin.php',
         'SpinupWp\\Plugin' => __DIR__ . '/../..' . '/src/Plugin.php',
         'SpinupWp\\SiteHealth' => __DIR__ . '/../..' . '/src/SiteHealth.php',
+        'SpinupWp\\SubdomainUrlRewriter' => __DIR__ . '/../..' . '/src/SubdomainUrlRewriter.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

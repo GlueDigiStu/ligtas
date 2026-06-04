@@ -55,6 +55,34 @@ h1 img {
   border: 2px solid #FF6246;
 }
 
+#wpcaptcha-ad {
+  border: 2px solid #253bac;
+  padding: 10px 20px;
+  background: white;
+}
+
+#wpcaptcha-ad a.button {
+  padding: 11px 20px;
+  color: white;
+  background: #253bac;
+  font-weight: 600;
+  border: none;
+  line-height: 1.5;
+  height: auto;
+  margin-bottom: 10px;
+  white-space: normal;
+  max-width: 90%;
+}
+
+#wpcaptcha-ad a.button:hover,
+#wpcaptcha-ad a.button:active,
+#wpcaptcha-ad a.button:focus {
+  box-shadow: 0px 0px 10px 0px rgb(50 138 210 / 52%);
+  background: #253bac;
+  color: white;
+  border: none;
+}
+
 .eps-table {
   width: 100%;
   table-layout: fixed;
@@ -499,7 +527,7 @@ a.button.eps-redirect-remove:hover {
 
 #eps-pro-table {
   width: 100%;
-  margin: 10px auto 0 auto;
+  margin: 10px auto 10px auto;
   border-collapse: collapse;
 }
 
@@ -507,10 +535,15 @@ a.button.eps-redirect-remove:hover {
   padding: 4px 10px 4px 34px;
   border: none;
   font-size: 14px;
+  border-right: 1px solid gray;
 }
 
 #eps-pro-table tr:last-child td {
   text-align: center;
+}
+
+#eps-pro-table tr td:last-child {
+    border-right: none;
 }
 
 #eps-pro-table .dashicons-yes {
