@@ -849,7 +849,7 @@
             "label": "Online Courses Helper Text",
             "name": "online_courses",
             "aria-label": "",
-            "type": "text",
+            "type": "wysiwyg",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -859,11 +859,11 @@
                 "id": ""
             },
             "default_value": "",
-            "maxlength": "",
             "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
         },
         {
             "key": "field_69c505f9977b2",
@@ -968,7 +968,7 @@
             "label": "Virtual Courses Helper Text",
             "name": "virtual_courses",
             "aria-label": "",
-            "type": "text",
+            "type": "wysiwyg",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -978,11 +978,11 @@
                 "id": ""
             },
             "default_value": "",
-            "maxlength": "",
             "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
         },
         {
             "key": "field_69c50637977b5",
@@ -1084,10 +1084,10 @@
         },
         {
             "key": "field_69b2a46f8ebb9",
-            "label": "Classroom Courses",
+            "label": "Classroom Courses Helper Text",
             "name": "classroom_courses",
             "aria-label": "",
-            "type": "text",
+            "type": "wysiwyg",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -1097,11 +1097,11 @@
                 "id": ""
             },
             "default_value": "",
-            "maxlength": "",
             "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
         },
         {
             "key": "field_69c50664977b8",
@@ -1315,5 +1315,7 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1780557894
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1780559552
 }

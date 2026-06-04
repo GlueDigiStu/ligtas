@@ -162,7 +162,7 @@ if ($enable_online_courses):
                         </h3>
 
                         <?php if ($online_courses_text = get_field('online_courses')) { ?>
-                            <p><?= $online_courses_text ?></p>
+                            <div><?= $online_courses_text ?></div>
                         <?php } ?>
                         <?php
                         $variations_type = 0;
@@ -317,7 +317,7 @@ if ($enable_virtual_courses):?>
             </h3>
 
             <?php if ($virtual_courses_text = get_field('virtual_courses')) { ?>
-                <p class="x:pb-12"><?= $virtual_courses_text ?></p>
+                <div class="x:pb-12"><?= $virtual_courses_text ?></div>
             <?php } ?>
         </div>
 
@@ -448,7 +448,7 @@ if ($enable_classroom_courses):?>
                     </h3>
 
                     <?php if ($classroom_courses_text = get_field('classroom_courses')) { ?>
-                        <p class="x:pb-12"><?= $classroom_courses_text ?></p>
+                        <div class="x:pb-12"><?= $classroom_courses_text ?></div>
                     <?php } ?>
                 </div>
                 <?php
