@@ -183,7 +183,7 @@
             <div class="footer_bottom_wrap">
                 <?php if (get_field('form', 'ts')) { ?>
                     <!-- Readd when they're ready -->
-                     <div class="footer_newsletter">
+                     <!--<div class="footer_newsletter">
 							<?php if (get_field('section_form', 'ts')) { ?>
 							<h3 class="title_category"><?php echo get_field('section_form', 'ts'); ?></h3>
 							<?php }
@@ -191,7 +191,7 @@
 							<h2 class="footer_newsletter_title"><?php echo get_field('title_form', 'ts'); ?></h2>
 					    	<?php }
                     echo get_field('form', 'ts'); ?>
-						</div>
+						</div>-->
                 <?php } ?>
                 <ul class="footer_links">
                     <?php wp_nav_menu(array('theme_location' => 'links', 'items_wrap' => '%3$s', 'container' => false, 'depth' => 1)); ?>
