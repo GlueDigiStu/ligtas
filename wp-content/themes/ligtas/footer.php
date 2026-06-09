@@ -205,7 +205,7 @@
                 <img src="<?php bloginfo('template_url'); ?>/images/icon-purple.png" alt="<?php bloginfo('name'); ?>">
             </a>
             <?php if (have_rows('logos', 'ts')): ?>
-                <div class="logos_wrap">
+                <div class="logos_wrap x:flex x:flex-wrap">
                     <?php while (have_rows('logos', 'ts')): the_row(); ?>
                         <?php if (get_sub_field('logo')) { ?>
                             <?php
