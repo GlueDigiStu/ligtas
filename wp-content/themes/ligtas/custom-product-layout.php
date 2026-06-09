@@ -150,7 +150,7 @@ if ($enable_online_courses):
         }
     </style>
     <?php $most_popular = get_field('most_popular'); ?>
-    <div id="online-courses" style="padding-top: 200px; margin-top: -200px;" class="  pbm_no">
+    <div id="online-courses" style="padding-top: 100px; margin-top: -100px;" class="  pbm_no">
         <div class="container">
             <div class="">
                 <div class="">
@@ -306,7 +306,7 @@ $enable_virtual_courses = get_field('enable_virtual_courses');
 if ($enable_virtual_courses):?>
 
 
-    <div id="virtual-courses" style="padding-top: 200px; margin-top: -200px;" class="container x:pt-8 x:mt-12">
+    <div id="virtual-courses" style="padding-top: 100px; margin-top: -100px;" class="container x:pt-8 x:mt-12">
         <div class="typical_text">
             <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
 
@@ -422,7 +422,7 @@ if ($enable_virtual_courses):?>
 $enable_classroom_courses = get_field('enable_classroom_courses');
 
 if ($enable_classroom_courses):?>
-<div id="classroom-courses" style="padding-top: 200px; margin-top: -200px;">
+<div id="classroom-courses" style="padding-top: 100px; margin-top: -100px;">
     <div  class="x:bg-[#f5f5f5]">
         <div class="container">
             <div class="x:pt-20 x:pb-8">
