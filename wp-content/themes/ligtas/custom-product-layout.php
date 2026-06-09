@@ -37,7 +37,7 @@ $tfp = 'product_cat_' . $term_parent;
                                 <?php the_content(); ?>
                             <?php endwhile; ?>
                         </div>
-                        <a class="btn fade_in" href="#">Course Overview</a>
+                        <a class="btn fade_in" href="#courseOverview">Course Overview</a>
                     </div>
                 </div>
 
@@ -562,7 +562,7 @@ if ($enable_classroom_courses):?>
             margin-top: 16px;
         }
     </style>
-    <div class="bg_grey x:py-20">
+    <div id="courseOverview" class="bg_grey x:py-20">
     <div class="container">
         <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
             <?php $course_overview_title = get_field('course_overview_title'); ?>
