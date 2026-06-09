@@ -150,9 +150,10 @@ if ($enable_online_courses):
         }
     </style>
     <?php $most_popular = get_field('most_popular'); ?>
-    <div id="online-courses" style="padding-top: 100px; margin-top: -100px;" class="  pbm_no">
+    <div id="online-courses" style="padding-top: 100px; margin-top: -100px;" class="x:mb-12">
         <div class="container">
             <div class="">
+
                 <div class="">
                     <div class="typical_text x:mt-12">
                         <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">

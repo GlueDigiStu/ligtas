@@ -17,8 +17,6 @@
     --x-text-xl--line-height: calc(1.75 / 1.25);
     --x-text-2xl: 1.5rem;
     --x-text-2xl--line-height: calc(2 / 1.5);
-    --x-text-3xl: 1.875rem;
-    --x-text-3xl--line-height: calc(2.25 / 1.875);
     --x-font-weight-normal: 400;
     --x-font-weight-bold: 700;
     --x-default-font-family: var(--x-font-sans);
@@ -252,9 +250,6 @@
   .x\:h-11 {
     height: calc(var(--x-spacing) * 11) !important;
   }
-  .x\:h-\[44px\] {
-    height: 44px !important;
-  }
   .x\:w-full {
     width: 100% !important;
   }
@@ -410,9 +405,6 @@
   }
   .x\:text-\[\#291261\] {
     color: #291261 !important;
-  }
-  .x\:text-\[\#a27fff\] {
-    color: #a27fff !important;
   }
   .x\:text-white {
     color: var(--x-color-white) !important;
