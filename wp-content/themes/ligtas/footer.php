@@ -264,7 +264,7 @@
     <div id="mini-cart-total" style="border-top:2px solid #a27fff;padding-top:12px;font-weight:bold;color:#291261;font-size:16px;"></div>
     <div style="display:flex;gap:12px;margin-top:16px;">
         <a id="mini-cart-link" href="#" class="btn" style="flex:1;text-align:center;justify-content:center;min-width:0;">View Cart</a>
-        <a id="mini-cart-checkout-link" href="#" class="btn btn_purple" style="flex:1;text-align:center;justify-content:center;min-width:0;">Checkout</a>
+<!--        <a id="mini-cart-checkout-link" href="#" class="btn btn_purple" style="flex:1;text-align:center;justify-content:center;min-width:0;">Checkout</a>-->
     </div>
 </div>
 
