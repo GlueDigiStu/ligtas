@@ -536,11 +536,11 @@ if ($enable_classroom_courses):?>
             </div>
             <?php } ?>
 
-            <?php if ($cta = get_field('classroom_courses_cta')): ?>
+            <?php if ( get_field('classroom_courses_cta') || get_field('classroom_courses_cta_button')): ?>
                 <div class="container">
                     <div class="x:flex x:flex-wrap x:justify-start  x:items-center x:gap-4 x:pb-20">
                         <div class="typical_text">
-                            <?= $cta ?>
+                            <?= get_field('classroom_courses_cta') ?>
                         </div>
                         <?php if ($btn = get_field('classroom_courses_cta_button')): ?>
                             <div class="x:md:basis-1/6">
