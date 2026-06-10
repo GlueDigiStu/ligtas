@@ -821,7 +821,7 @@ get_header( 'shop' );
             $arg['tax_query'][] = array('taxonomy'=>'product_cat', 'field'=>'id', 'terms'=>$term_id);
             $Nquery = new WP_Query($arg); if($Nquery->have_posts()): 
         ?>
-        <div class="content_section pt_no">
+        <div class="content_section">
             <div class="container">
             	<?php if(get_field('section_more_product',$tfp) || get_field('title_more_posts',$tfp)) { ?>
 				<div class="content_description mb_64">
