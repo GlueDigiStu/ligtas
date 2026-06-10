@@ -398,7 +398,7 @@ if ($enable_virtual_courses):?>
 
         <?php } ?>
 
-        <?php if ($cta = get_field('virtual_courses_cta')): ?>
+        <?php if ($cta = get_field('virtual_courses_cta') || get_field('virtual_courses_cta_button')): ?>
             <div class="x:flex x:flex-wrap x:justify-start  x:items-center x:gap-4 x:pb-20">
                 <div class="typical_text">
                     <?= $cta ?>
