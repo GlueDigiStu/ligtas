@@ -38,7 +38,8 @@ $tfp = 'product_cat_' . $term_parent;
                             <?php endwhile; ?>
                         </div>
                         <?php $course_overview_title = get_field('course_overview_title'); ?>
-                        <a class="btn fade_in" href="#courseOverview"><?= $course_overview_title ?: 'Course Overview'?></a>
+                        <a class="btn fade_in"
+                           href="#courseOverview"><?= $course_overview_title ?: 'Course Overview' ?></a>
                     </div>
                 </div>
 
@@ -109,7 +110,7 @@ $tfp = 'product_cat_' . $term_parent;
                     <div class="x:flex x:items-center x:justify-center x:gap-4 x:mt-8 x:flex-wrap">
                         <?php if (is_array($icon_row['items'])): ?>
                             <?php foreach ($icon_row['items'] as $item): ?>
-                                <div class="<?= $item['width'] == 'wide' ? 'x:md:basis-1/5 x:basis-full' : 'x:md:basis-1/6 x:basis-1/2 x:max-w-37.5'?> ">
+                                <div class="<?= $item['width'] == 'wide' ? 'x:md:basis-1/5 x:basis-full' : 'x:md:basis-1/6 x:basis-1/2 x:max-w-37.5' ?> ">
                                     <?= wp_get_attachment_image($item['icon'], 'full', null, ['class' => $item['width'] == 'wide' ? '' : 'x:aspect-square x:object-contain']); ?>
                                     <p class="x:font-bold x:text-center x:mt-4"><?= $item['text'] ?></p>
                                 </div>
@@ -138,12 +139,16 @@ if ($enable_online_courses):
             }
         }
 
-        .nebosh-gold-badge{
-            width: 70px; position: absolute; top: 25px; transform: translateY( -100%); right: 0;
+        .nebosh-gold-badge {
+            width: 70px;
+            position: absolute;
+            top: 25px;
+            transform: translateY(-100%);
+            right: 0;
         }
 
-        @media(max-width: 768px){
-            .nebosh-gold-badge{
+        @media (max-width: 768px) {
+            .nebosh-gold-badge {
                 width: 50px;
                 right: -30px;
             }
@@ -159,8 +164,8 @@ if ($enable_online_courses):
                         <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
 
                             <img src="<?php bloginfo('template_url'); ?>/images/course_icon_1.svg" alt="">
-<?php $online_courses_title = get_field('online_courses_title'); ?>
-                            <?= $online_courses_title ?: 'Our Online Course Options'?>
+                            <?php $online_courses_title = get_field('online_courses_title'); ?>
+                            <?= $online_courses_title ?: 'Our Online Course Options' ?>
                         </h3>
 
                         <?php if ($online_courses_text = get_field('online_courses')) { ?>
@@ -313,7 +318,7 @@ if ($enable_virtual_courses):?>
 
 
                 <img src="<?php bloginfo('template_url'); ?>/images/course_icon_1.svg" alt="">
-<?php $virtual_courses_title = get_field('virtual_courses_title'); ?>
+                <?php $virtual_courses_title = get_field('virtual_courses_title'); ?>
                 <?= $virtual_courses_title ?: 'Our Virtual Course Options' ?>
 
             </h3>
@@ -423,133 +428,136 @@ if ($enable_virtual_courses):?>
 $enable_classroom_courses = get_field('enable_classroom_courses');
 
 if ($enable_classroom_courses):?>
-<div id="classroom-courses" style="padding-top: 100px; margin-top: -100px;">
-    <div  class="x:bg-[#f5f5f5]">
-        <div class="container">
-            <div class="x:pt-20 x:pb-8">
-                <div class="typical_text">
-                    <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
-
-                        <svg width="32" height="29" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18.7895 18.4893C18.943 18.5742 19.0734 18.6975 19.1687 18.8477C19.2787 19.0214 19.337 19.2238 19.337 19.4305C19.337 19.6371 19.2787 19.8396 19.1687 20.0132C19.0587 20.1869 18.9016 20.3244 18.7163 20.4085L18.7895 18.4893ZM18.7895 18.4893V18.4671L18.7165 18.4337L10.4555 14.6555L10.4554 14.6554C10.3221 14.5947 10.1778 14.5632 10.0318 14.5632C9.88578 14.5632 9.74148 14.5947 9.60821 14.6554L9.60807 14.6555L1.34747 18.4335C1.34743 18.4335 1.34739 18.4335 1.34735 18.4336C1.16199 18.5177 1.00496 18.6552 0.894951 18.8288C0.784942 19.0025 0.726562 19.2049 0.726562 19.4116C0.726562 19.6183 0.784942 19.8207 0.894951 19.9944C1.00498 20.168 1.16206 20.3056 1.34747 20.3897L1.34805 20.3899L2.90088 21.0851L2.6418 21.1784L2.55916 21.2081V21.296V27.4355C2.55916 27.5928 2.61983 27.7443 2.72893 27.8566C2.83815 27.969 2.98705 28.0328 3.1431 28.0328C3.29914 28.0328 3.44805 27.969 3.55726 27.8566C3.66636 27.7443 3.72704 27.5928 3.72704 27.4355V21.9674L10.0721 19.5235L10.35 19.4165L10.079 19.2931L8.95921 18.7831L8.9114 18.7613L8.8624 18.7802L4.43227 20.4898L2.06671 19.4069L10.0272 15.7662L17.9876 19.4069L10.0271 23.0477L6.71958 21.5411L6.67188 21.5194L6.62296 21.5382L5.55362 21.9488V21.9458L5.38415 22.0103L4.46626 22.3598L4.38574 22.3905V22.4766V25.4709V25.5228L4.42259 25.5595L4.69795 25.8334L4.69791 25.8334L4.70057 25.8359C6.15901 27.2045 8.04965 27.985 10.0242 28.0327L10.0242 28.0329L10.0299 28.0327C11.9976 27.9907 13.8841 27.2207 15.3442 25.8647L15.3443 25.8648L15.3473 25.8617L15.6227 25.5878L15.6595 25.5512V25.4992V21.8014L18.7161 20.4086L18.7895 18.4893ZM5.55362 22.3161L9.59904 24.13C9.59915 24.13 9.59926 24.1301 9.59937 24.1301C9.73254 24.1908 9.87673 24.2222 10.0226 24.2222C10.1685 24.2222 10.3127 24.1908 10.4459 24.1301C10.446 24.1301 10.4461 24.13 10.4462 24.13L14.4824 22.3202V25.0193C13.2481 26.1465 11.6676 26.7905 10.018 26.8382C8.36852 26.7905 6.78801 26.1465 5.55362 25.0193V22.3161Z"
-                                  fill="#291261" stroke="#291261" stroke-width="0.25"/>
-                            <path d="M18.7367 26.439H26.2282C28.4374 26.439 30.2282 24.6481 30.2282 22.439V5.46875C30.2282 3.25961 28.4374 1.46875 26.2282 1.46875H6.32031C4.11117 1.46875 2.32031 3.25961 2.32031 5.46875V14.1348"
-                                  stroke="#291261" stroke-width="2"/>
-                            <line x1="5.25781" y1="5.60974" x2="28.0248" y2="5.60974" stroke="#291261"
-                                  stroke-width="2"/>
-                            <line x1="5.25781" y1="10.7507" x2="28.0248" y2="10.7507" stroke="#291261"
-                                  stroke-width="2"/>
-                            <line x1="23.6172" y1="15.1572" x2="28.0237" y2="15.1572" stroke="#291261"
-                                  stroke-width="2"/>
-                            <line x1="23.6172" y1="20.2981" x2="28.0237" y2="20.2981" stroke="#291261"
-                                  stroke-width="2"/>
-                        </svg>
-
-                        <?php $classroom_courses_title = get_field('classroom_courses_title'); ?>
-                            <?= $classroom_courses_title ?: 'Our Classroom Based Course Options'?>
-                    </h3>
-
-                    <?php if ($classroom_courses_text = get_field('classroom_courses')) { ?>
-                        <div class="x:pb-12"><?= $classroom_courses_text ?></div>
-                    <?php } ?>
-                </div>
-                <?php
-                $variations_type = 0;
-                foreach ($product->get_available_variations() as $variations) {
-                    if (get_field('type', $variations['variation_id']) == 'Classroom') {
-                        $variations_type = 1;
-                    }
-                }
-                if ($variations_type) {
-                ?>
-
-                <div class="swiper classroom-course-swiper">
-                    <div class="swiper-wrapper">
-
-
-                        <?php
-                        foreach ($product->get_available_variations() as $variations) {
-                            if (get_field('type', $variations['variation_id']) == 'Classroom') {
-                                ?>
-                                <div class="swiper-slide course_list_item x:mt-0  x:border-0 x:bg-white x:p-4 x:rounded-[10px]"
-                                     data-product="<?php echo $product->get_id(); ?>"
-                                     data-variation="<?php echo $variations['variation_id']; ?>"
-                                     data-nonce="<?php echo wp_create_nonce('add_varition'); ?>">
-                                    <div class="course_list_info">
-                                        <div class="course_list_details">
-                                            <?php echo $variations['variation_description']; ?>
-                                        </div>
-                                    </div>
-                                    <div class="">
-                                        <p class="course_list_price x:text-center x:mb-4">
-                                            <?php
-                                            if (!empty($variations['price_html'])) {
-                                                echo $variations['price_html'];
-                                            } else {
-                                                $variation_obj = wc_get_product($variations['variation_id']);
-                                                echo wc_price($variation_obj->get_price());
-                                            }
-                                            ?>
-                                        </p>
-                                        <div class="course_list_right">
-                                            <div class="quantity_counter x:hidden">
-                                                <button class="counter_decrement decrement"></button>
-                                                <input class="counter_value value" type="number" name="qyt" value="1">
-                                                <button class="counter_increment increment"></button>
-                                            </div>
-                                            <a class="btn add_varition x:mx-auto" href="#">Add to cart
-                                                <svg class="svg_arrow_btn">
-                                                    <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_btn"></use>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php }
-                        } ?>
-                    </div>
-                </div>
-
-                <div class="classroom_nav">
-                    <div class="classroom_arrow classroom_prev" tabindex="0" role="button" aria-label="Previous slide"
-                         aria-controls="swiper-wrapper-fbb8af61117135d7">
-                        <svg class="svg_arrow_prev">
-                            <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_prev"></use>
-                        </svg>
-                    </div>
-                    <div class="classroom_arrow classroom_next" tabindex="0" role="button" aria-label="Next slide"
-                         aria-controls="swiper-wrapper-fbb8af61117135d7">
-                        <svg class="svg_arrow_next">
-                            <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_next"></use>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php } ?>
-
-        <?php if ($cta = get_field('classroom_courses_cta')): ?>
+    <div id="classroom-courses" style="padding-top: 100px; margin-top: -100px;">
+        <div class="x:bg-[#f5f5f5]">
             <div class="container">
-                <div class="x:flex x:flex-wrap x:justify-start  x:items-center x:gap-4 x:pb-20">
+                <div class="x:pt-20 x:pb-8">
                     <div class="typical_text">
-                        <?= $cta ?>
+                        <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
+
+                            <svg width="32" height="29" viewBox="0 0 32 29" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18.7895 18.4893C18.943 18.5742 19.0734 18.6975 19.1687 18.8477C19.2787 19.0214 19.337 19.2238 19.337 19.4305C19.337 19.6371 19.2787 19.8396 19.1687 20.0132C19.0587 20.1869 18.9016 20.3244 18.7163 20.4085L18.7895 18.4893ZM18.7895 18.4893V18.4671L18.7165 18.4337L10.4555 14.6555L10.4554 14.6554C10.3221 14.5947 10.1778 14.5632 10.0318 14.5632C9.88578 14.5632 9.74148 14.5947 9.60821 14.6554L9.60807 14.6555L1.34747 18.4335C1.34743 18.4335 1.34739 18.4335 1.34735 18.4336C1.16199 18.5177 1.00496 18.6552 0.894951 18.8288C0.784942 19.0025 0.726562 19.2049 0.726562 19.4116C0.726562 19.6183 0.784942 19.8207 0.894951 19.9944C1.00498 20.168 1.16206 20.3056 1.34747 20.3897L1.34805 20.3899L2.90088 21.0851L2.6418 21.1784L2.55916 21.2081V21.296V27.4355C2.55916 27.5928 2.61983 27.7443 2.72893 27.8566C2.83815 27.969 2.98705 28.0328 3.1431 28.0328C3.29914 28.0328 3.44805 27.969 3.55726 27.8566C3.66636 27.7443 3.72704 27.5928 3.72704 27.4355V21.9674L10.0721 19.5235L10.35 19.4165L10.079 19.2931L8.95921 18.7831L8.9114 18.7613L8.8624 18.7802L4.43227 20.4898L2.06671 19.4069L10.0272 15.7662L17.9876 19.4069L10.0271 23.0477L6.71958 21.5411L6.67188 21.5194L6.62296 21.5382L5.55362 21.9488V21.9458L5.38415 22.0103L4.46626 22.3598L4.38574 22.3905V22.4766V25.4709V25.5228L4.42259 25.5595L4.69795 25.8334L4.69791 25.8334L4.70057 25.8359C6.15901 27.2045 8.04965 27.985 10.0242 28.0327L10.0242 28.0329L10.0299 28.0327C11.9976 27.9907 13.8841 27.2207 15.3442 25.8647L15.3443 25.8648L15.3473 25.8617L15.6227 25.5878L15.6595 25.5512V25.4992V21.8014L18.7161 20.4086L18.7895 18.4893ZM5.55362 22.3161L9.59904 24.13C9.59915 24.13 9.59926 24.1301 9.59937 24.1301C9.73254 24.1908 9.87673 24.2222 10.0226 24.2222C10.1685 24.2222 10.3127 24.1908 10.4459 24.1301C10.446 24.1301 10.4461 24.13 10.4462 24.13L14.4824 22.3202V25.0193C13.2481 26.1465 11.6676 26.7905 10.018 26.8382C8.36852 26.7905 6.78801 26.1465 5.55362 25.0193V22.3161Z"
+                                      fill="#291261" stroke="#291261" stroke-width="0.25"/>
+                                <path d="M18.7367 26.439H26.2282C28.4374 26.439 30.2282 24.6481 30.2282 22.439V5.46875C30.2282 3.25961 28.4374 1.46875 26.2282 1.46875H6.32031C4.11117 1.46875 2.32031 3.25961 2.32031 5.46875V14.1348"
+                                      stroke="#291261" stroke-width="2"/>
+                                <line x1="5.25781" y1="5.60974" x2="28.0248" y2="5.60974" stroke="#291261"
+                                      stroke-width="2"/>
+                                <line x1="5.25781" y1="10.7507" x2="28.0248" y2="10.7507" stroke="#291261"
+                                      stroke-width="2"/>
+                                <line x1="23.6172" y1="15.1572" x2="28.0237" y2="15.1572" stroke="#291261"
+                                      stroke-width="2"/>
+                                <line x1="23.6172" y1="20.2981" x2="28.0237" y2="20.2981" stroke="#291261"
+                                      stroke-width="2"/>
+                            </svg>
+
+                            <?php $classroom_courses_title = get_field('classroom_courses_title'); ?>
+                            <?= $classroom_courses_title ?: 'Our Classroom Based Course Options' ?>
+                        </h3>
+
+                        <?php if ($classroom_courses_text = get_field('classroom_courses')) { ?>
+                            <div class="x:pb-12"><?= $classroom_courses_text ?></div>
+                        <?php } ?>
                     </div>
-                    <?php if ($btn = get_field('classroom_courses_cta_button')): ?>
-                        <div class="x:md:basis-1/6">
-                            <?php if (is_array($btn)): ?>
-                                <div class="x:ml-auto x:flex">
-                                    <a class="btn  x:text-center x:inline-block"
-                                       href="<?= $btn['url'] ?>"
-                                       target="<?= $btn['target'] ?>"><?= $btn['title'] ?></a>
-                                </div>
-                            <?php endif; ?>
+                    <?php
+                    $variations_type = 0;
+                    foreach ($product->get_available_variations() as $variations) {
+                        if (get_field('type', $variations['variation_id']) == 'Classroom') {
+                            $variations_type = 1;
+                        }
+                    }
+                    if ($variations_type) {
+                    ?>
+
+                    <div class="swiper classroom-course-swiper">
+                        <div class="swiper-wrapper">
+
+
+                            <?php
+                            foreach ($product->get_available_variations() as $variations) {
+                                if (get_field('type', $variations['variation_id']) == 'Classroom') {
+                                    ?>
+                                    <div class="swiper-slide course_list_item x:mt-0  x:border-0 x:bg-white x:p-4 x:rounded-[10px]"
+                                         data-product="<?php echo $product->get_id(); ?>"
+                                         data-variation="<?php echo $variations['variation_id']; ?>"
+                                         data-nonce="<?php echo wp_create_nonce('add_varition'); ?>">
+                                        <div class="course_list_info">
+                                            <div class="course_list_details">
+                                                <?php echo $variations['variation_description']; ?>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <p class="course_list_price x:text-center x:mb-4">
+                                                <?php
+                                                if (!empty($variations['price_html'])) {
+                                                    echo $variations['price_html'];
+                                                } else {
+                                                    $variation_obj = wc_get_product($variations['variation_id']);
+                                                    echo wc_price($variation_obj->get_price());
+                                                }
+                                                ?>
+                                            </p>
+                                            <div class="course_list_right">
+                                                <div class="quantity_counter x:hidden">
+                                                    <button class="counter_decrement decrement"></button>
+                                                    <input class="counter_value value" type="number" name="qyt"
+                                                           value="1">
+                                                    <button class="counter_increment increment"></button>
+                                                </div>
+                                                <a class="btn add_varition x:mx-auto" href="#">Add to cart
+                                                    <svg class="svg_arrow_btn">
+                                                        <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_btn"></use>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php }
+                            } ?>
                         </div>
-                    <?php endif; ?>
+                    </div>
+
+                    <div class="classroom_nav">
+                        <div class="classroom_arrow classroom_prev" tabindex="0" role="button"
+                             aria-label="Previous slide"
+                             aria-controls="swiper-wrapper-fbb8af61117135d7">
+                            <svg class="svg_arrow_prev">
+                                <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_prev"></use>
+                            </svg>
+                        </div>
+                        <div class="classroom_arrow classroom_next" tabindex="0" role="button" aria-label="Next slide"
+                             aria-controls="swiper-wrapper-fbb8af61117135d7">
+                            <svg class="svg_arrow_next">
+                                <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_next"></use>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
-        <?php endif; ?>
+            <?php } ?>
+
+            <?php if ($cta = get_field('classroom_courses_cta')): ?>
+                <div class="container">
+                    <div class="x:flex x:flex-wrap x:justify-start  x:items-center x:gap-4 x:pb-20">
+                        <div class="typical_text">
+                            <?= $cta ?>
+                        </div>
+                        <?php if ($btn = get_field('classroom_courses_cta_button')): ?>
+                            <div class="x:md:basis-1/6">
+                                <?php if (is_array($btn)): ?>
+                                    <div class="x:ml-auto x:flex">
+                                        <a class="btn  x:text-center x:inline-block"
+                                           href="<?= $btn['url'] ?>"
+                                           target="<?= $btn['target'] ?>"><?= $btn['title'] ?></a>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
-</div>
 <?php endif; ?>
 
     <style>
@@ -557,68 +565,70 @@ if ($enable_classroom_courses):?>
             transform: rotate(90deg);
         }
 
-        .content ul{
+        .content ul {
             list-style: disc;
             padding-left: 20px;
         }
-        .content p + p{
+
+        .content p + p {
             margin-top: 16px;
         }
     </style>
     <div id="courseOverview" class="bg_grey x:py-20">
-    <div class="container">
-        <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
-            <?php $course_overview_title = get_field('course_overview_title'); ?>
-            <?= $course_overview_title ?: 'Course Overview'?>
-        </h3>
+        <div class="container">
+            <h3 class="title_block x:flex x:items-center x:gap-2 x:mb-12 x:text-[#291261]">
+                <?php $course_overview_title = get_field('course_overview_title'); ?>
+                <?= $course_overview_title ?: 'Course Overview' ?>
+            </h3>
 
-        <?php $coa = get_field('course_overview_accordion'); ?>
+            <?php $coa = get_field('course_overview_accordion'); ?>
 
-        <?php if (!empty($coa)) : ?>
-            <div class="x:grid x:grid-cols-1 <?= count($coa) > 1 ? 'x:md:grid-cols-4' : '' ?> x:gap-8 x:mb-16">
-                <?php if (count($coa) > 1) : ?>
-                    <ul class="x:md:col-span-1 x:sticky x:top-0 sidebar-links x:pt-[36px]">
-                        <?php foreach ($coa as $key => $item) : ?>
-                            <li class="x:mb-8"><a
-                                        class="x:text-xl x:font-bold <?= $key == 0 ? 'x:border-b x:border-[#a27fff]' : '' ?>"
-                                        href="#<?= $key ?>"><?= $item['section'] ?></a></li>
-                        <?php endforeach; ?>
-                    </ul>
-                <?php endif; ?>
+            <?php if (!empty($coa)) : ?>
+                <div class="x:grid x:grid-cols-1 <?= count($coa) > 1 ? 'x:md:grid-cols-4' : '' ?> x:gap-8 x:mb-16">
+                    <?php if (count($coa) > 1) : ?>
+                        <ul class="x:md:col-span-1 x:sticky x:top-0 sidebar-links x:pt-[36px]">
+                            <?php foreach ($coa as $key => $item) : ?>
+                                <li class="x:mb-8"><a
+                                            class="x:text-xl x:font-bold <?= $key == 0 ? 'x:border-b x:border-[#a27fff]' : '' ?>"
+                                            href="#<?= $key ?>"><?= $item['section'] ?></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
 
-                <?php foreach ($coa as $key => $item) : ?>
-                    <div id="<?= $key ?>" class="<?= $key > 0 ? 'x:hidden' : '' ?> x:md:col-span-3 accordion-panel">
-                        <?php foreach ($item['faqs'] as $faq) : ?>
-                            <details name="accordion-items">
-                                <summary class="switch_nav_item current">
-                                    <p class="switch_nav_name"><?= $faq['question'] ?></p>
-                                    <div class="switch_nav_arrow">
-                                        <svg class="svg_arrow_small">
-                                            <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_small"></use>
-                                        </svg>
-                                    </div>
-                                </summary>
-                                <div class="content x:pt-8">
-                                    <?= $faq['answer'] ?>
-                                    <?php if(is_array($faq['buttons']) && count($faq['buttons']) > 0): ?>
-                                        <div class="x:mt-8 ">
-                                            <?php foreach ($faq['buttons'] as $btn): ?>
-                                                <p><a class="btn" href="<?= $btn['link']['url'] ?>"
-                                                   target="<?= $btn['link']['target'] ?>"><?= $btn['link']['title'] ?></a></p>
-                                            <?php endforeach; ?>
+                    <?php foreach ($coa as $key => $item) : ?>
+                        <div id="<?= $key ?>" class="<?= $key > 0 ? 'x:hidden' : '' ?> x:md:col-span-3 accordion-panel">
+                            <?php foreach ($item['faqs'] as $faq) : ?>
+                                <details name="accordion-items">
+                                    <summary class="switch_nav_item current">
+                                        <p class="switch_nav_name"><?= $faq['question'] ?></p>
+                                        <div class="switch_nav_arrow">
+                                            <svg class="svg_arrow_small">
+                                                <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_small"></use>
+                                            </svg>
                                         </div>
-                                    <?php endif; ?>
-                                </div>
-                            </details>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endforeach; ?>
+                                    </summary>
+                                    <div class="content x:pt-8">
+                                        <?= $faq['answer'] ?>
+                                        <?php if (is_array($faq['buttons']) && count($faq['buttons']) > 0): ?>
+                                            <div class="x:mt-8 ">
+                                                <?php foreach ($faq['buttons'] as $btn): ?>
+                                                    <p><a class="btn" href="<?= $btn['link']['url'] ?>"
+                                                          target="<?= $btn['link']['target'] ?>"><?= $btn['link']['title'] ?></a>
+                                                    </p>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </details>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endforeach; ?>
 
-            </div>
-        <?php endif; ?>
+                </div>
+            <?php endif; ?>
 
+        </div>
     </div>
-
 
     <div class="cta_section " id="careers">
         <div class="cta_wrap">
@@ -653,79 +663,79 @@ if ($enable_classroom_courses):?>
         </div>
     </div>
 
-    <?php
-    $arg = array('post__not_in' => array($post->ID), 'post_type' => 'product', 'posts_per_page' => 3);
-    $arg['tax_query'][] = array('taxonomy' => 'product_cat', 'field' => 'id', 'terms' => $term_id);
-    $Nquery = new WP_Query($arg);
-    if ($Nquery->have_posts()):
-        ?>
-        <div class="content_section">
-            <div class="container">
-                <?php if (get_field('section_more_product', $tfp) || get_field('title_more_posts', $tfp)) { ?>
-                    <div class="content_description mb_64">
-                        <?php if (get_field('section_more_product', $tfp)) { ?>
-                            <h3 class="title_category fade_in"><?php echo get_field('section_more_product', $tfp); ?></h3>
-                        <?php }
-                        if (get_field('title_more_product', $tfp)) { ?>
-                            <h2 class="title_section fade_in"><?php echo get_field('title_more_product', $tfp); ?></h2>
-                        <?php } ?>
-                    </div>
-                <?php } ?>
-                <div class="courses_wrap">
-                    <?php while ($Nquery->have_posts()): $Nquery->the_post();
-                        $category = get_the_terms($post->ID, 'product_cat'); ?>
-                        <div class="course_item fade_in">
-                            <div class="course_item_main">
-                                <div class="course_item_top">
-                                    <span class="course_item_category"><?php echo get_term($category[0]->term_id)->name; ?></span>
-                                    <?php if (has_post_thumbnail()) {
-                                        $thumb = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true); ?>
-                                        <a class="course_item_img" href="<?php the_permalink(); ?>">
-                                            <img src="<?php echo esc_url($thumb[0]); ?>" alt="<?php the_title(); ?>">
-                                        </a>
+<?php
+$arg = array('post__not_in' => array($post->ID), 'post_type' => 'product', 'posts_per_page' => 3);
+$arg['tax_query'][] = array('taxonomy' => 'product_cat', 'field' => 'id', 'terms' => $term_id);
+$Nquery = new WP_Query($arg);
+if ($Nquery->have_posts()):
+    ?>
+    <div class="content_section">
+        <div class="container">
+            <?php if (get_field('section_more_product', $tfp) || get_field('title_more_posts', $tfp)) { ?>
+                <div class="content_description mb_64">
+                    <?php if (get_field('section_more_product', $tfp)) { ?>
+                        <h3 class="title_category fade_in"><?php echo get_field('section_more_product', $tfp); ?></h3>
+                    <?php }
+                    if (get_field('title_more_product', $tfp)) { ?>
+                        <h2 class="title_section fade_in"><?php echo get_field('title_more_product', $tfp); ?></h2>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+            <div class="courses_wrap">
+                <?php while ($Nquery->have_posts()): $Nquery->the_post();
+                    $category = get_the_terms($post->ID, 'product_cat'); ?>
+                    <div class="course_item fade_in">
+                        <div class="course_item_main">
+                            <div class="course_item_top">
+                                <span class="course_item_category"><?php echo get_term($category[0]->term_id)->name; ?></span>
+                                <?php if (has_post_thumbnail()) {
+                                    $thumb = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true); ?>
+                                    <a class="course_item_img" href="<?php the_permalink(); ?>">
+                                        <img src="<?php echo esc_url($thumb[0]); ?>" alt="<?php the_title(); ?>">
+                                    </a>
+                                <?php } ?>
+                            </div>
+                            <div class="course_item_info">
+                                <div class="course_item_icons">
+                                    <?php if (get_field('online')) { ?>
+                                        <img src="<?php bloginfo('template_url'); ?>/images/course_icon_1.svg"
+                                             alt="">
+                                    <?php }
+                                    if (get_field('virtual')) { ?>
+                                        <img src="<?php bloginfo('template_url'); ?>/images/course_icon_2.svg"
+                                             alt="">
+                                    <?php }
+                                    if (get_field('classroom')) { ?>
+                                        <img src="<?php bloginfo('template_url'); ?>/images/course_icon_3.svg"
+                                             alt="">
+                                    <?php }
+                                    if (get_field('workplace')) { ?>
+                                        <img src="<?php bloginfo('template_url'); ?>/images/course_icon_4.svg"
+                                             alt="">
                                     <?php } ?>
                                 </div>
-                                <div class="course_item_info">
-                                    <div class="course_item_icons">
-                                        <?php if (get_field('online')) { ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/images/course_icon_1.svg"
-                                                 alt="">
-                                        <?php }
-                                        if (get_field('virtual')) { ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/images/course_icon_2.svg"
-                                                 alt="">
-                                        <?php }
-                                        if (get_field('classroom')) { ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/images/course_icon_3.svg"
-                                                 alt="">
-                                        <?php }
-                                        if (get_field('workplace')) { ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/images/course_icon_4.svg"
-                                                 alt="">
-                                        <?php } ?>
-                                    </div>
-                                    <a class="course_item_name"
-                                       href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                                    <div class="typical_text small">
-                                        <p><?php echo get_the_excerpt(); ?></p>
-                                    </div>
+                                <a class="course_item_name"
+                                   href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                <div class="typical_text small">
+                                    <p><?php echo get_the_excerpt(); ?></p>
                                 </div>
                             </div>
-                            <div class="course_item_more">
-                                <a class="link" href="<?php the_permalink(); ?>">Learn More</a>
-                                <a class="course_item_arrow" href="<?php the_permalink(); ?>">
-                                    <svg class="svg_arrow_post">
-                                        <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_post"></use>
-                                    </svg>
-                                </a>
-                            </div>
                         </div>
-                    <?php endwhile; ?>
-                </div>
+                        <div class="course_item_more">
+                            <a class="link" href="<?php the_permalink(); ?>">Learn More</a>
+                            <a class="course_item_arrow" href="<?php the_permalink(); ?>">
+                                <svg class="svg_arrow_post">
+                                    <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_post"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
             </div>
         </div>
-    <?php endif;
-    wp_reset_query(); ?>
+    </div>
+<?php endif;
+wp_reset_query(); ?>
     <script>
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -828,7 +838,6 @@ if ($enable_classroom_courses):?>
 
         });
     </script>
-
 
 
 <?php
