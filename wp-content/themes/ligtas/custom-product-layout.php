@@ -642,7 +642,7 @@ if ($enable_classroom_courses):?>
                 <div class="cta_description">
                     <h3 class="title_block">Booking for more than one candidate?
                         <br><span>Speak to one of our team today.</span></h3>
-                    <a class="link_arrow" href="#">
+                    <a class="link_arrow" href="/contact">
                         Find out more
                         <svg class="svg_arrow_btn">
                             <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_btn"></use>
