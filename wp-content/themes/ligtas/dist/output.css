@@ -395,6 +395,10 @@
   .x\:text-\[22px\] {
     font-size: 22px !important;
   }
+  .x\:leading-\[1\.5\] {
+    --tw-leading: 1.5 !important;
+    line-height: 1.5 !important;
+  }
   .x\:font-bold {
     --tw-font-weight: var(--x-font-weight-bold) !important;
     font-weight: var(--x-font-weight-bold) !important;
@@ -513,6 +517,10 @@
   inherits: false;
   initial-value: solid;
 }
+@property --tw-leading {
+  syntax: "*";
+  inherits: false;
+}
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;
@@ -524,6 +532,7 @@
       --tw-translate-y: 0;
       --tw-translate-z: 0;
       --tw-border-style: solid;
+      --tw-leading: initial;
       --tw-font-weight: initial;
     }
   }

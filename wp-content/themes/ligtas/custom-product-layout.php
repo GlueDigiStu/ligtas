@@ -607,7 +607,8 @@ if ($enable_classroom_courses):?>
                                             </svg>
                                         </div>
                                     </summary>
-                                    <div class="content x:pt-8">
+                                    <div class="content x:pt-8 x:leading-[1.5]">
+
                                         <?= $faq['answer'] ?>
                                         <?php if (is_array($faq['buttons']) && count($faq['buttons']) > 0): ?>
                                             <div class="x:mt-8 ">
