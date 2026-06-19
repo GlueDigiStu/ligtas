@@ -109,7 +109,7 @@
 		$btn.data('courseSaving', true).addClass('course-saving');
 
 		var payload = $('.woocommerce-cart-form')
-			.find('[name^="recipient_first_name"], [name^="recipient_last_name"], [name^="recipient_email"]')
+			.find('[name^="recipient_first_name"], [name^="recipient_last_name"], [name^="recipient_email"], [name^="recipient_dob"]')
 			.serialize();
 
 		payload += '&action=course_save_recipients';

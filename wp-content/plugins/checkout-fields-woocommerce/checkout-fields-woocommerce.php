@@ -24,7 +24,42 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         return $cart_item_data;
     }
     add_filter('woocommerce_add_cart_item_data', 'course_prevent_cart_item_merging', 10, 2);
-    
+
+    /**
+     * Whether a product is configured to collect each recipient's date of birth.
+     *
+     * Driven by the "Collect date of birth" checkbox on the product edit screen
+     * (stored as the _collect_date_of_birth meta). Used everywhere the DOB field
+     * is rendered, validated and saved so the behaviour stays per-product.
+     */
+    function course_product_requires_dob($product_id) {
+        return 'yes' === get_post_meta($product_id, '_collect_date_of_birth', true);
+    }
+
+    /**
+     * Add the "Collect date of birth" checkbox to the product data panel.
+     */
+    function course_add_dob_product_option() {
+        woocommerce_wp_checkbox(array(
+            'id'          => '_collect_date_of_birth',
+            'label'       => __('Collect date of birth', 'woocommerce'),
+            'description' => __('Show a date of birth field for each recipient in the cart.', 'woocommerce'),
+        ));
+    }
+    add_action('woocommerce_product_options_general_product_data', 'course_add_dob_product_option');
+
+    /**
+     * Save the "Collect date of birth" checkbox.
+     *
+     * WooCommerce verifies the meta-box nonce and edit capability before firing
+     * woocommerce_process_product_meta, so we only normalise the checkbox value.
+     */
+    function course_save_dob_product_option($post_id) {
+        $value = isset($_POST['_collect_date_of_birth']) ? 'yes' : 'no';
+        update_post_meta($post_id, '_collect_date_of_birth', $value);
+    }
+    add_action('woocommerce_process_product_meta', 'course_save_dob_product_option');
+
     /**
      * Add recipient fields after cart item name
      */
@@ -34,16 +69,20 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         
         // Get saved recipient data (if any)
         $recipients = isset($cart_item['course_recipients']) ? $cart_item['course_recipients'] : array();
-        
+
+        // Whether this product collects a date of birth per recipient.
+        $collect_dob = course_product_requires_dob($cart_item['product_id']);
+
         // Container for all recipient forms
         echo '<div class="course-recipients-container">';
-        
+
         // Add a form for each quantity
         for ($i = 0; $i < $quantity; $i++) {
             // Get saved values for this recipient (if any)
             $first_name = isset($recipients[$i]['first_name']) ? $recipients[$i]['first_name'] : '';
             $last_name = isset($recipients[$i]['last_name']) ? $recipients[$i]['last_name'] : '';
             $email = isset($recipients[$i]['email']) ? $recipients[$i]['email'] : '';
+            $dob = isset($recipients[$i]['dob']) ? $recipients[$i]['dob'] : '';
             
             // Only show recipient number if there's more than one
             $recipient_label = $quantity > 1 ? 'Recipient ' . ($i + 1) . ' of ' . $quantity : 'Recipient Information';
@@ -81,6 +120,18 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                            class="input-text"
                            />
                 </div>
+
+                <?php if ($collect_dob) : ?>
+                <div class="course-recipient-field">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date"
+						   id="dob"
+                           name="recipient_dob[<?php echo esc_attr($cart_item_key); ?>][<?php echo $i; ?>]"
+                           value="<?php echo esc_attr($dob); ?>"
+                           class="input-text"
+                           />
+                </div>
+                <?php endif; ?>
             </div>
             <?php
         }
@@ -111,6 +162,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             'recipient_first_name' => 'first_name',
             'recipient_last_name'  => 'last_name',
             'recipient_email'      => 'email',
+            'recipient_dob'        => 'dob',
         );
 
         foreach ($field_map as $post_key => $recipient_key) {
@@ -180,6 +232,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
         foreach (WC()->cart->get_cart() as $cart_item) {
             $product_name = $cart_item['data']->get_name();
+            $collect_dob  = course_product_requires_dob($cart_item['product_id']);
 
             if (!isset($cart_item['course_recipients']) || !is_array($cart_item['course_recipients'])) {
                 $errors[] = sprintf(__('Please enter recipient information for "%s".', 'woocommerce'), $product_name);
@@ -189,6 +242,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             foreach ($cart_item['course_recipients'] as $index => $recipient) {
                 if (empty($recipient['first_name']) || empty($recipient['last_name']) || empty($recipient['email']) || !is_email($recipient['email'])) {
                     $errors[] = sprintf(__('Please complete valid recipient details for recipient %1$d of "%2$s".', 'woocommerce'), $index + 1, $product_name);
+                }
+
+                if ($collect_dob && empty($recipient['dob'])) {
+                    $errors[] = sprintf(__('Please enter the date of birth for recipient %1$d of "%2$s".', 'woocommerce'), $index + 1, $product_name);
                 }
             }
         }
@@ -214,14 +271,14 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             'course-cart-recipients',
             plugins_url('assets/css/cart-recipients.css', __FILE__),
             array(),
-            '1.1.0'
+            '1.2.0'
         );
 
         wp_enqueue_script(
             'course-cart-recipients',
             plugins_url('assets/js/cart-recipients.js', __FILE__),
             array('jquery'),
-            '1.1.0',
+            '1.2.0',
             true
         );
 
@@ -261,16 +318,20 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             $first = isset($recipient['first_name']) ? $recipient['first_name'] : '';
             $last  = isset($recipient['last_name']) ? $recipient['last_name'] : '';
             $email = isset($recipient['email']) ? $recipient['email'] : '';
+            $dob   = isset($recipient['dob']) ? $recipient['dob'] : '';
 
             $name  = trim($first . ' ' . $last);
 
-            if ('' === $name && '' === $email) {
+            if ('' === $name && '' === $email && '' === $dob) {
                 continue;
             }
 
             $value = $name;
             if ('' !== $email) {
                 $value .= ('' !== $name) ? ' (' . $email . ')' : $email;
+            }
+            if ('' !== $dob) {
+                $value .= ('' !== $value) ? ' — ' . sprintf(__('DOB: %s', 'woocommerce'), $dob) : sprintf(__('DOB: %s', 'woocommerce'), $dob);
             }
 
             $item_data[] = array(
@@ -311,7 +372,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         foreach ($cart_items as $cart_item_key => $cart_item) {
             $product_name = $cart_item['data']->get_name();
             $quantity = $cart_item['quantity'];
-            
+            $collect_dob = course_product_requires_dob($cart_item['product_id']);
+
             // Check if we have recipients data
             if (!isset($cart_item['course_recipients']) || !is_array($cart_item['course_recipients'])) {
                 wc_add_notice(sprintf(__('Please enter recipient information for "%s"', 'woocommerce'), $product_name), 'error');
@@ -332,6 +394,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     wc_add_notice(sprintf(__('Please enter email for recipient %d of "%s"', 'woocommerce'), $index + 1, $product_name), 'error');
                 } elseif (!is_email($recipient['email'])) {
                     wc_add_notice(sprintf(__('Please enter a valid email for recipient %d of "%s"', 'woocommerce'), $index + 1, $product_name), 'error');
+                }
+
+                if ($collect_dob && empty($recipient['dob'])) {
+                    wc_add_notice(sprintf(__('Please enter date of birth for recipient %d of "%s"', 'woocommerce'), $index + 1, $product_name), 'error');
                 }
             }
         }
@@ -362,6 +428,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 if (!empty($recipient['email'])) {
                     $item->add_meta_data($prefix . 'Email', $recipient['email'], true);
                 }
+
+                if (!empty($recipient['dob'])) {
+                    $item->add_meta_data($prefix . 'Date of Birth', $recipient['dob'], true);
+                }
             }
         }
     }
@@ -383,7 +453,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     $first_name = isset($recipient['first_name']) ? $recipient['first_name'] : '';
                     $last_name = isset($recipient['last_name']) ? $recipient['last_name'] : '';
                     $email = isset($recipient['email']) ? $recipient['email'] : '';
-                    
+                    $dob = isset($recipient['dob']) ? $recipient['dob'] : '';
+
                     if ($first_name && $last_name && $email) {
                         // This is where you would make your API call to the LMS
                         // Example placeholder for future implementation:
@@ -392,6 +463,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             'first_name' => $first_name,
                             'last_name' => $last_name,
                             'email' => $email,
+                            'dob' => $dob,
                             'course_id' => $product_id,
                             'variation_id' => $variation_id,
                             'order_id' => $order_id
