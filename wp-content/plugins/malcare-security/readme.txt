@@ -6,7 +6,7 @@ Donate link: https://www.malcare.com
 Requires at least: 4.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 6.47
+Stable tag: 6.48
 License: GPLv2 or later
 License URI: [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -402,6 +402,10 @@ FTP details input into MalCare is processed on our servers. We need your FTP cre
 These are available on our website: [Terms of Service](https://www.malcare.com/tos/) and [Privacy Policy](https://www.malcare.com/privacy/)
 
 == CHANGELOG ==
+= 6.48 =
+* Fix: Preserve default PHP error handling after PHP Error Monitoring processes an error.
+* Tweak: Reduce repeated firewall IP whitelist lookups.
+
 = 6.47 =
 * Fix: Prevent stale WordPress core update cleanup rules from deleting files added by newer WordPress core packages.
 
