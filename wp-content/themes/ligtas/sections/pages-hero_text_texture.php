@@ -28,6 +28,19 @@
                             </svg>
                         </a>
                         <?php } ?>
+
+                        <?php if(is_array(get_field('buttons'))) { ?>
+                            <div class="buttons fade_in">
+                                <?php foreach(get_field('buttons') as $button) { ?>
+                                    <a class="btn" href="<?php echo esc_url($button['link']['url']); ?>"<?php if($button['link']['target'] == 'blank') { echo ' target="_blank"'; } ?>>
+                                        <?php echo $button['link']['title']; ?>
+                                        <svg class="svg_arrow_btn">
+                                            <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_btn"></use>
+                                        </svg>
+                                    </a>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
                 <div class="intro_curve<?php if(get_field('decor')==3) { echo ' v_5'; } ?>">
