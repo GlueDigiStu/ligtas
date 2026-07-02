@@ -106,6 +106,7 @@ $tfp = 'product_cat_' . $term_parent;
                             <div class="x:bg-[#291261] x:rounded-[10px] x:p-4">
                                 <p class="x:text-white x:text-[22px] x:mb-4 x:text-center">In-Company Courses</p>
 
+                                <p class="x:text-center x:text-sm x:text-white">Prices from</p>
                                 <p class="x:text-white x:text-[22px] x:text-center x:mb-4"><?= $course_overview['in_company_courses']['price'] ?></p>
                                 <a class="btn fade_in x:w-full x:text-center x:justify-center x:min-w-0"
                                    href="#in-company-courses">Find
