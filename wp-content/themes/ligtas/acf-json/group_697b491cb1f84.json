@@ -21,6 +21,23 @@
             "selected": 0
         },
         {
+            "key": "field_6a635b3651cfc",
+            "label": "Header Button",
+            "name": "header_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0
+        },
+        {
             "key": "field_69a077e018616",
             "label": "Course Overview Panels",
             "name": "course_overview_panels",
@@ -1538,5 +1555,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1782985971
+    "modified": 1784896332
 }
