@@ -818,6 +818,19 @@ add_action('quick_edit_custom_box', 'add_quick_edit_fields', 10, 2);
 add_action( 'init', 'enable_product_page_attributes' );
 function enable_product_page_attributes() {
     add_post_type_support( 'product', 'page-attributes' );
+    // WooCommerce does not register 'revisions' support for products. Without it
+    // wp_get_post_revisions() returns nothing, so ACF cannot remap get_field() to
+    // the preview autosave and Preview renders the live published field values.
+    add_post_type_support( 'product', 'revisions' );
+}
+
+// Products are content-heavy, so cap stored revisions rather than keeping them all.
+add_filter( 'wp_revisions_to_keep', 'limit_product_revisions', 10, 2 );
+function limit_product_revisions( $num, $post ) {
+    if ( 'product' === $post->post_type ) {
+        return 10;
+    }
+    return $num;
 }
 
 

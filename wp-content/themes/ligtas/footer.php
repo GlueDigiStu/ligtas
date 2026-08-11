@@ -261,6 +261,25 @@
             }
         },
     });
+
+    // Simple testimonial panels (Testimonial block, Type = Simple).
+    // Initialised per instance so more than one can sit on the same page.
+    if (typeof Swiper !== 'undefined') {
+        document.querySelectorAll('.testimonials_simple_slider').forEach(function (slider) {
+            new Swiper(slider, {
+                loop: true,
+                slidesPerView: 1,
+                spaceBetween: 0,
+                effect: 'fade',
+                fadeEffect: {crossFade: true},
+                speed: 500,
+                navigation: {
+                    prevEl: slider.querySelector('.testimonials_simple_prev'),
+                    nextEl: slider.querySelector('.testimonials_simple_next'),
+                },
+            });
+        });
+    }
 </script>
 <!-- Mini Cart Panel -->
 <div id="mini-cart-panel"

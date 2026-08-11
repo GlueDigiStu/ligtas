@@ -22,6 +22,34 @@
             "esc_html": 0
         },
         {
+            "key": "field_68a3f1c704b71",
+            "label": "Type",
+            "name": "type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Standard shows the headshot and the curve texture. Simple is a plain panel with no photo or texture — use it for internal testimonials on content heavy pages.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "choices": {
+                "1": "Standard",
+                "2": "Simple"
+            },
+            "default_value": "1",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
             "key": "field_681202270e1f5",
             "label": "Color",
             "name": "color",
@@ -147,7 +175,7 @@
                     "name": "photo",
                     "aria-label": "",
                     "type": "image",
-                    "instructions": "",
+                    "instructions": "Not used when Type is set to Simple.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -213,5 +241,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1746110756
+    "modified": 1786406400
 }
