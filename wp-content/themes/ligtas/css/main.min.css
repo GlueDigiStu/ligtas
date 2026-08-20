@@ -35,6 +35,10 @@
     width: 12px;
     height: 12px;
 }
+.svg_arrow_up {
+    width: 16px;
+    height: 16px;
+}
 .svg_classroom_icon {
     width: 32px;
     height: 28px;
@@ -10618,3 +10622,58 @@ ol li::before {
   }
 }
 /*END Manual block padding styles */
+
+/*Floating back to top button
+  z-index sits one below the header's 10 on purpose: the mobile nav is a
+  full-screen fixed overlay inside .header, so it covers this button while the
+  menu is open without any JavaScript having to hide it.
+  .is_visible is added by the script at the bottom of footer.php. */
+.floating_top {
+    position: fixed;
+    left: 32px;
+    bottom: 32px;
+    z-index: 9;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+    border: 1px solid #a27fff;
+    border-radius: 50%;
+    background-color: #a27fff;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background-color 0.3s, border-color 0.3s;
+}
+.floating_top.is_visible {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+.floating_top:hover {
+    border-color: #291261;
+    background-color: #291261;
+}
+.floating_top svg {
+    display: block;
+    fill: #fafafa;
+    transition: fill 0.3s;
+}
+@media screen and (max-width: 767px) {
+    .floating_top {
+        left: 20px;
+        bottom: 20px;
+        width: 48px;
+        height: 48px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .floating_top {
+        transform: none;
+        transition: opacity 0.3s, visibility 0.3s, background-color 0.3s, border-color 0.3s;
+    }
+}
+/*END Floating back to top button */

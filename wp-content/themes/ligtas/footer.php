@@ -393,6 +393,46 @@
     });
 </script>
 
+<?php
+/*
+ * Floating back to top.
+ *
+ * Separate from the two #back_to_top buttons in the footer markup above - those
+ * are only reachable once you have already scrolled to the bottom. This one
+ * follows the page and appears after a screen's worth of scrolling.
+ */
+?>
+<button type="button" class="floating_top" aria-label="Back to top">
+    <svg class="svg_arrow_up" aria-hidden="true" focusable="false">
+        <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_up"></use>
+    </svg>
+</button>
+
+<script>
+    (function () {
+        var button = document.querySelector('.floating_top');
+
+        if (!button) {
+            return;
+        }
+
+        function toggleVisibility() {
+            button.classList.toggle('is_visible', window.pageYOffset > window.innerHeight);
+        }
+
+        button.addEventListener('click', function () {
+            // Honoured at click time rather than cached, so the button follows
+            // the setting if the visitor changes it mid-session.
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+        });
+
+        window.addEventListener('scroll', toggleVisibility, { passive: true });
+        toggleVisibility();
+    })();
+</script>
+
 <?php wp_footer(); ?>
 
 </body>
