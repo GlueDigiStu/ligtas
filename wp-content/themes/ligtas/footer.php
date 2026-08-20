@@ -395,8 +395,8 @@
  */
 ?>
 <button type="button" class="floating_top" aria-label="Back to top">
-    <svg class="svg_arrow_up" aria-hidden="true" focusable="false">
-        <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_up"></use>
+    <svg class="svg_arrow_up" viewBox="320 -640 320 320" aria-hidden="true" focusable="false">
+        <path d="M440-320h80v-168l64 64 56-56-160-160-160 160 56 56 64-64v168Z"/>
     </svg>
 </button>
 
