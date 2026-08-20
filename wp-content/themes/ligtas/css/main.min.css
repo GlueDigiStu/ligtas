@@ -36,8 +36,8 @@
     height: 12px;
 }
 .svg_arrow_up {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
 }
 .svg_classroom_icon {
     width: 32px;
@@ -4894,19 +4894,6 @@ body {
         flex-wrap: wrap;
     }
 }
-#back_to_top {
-    background: transparent;
-    border: none;
-    padding: 0;
-    width: fit-content;
-    margin-top: 20px;
-    color: #FFF;
-    cursor: pointer;
-}
-#back_to_top > img {
-    width: 50px;
-    height: 50px;
-}
 .footer_left {
     margin-right: 5.72vw;
     display: flex;
@@ -5246,16 +5233,6 @@ body {
         display: block;
         max-width: 392px;
         margin: 72px auto 0;
-    }
-}
-.footer_bottom #back_to_top {
-    display: none;
-}
-@media screen and (max-width: 767px) {
-    .footer_bottom #back_to_top {
-        display: block;
-        margin: auto;
-        cursor: pointer;
     }
 }
 .footer_bottom_wrap {

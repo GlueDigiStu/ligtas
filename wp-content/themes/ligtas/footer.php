@@ -7,10 +7,6 @@
                         <img src="<?php bloginfo('template_url'); ?>/images/icon-purple.png"
                              alt="<?php bloginfo('name'); ?>">
                     </a>
-                    <button id="back_to_top">
-                        <img src="<?php bloginfo('template_url'); ?>/images/arrow_up.svg" alt="Back to top">
-                        <p>Back to top</p>
-                    </button>
                 </div>
                 <div class="footer_navbar">
                     <?php
@@ -197,10 +193,6 @@
                     <?php wp_nav_menu(array('theme_location' => 'links', 'items_wrap' => '%3$s', 'container' => false, 'depth' => 1)); ?>
                 </ul>
             </div>
-            <button id="back_to_top">
-                <img src="<?php bloginfo('template_url'); ?>/images/arrow_up.svg" alt="Back to top">
-                <p>Back to top</p>
-            </button>
             <a class="footer_logo" href="<?php bloginfo('url'); ?>/">
                 <img src="<?php bloginfo('template_url'); ?>/images/icon-purple.png" alt="<?php bloginfo('name'); ?>">
             </a>
@@ -397,9 +389,9 @@
 /*
  * Floating back to top.
  *
- * Separate from the two #back_to_top buttons in the footer markup above - those
- * are only reachable once you have already scrolled to the bottom. This one
- * follows the page and appears after a screen's worth of scrolling.
+ * The site's only back to top control. Appears after a screen's worth of
+ * scrolling and follows the page, replacing the pair of static #back_to_top
+ * buttons that used to sit in the footer markup.
  */
 ?>
 <button type="button" class="floating_top" aria-label="Back to top">
