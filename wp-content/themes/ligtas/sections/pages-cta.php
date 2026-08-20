@@ -5,7 +5,7 @@
     } else {
         $background = get_field('background');
 ?>
-        <div class="content_section pt_no <?php echo $background.' '.get_field('indents'); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?>>
+        <div class="content_section pt_no <?php echo $background.' '.get_field('indents'); ?><?php echo ligtas_manual_padding_class(); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?><?php echo ligtas_manual_padding_style(); ?>>
             <div class="container">
                 <div class="contact_cta fade_in">
                     <div class="contact_cta_body">

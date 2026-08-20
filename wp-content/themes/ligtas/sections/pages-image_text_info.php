@@ -9,7 +9,7 @@
         }
         $alignment = get_field('alignment');
 ?>
-        <div class="content_section <?php echo $color.' '.get_field('indents'); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?>>
+        <div class="content_section <?php echo $color.' '.get_field('indents'); ?><?php echo ligtas_manual_padding_class(); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?><?php echo ligtas_manual_padding_style(); ?>>
             <div class="container">
                 <div class="about_content<?php if($alignment==2) { echo ' reverse'; } ?>">
                     <?php if(get_field('image')) { $img = get_field('image'); ?>

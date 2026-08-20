@@ -640,6 +640,70 @@ function mihdan_register_blocks() {
 add_action( 'acf/init', 'mihdan_register_blocks' );
 
 /**
+ * Manual block padding.
+ *
+ * Every "Pages block" field group carries a "Use Manual Padding" toggle plus a
+ * padding top and padding bottom slider. Blocks that were built before this
+ * existed have the toggle off, so they keep the spacing their stylesheet rules
+ * already give them and nothing is written to the markup.
+ *
+ * Call both helpers on a block's outer wrapper: the class inside the class
+ * attribute, the style just before the closing angle bracket.
+ *
+ * @return array|false Padding in px, or false when the block has not opted in.
+ */
+function ligtas_manual_padding() {
+    if ( ! function_exists( 'get_field' ) || ! get_field( 'use_manual_padding' ) ) {
+        return false;
+    }
+
+    return array(
+        'top'    => ligtas_manual_padding_value( 'manual_padding_top' ),
+        'bottom' => ligtas_manual_padding_value( 'manual_padding_bottom' ),
+    );
+}
+
+/**
+ * Read one padding slider.
+ *
+ * 0 is a deliberate choice (sections sitting flush), so it is only the missing
+ * value - a block toggled on without the sliders ever being saved - that falls
+ * back to the theme's standard 140px rather than collapsing the section.
+ *
+ * @param string $name Field name.
+ * @return int Padding in px, clamped to the slider's own range.
+ */
+function ligtas_manual_padding_value( $name ) {
+    $value = get_field( $name );
+
+    if ( ! is_numeric( $value ) ) {
+        return 140;
+    }
+
+    return min( 300, absint( $value ) );
+}
+
+function ligtas_manual_padding_class() {
+    return ligtas_manual_padding() ? ' has-manual-padding' : '';
+}
+
+function ligtas_manual_padding_style() {
+    $padding = ligtas_manual_padding();
+
+    if ( ! $padding ) {
+        return '';
+    }
+
+    $custom_properties = sprintf(
+        '--manual-pad-top:%dpx;--manual-pad-bottom:%dpx;',
+        $padding['top'],
+        $padding['bottom']
+    );
+
+    return ' style="' . esc_attr( $custom_properties ) . '"';
+}
+
+/**
  * Initialize ACF date picker for WooCommerce product variations
  */
 function acf_init_date_picker_for_variations() {

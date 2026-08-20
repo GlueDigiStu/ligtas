@@ -10600,3 +10600,21 @@ ol li::before {
   }
 }
 /*END LCA Membership list styles */
+
+/*Manual block padding styles
+  Applied only to blocks where an editor has ticked "Use Manual Padding".
+  !important is needed because the per-block padding classes it replaces
+  (.p_180, .pt_280, .pt_no ...) are more specific than this single class.
+  On narrow screens the value is capped at 96px, which is what every one of
+  those preset classes already collapses to below 991px. */
+.has-manual-padding {
+  padding-top: var(--manual-pad-top, 0px) !important;
+  padding-bottom: var(--manual-pad-bottom, 0px) !important;
+}
+@media screen and (max-width: 991px) {
+  .has-manual-padding {
+    padding-top: min(var(--manual-pad-top, 0px), 96px) !important;
+    padding-bottom: min(var(--manual-pad-bottom, 0px), 96px) !important;
+  }
+}
+/*END Manual block padding styles */

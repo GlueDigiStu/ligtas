@@ -22,6 +22,90 @@
             "esc_html": 0
         },
         {
+            "key": "field_740abdc04f67c",
+            "label": "Use Manual Padding",
+            "name": "use_manual_padding",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Override this section's default top and bottom spacing. Leave off to keep the spacing it has now.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5709ed5c2cc5c",
+            "label": "Padding top",
+            "name": "manual_padding_top",
+            "aria-label": "",
+            "type": "range",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_740abdc04f67c",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "default_value": 140,
+            "min": 0,
+            "max": 300,
+            "step": 5,
+            "prepend": "",
+            "append": "px",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_e15aa7b0a5d4e",
+            "label": "Padding bottom",
+            "name": "manual_padding_bottom",
+            "aria-label": "",
+            "type": "range",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_740abdc04f67c",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "default_value": 140,
+            "min": 0,
+            "max": 300,
+            "step": 5,
+            "prepend": "",
+            "append": "px",
+            "allow_in_bindings": 0
+        },
+        {
             "key": "field_681248097eabc",
             "label": "Color",
             "name": "color",
@@ -433,5 +517,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1746098424
+    "modified": 1787213943
 }

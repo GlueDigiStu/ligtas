@@ -10,7 +10,7 @@
         $breadcrumbs = get_field('no_breadcrumbs');
 ?>
     <?php if(get_field('type') == 1) { ?>
-        <div class="top_section<?php if($breadcrumbs) { echo ' top_home'; } ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?>>
+        <div class="top_section<?php if($breadcrumbs) { echo ' top_home'; } ?><?php echo ligtas_manual_padding_class(); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?><?php echo ligtas_manual_padding_style(); ?>>
             <div class="top_bg">
                 <?php if(get_field('video')) { ?>
                 <video autoplay muted playsinline loop>
@@ -64,7 +64,7 @@
             </div>
         </div>
     <?php } elseif(get_field('type') == 2) { ?>
-        <div class="top_page <?php echo $color ?>">
+        <div class="top_page <?php echo $color ?><?php echo ligtas_manual_padding_class(); ?>"<?php echo ligtas_manual_padding_style(); ?>>
             <div class="container">
                 <div class="top_page_inner">
                     <?php if(!get_field('no_breadcrumbs')) { lsx_breadcrumbs(); } ?>
@@ -84,7 +84,7 @@
             </div>
         </div>
     <?php } elseif(get_field('type') == 3) { ?>
-        <div class="top_article top_page <?php echo $color ?>">
+        <div class="top_article top_page <?php echo $color ?><?php echo ligtas_manual_padding_class(); ?>"<?php echo ligtas_manual_padding_style(); ?>>
             <div class="container">
                 <div class="top_page_inner">
                     <?php if(!get_field('no_breadcrumbs')) { lsx_breadcrumbs(); } ?>

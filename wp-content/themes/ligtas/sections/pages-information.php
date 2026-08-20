@@ -10,7 +10,7 @@
         $type = get_field('type');
 ?>
     <?php if($type == 3) { ?>
-        <div class="content_section <?php echo $color.' '.get_field('indents'); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?>>
+        <div class="content_section <?php echo $color.' '.get_field('indents'); ?><?php echo ligtas_manual_padding_class(); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?><?php echo ligtas_manual_padding_style(); ?>>
             <div class="container">
                 <div class="benefits_wrap">
                     <div class="benefits_left fade_left">
@@ -69,7 +69,7 @@
             </div>
         </div>
     <?php } else { ?>  
-        <div class="compliance_section content_section <?php echo $color.' '.get_field('indents'); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?>>
+        <div class="compliance_section content_section <?php echo $color.' '.get_field('indents'); ?><?php echo ligtas_manual_padding_class(); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?><?php echo ligtas_manual_padding_style(); ?>>
             <div class="container">
                 <?php if(get_field('section') || get_field('title') || get_field('text')) { ?>
                 <div class="compliance_description">

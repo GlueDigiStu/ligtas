@@ -9,7 +9,7 @@
         }
         $img = get_field('image');
 ?>
-        <div class="top_img <?php echo $color.' '.get_field('indents'); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?>>
+        <div class="top_img <?php echo $color.' '.get_field('indents'); ?><?php echo ligtas_manual_padding_class(); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?><?php echo ligtas_manual_padding_style(); ?>>
             <?php if(get_field('container')) { echo '<div class="container">'; } ?>
             <div class="top_img_inner fade_in">
                 <img src="<?php echo $img['url']; ?>" alt="<?php echo $img['alt']; ?>">
