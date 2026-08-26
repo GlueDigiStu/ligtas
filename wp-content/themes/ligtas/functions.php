@@ -606,38 +606,108 @@ add_filter( 'block_categories_all', 'register_layout_category' );
 function mihdan_register_blocks() {
     if( function_exists( 'acf_register_block_type' ) ) {
 
-        acf_register_block_type(array('name'=>'TS0', 'title'=>'Heander', 'render_template'=>'sections/pages-heander.php', 'post_types'=>array('page','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS1', 'title'=>'Rich text', 'render_template'=>'sections/pages-rich_text.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS2', 'title'=>'Form', 'render_template'=>'sections/pages-form.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS3', 'title'=>'Hero text & Anchor Links', 'render_template'=>'sections/pages-hero_text_anchor_links.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS4', 'title'=>'3 Column Accordion', 'render_template'=>'sections/pages-3_column_accordion.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS5', 'title'=>'Testimonial', 'render_template'=>'sections/pages-testimonial.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS6', 'title'=>'Image & text info', 'render_template'=>'sections/pages-image_text_info.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS7', 'title'=>'Gallery', 'render_template'=>'sections/pages-gallery.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS8', 'title'=>'Wayfinding Card', 'render_template'=>'sections/pages-wayfinding_card.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS9', 'title'=>'Hero Text & CTA', 'render_template'=>'sections/pages-hero_text_cta.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS10', 'title'=>'Hero Text & Texture', 'render_template'=>'sections/pages-hero_text_texture.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS11', 'title'=>'Text & Cards', 'render_template'=>'sections/pages-text_cards.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS12', 'title'=>'Information', 'render_template'=>'sections/pages-information.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS13', 'title'=>'Text & Image & Accordion', 'render_template'=>'sections/pages-text_image_accordion.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS14', 'title'=>'After Scroll', 'render_template'=>'sections/pages-after_scroll.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS15', 'title'=>'Parallax', 'render_template'=>'sections/pages-parallax.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS16', 'title'=>'Image', 'render_template'=>'sections/pages-image.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS17', 'title'=>'Full accordion', 'render_template'=>'sections/pages-full_accordion.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS18', 'title'=>'Cases', 'render_template'=>'sections/pages-cases.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS19', 'title'=>'Info', 'render_template'=>'sections/pages-info.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS20', 'title'=>'Posts', 'render_template'=>'sections/pages-posts.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS21', 'title'=>'Intro text', 'render_template'=>'sections/pages-intro_text.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS22', 'title'=>'Team', 'render_template'=>'sections/pages-team.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS23', 'title'=>'List', 'render_template'=>'sections/pages-list.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS24', 'title'=>'CTA', 'render_template'=>'sections/pages-cta.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS25', 'title'=>'Intro slider', 'render_template'=>'sections/pages-intro_slider.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS26', 'title'=>'Hero Image & Text', 'render_template'=>'sections/pages-hero_image_text.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
-        acf_register_block_type(array('name'=>'TS27', 'title'=>'Learning Table', 'render_template'=>'sections/pages-learning_table.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes'));
+        // acf_block_version 3 is the PHP equivalent of block.json's acf.blockVersion.
+        // acf_register_block_type() still defaults to version 1, whose fields render
+        // inside the block canvas - which the iframed editor in current WordPress
+        // hides. Version 3 moves them to the block inspector sidebar. ACF derives
+        // api_version 3 from this automatically on WP 6.3+.
+
+        acf_register_block_type(array('name'=>'TS0', 'title'=>'Heander', 'render_template'=>'sections/pages-heander.php', 'post_types'=>array('page','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS1', 'title'=>'Rich text', 'render_template'=>'sections/pages-rich_text.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS2', 'title'=>'Form', 'render_template'=>'sections/pages-form.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS3', 'title'=>'Hero text & Anchor Links', 'render_template'=>'sections/pages-hero_text_anchor_links.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS4', 'title'=>'3 Column Accordion', 'render_template'=>'sections/pages-3_column_accordion.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS5', 'title'=>'Testimonial', 'render_template'=>'sections/pages-testimonial.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS6', 'title'=>'Image & text info', 'render_template'=>'sections/pages-image_text_info.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS7', 'title'=>'Gallery', 'render_template'=>'sections/pages-gallery.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS8', 'title'=>'Wayfinding Card', 'render_template'=>'sections/pages-wayfinding_card.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS9', 'title'=>'Hero Text & CTA', 'render_template'=>'sections/pages-hero_text_cta.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS10', 'title'=>'Hero Text & Texture', 'render_template'=>'sections/pages-hero_text_texture.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS11', 'title'=>'Text & Cards', 'render_template'=>'sections/pages-text_cards.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS12', 'title'=>'Information', 'render_template'=>'sections/pages-information.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS13', 'title'=>'Text & Image & Accordion', 'render_template'=>'sections/pages-text_image_accordion.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS14', 'title'=>'After Scroll', 'render_template'=>'sections/pages-after_scroll.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS15', 'title'=>'Parallax', 'render_template'=>'sections/pages-parallax.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS16', 'title'=>'Image', 'render_template'=>'sections/pages-image.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS17', 'title'=>'Full accordion', 'render_template'=>'sections/pages-full_accordion.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS18', 'title'=>'Cases', 'render_template'=>'sections/pages-cases.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS19', 'title'=>'Info', 'render_template'=>'sections/pages-info.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS20', 'title'=>'Posts', 'render_template'=>'sections/pages-posts.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS21', 'title'=>'Intro text', 'render_template'=>'sections/pages-intro_text.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS22', 'title'=>'Team', 'render_template'=>'sections/pages-team.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS23', 'title'=>'List', 'render_template'=>'sections/pages-list.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS24', 'title'=>'CTA', 'render_template'=>'sections/pages-cta.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS25', 'title'=>'Intro slider', 'render_template'=>'sections/pages-intro_slider.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS26', 'title'=>'Hero Image & Text', 'render_template'=>'sections/pages-hero_image_text.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
+        acf_register_block_type(array('name'=>'TS27', 'title'=>'Learning Table', 'render_template'=>'sections/pages-learning_table.php', 'post_types'=>array('page','post','cases','wp_block'), 'supports'=>array('anchor'=>true,'align'=>false,'customClassName'=>false), 'mode'=>'edit', 'category'=>'themes', 'acf_block_version'=>3));
 
     }
 }
 add_action( 'acf/init', 'mihdan_register_blocks' );
+
+/**
+ * Manual block padding.
+ *
+ * Every "Pages block" field group carries a "Use Manual Padding" toggle plus a
+ * padding top and padding bottom slider. Blocks that were built before this
+ * existed have the toggle off, so they keep the spacing their stylesheet rules
+ * already give them and nothing is written to the markup.
+ *
+ * Call both helpers on a block's outer wrapper: the class inside the class
+ * attribute, the style just before the closing angle bracket.
+ *
+ * @return array|false Padding in px, or false when the block has not opted in.
+ */
+function ligtas_manual_padding() {
+    if ( ! function_exists( 'get_field' ) || ! get_field( 'use_manual_padding' ) ) {
+        return false;
+    }
+
+    return array(
+        'top'    => ligtas_manual_padding_value( 'manual_padding_top' ),
+        'bottom' => ligtas_manual_padding_value( 'manual_padding_bottom' ),
+    );
+}
+
+/**
+ * Read one padding slider.
+ *
+ * 0 is a deliberate choice (sections sitting flush), so it is only the missing
+ * value - a block toggled on without the sliders ever being saved - that falls
+ * back to the theme's standard 140px rather than collapsing the section.
+ *
+ * @param string $name Field name.
+ * @return int Padding in px, clamped to the slider's own range.
+ */
+function ligtas_manual_padding_value( $name ) {
+    $value = get_field( $name );
+
+    if ( ! is_numeric( $value ) ) {
+        return 140;
+    }
+
+    return min( 300, absint( $value ) );
+}
+
+function ligtas_manual_padding_class() {
+    return ligtas_manual_padding() ? ' has-manual-padding' : '';
+}
+
+function ligtas_manual_padding_style() {
+    $padding = ligtas_manual_padding();
+
+    if ( ! $padding ) {
+        return '';
+    }
+
+    $custom_properties = sprintf(
+        '--manual-pad-top:%dpx;--manual-pad-bottom:%dpx;',
+        $padding['top'],
+        $padding['bottom']
+    );
+
+    return ' style="' . esc_attr( $custom_properties ) . '"';
+}
 
 /**
  * Initialize ACF date picker for WooCommerce product variations

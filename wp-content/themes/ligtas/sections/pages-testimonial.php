@@ -13,14 +13,14 @@
         $rows = get_field('testimonial');
         $shownav = !$simple || (is_array($rows) && count($rows) > 1);
 ?>
-        <div class="testimonials_section<?php if($simple) { echo ' testimonials_simple'; } ?> <?php echo $color.' '.get_field('indents'); ?>"
+        <div class="testimonials_section<?php if($simple) { echo ' testimonials_simple'; } ?> <?php echo $color.' '.get_field('indents'); ?><?php echo ligtas_manual_padding_class(); ?>"
             id=<?php
             if(get_field('section')) {
                 echo str_replace(' ', '-', strtolower(get_field('section')));
             } elseif (get_field('title')) {
                 echo str_replace(' ', '-', strtolower(get_field('title')));
             }
-            ?>>
+            ?><?php echo ligtas_manual_padding_style(); ?>>
             <?php if(!$simple) { ?>
             <div class="testimonials_curve">
                 <picture>

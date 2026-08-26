@@ -7,10 +7,6 @@
                         <img src="<?php bloginfo('template_url'); ?>/images/icon-purple.png"
                              alt="<?php bloginfo('name'); ?>">
                     </a>
-                    <button id="back_to_top">
-                        <img src="<?php bloginfo('template_url'); ?>/images/arrow_up.svg" alt="Back to top">
-                        <p>Back to top</p>
-                    </button>
                 </div>
                 <div class="footer_navbar">
                     <?php
@@ -197,10 +193,6 @@
                     <?php wp_nav_menu(array('theme_location' => 'links', 'items_wrap' => '%3$s', 'container' => false, 'depth' => 1)); ?>
                 </ul>
             </div>
-            <button id="back_to_top">
-                <img src="<?php bloginfo('template_url'); ?>/images/arrow_up.svg" alt="Back to top">
-                <p>Back to top</p>
-            </button>
             <a class="footer_logo" href="<?php bloginfo('url'); ?>/">
                 <img src="<?php bloginfo('template_url'); ?>/images/icon-purple.png" alt="<?php bloginfo('name'); ?>">
             </a>
@@ -391,6 +383,46 @@
             }
         });
     });
+</script>
+
+<?php
+/*
+ * Floating back to top.
+ *
+ * The site's only back to top control. Appears after a screen's worth of
+ * scrolling and follows the page, replacing the pair of static #back_to_top
+ * buttons that used to sit in the footer markup.
+ */
+?>
+<button type="button" class="floating_top" aria-label="Back to top">
+    <svg class="svg_arrow_up" viewBox="320 -640 320 320" aria-hidden="true" focusable="false">
+        <path d="M440-320h80v-168l64 64 56-56-160-160-160 160 56 56 64-64v168Z"/>
+    </svg>
+</button>
+
+<script>
+    (function () {
+        var button = document.querySelector('.floating_top');
+
+        if (!button) {
+            return;
+        }
+
+        function toggleVisibility() {
+            button.classList.toggle('is_visible', window.pageYOffset > window.innerHeight);
+        }
+
+        button.addEventListener('click', function () {
+            // Honoured at click time rather than cached, so the button follows
+            // the setting if the visitor changes it mid-session.
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+        });
+
+        window.addEventListener('scroll', toggleVisibility, { passive: true });
+        toggleVisibility();
+    })();
 </script>
 
 <?php wp_footer(); ?>

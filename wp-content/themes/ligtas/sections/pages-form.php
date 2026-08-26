@@ -4,7 +4,7 @@
     	echo '<hr><h2>'.$block['title'].'</h2><hr>';
     } else {
 ?>
-        <div class="contact_section" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?>>
+        <div class="contact_section<?php echo ligtas_manual_padding_class(); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?><?php echo ligtas_manual_padding_style(); ?>>
             <div class="container">
                 <div class="contact_wrap">
                     <div class="contact_info fade_left">

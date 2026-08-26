@@ -8,7 +8,7 @@
             $colortext = ' grey'; 
         }
 ?>
-        <div class="cta_section <?php echo get_field('indents'); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?>>
+        <div class="cta_section <?php echo get_field('indents'); ?><?php echo ligtas_manual_padding_class(); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?><?php echo ligtas_manual_padding_style(); ?>>
             <div class="cta_wrap<?php if(get_field('wider')) { echo ' wider'; } ?>">
                 <?php if(get_field('image')) { $img = get_field('image'); ?>
                 <div class="cta_img fade_left">
