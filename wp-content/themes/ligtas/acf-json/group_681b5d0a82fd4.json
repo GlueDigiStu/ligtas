@@ -3,6 +3,70 @@
     "title": "Variations",
     "fields": [
         {
+            "key": "field_681e0a419ccd6",
+            "label": "Date Period",
+            "name": "date_period",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_681e0a179ccd4",
+            "label": "Start Date",
+            "name": "start_date",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "display_format": "d\/m\/Y",
+            "return_format": "d\/m\/Y",
+            "first_day": 1,
+            "allow_in_bindings": 1,
+            "default_to_current_date": 0
+        },
+        {
+            "key": "field_681e0a239ccd5",
+            "label": "End Date",
+            "name": "end_date",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "display_format": "d\/m\/Y",
+            "return_format": "d\/m\/Y",
+            "first_day": 1,
+            "allow_in_bindings": 1,
+            "default_to_current_date": 0
+        },
+        {
             "key": "field_681b5d0a2c61f",
             "label": "Type",
             "name": "type",
@@ -30,7 +94,63 @@
             "allow_in_bindings": 1,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_681e0acfd1487",
+            "label": "Tier",
+            "name": "tier",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "choices": {
+                "None": "None",
+                "Gold": "Gold",
+                "Silver": "Silver",
+                "Bronze": "Bronze"
+            },
+            "default_value": "None",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 1,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_681e127d54f95",
+            "label": "Course Code",
+            "name": "course_code",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "If the course is on LMS, add only the ID number here.\r\nFor example: 130 in https:\/\/ligtas.yourlms.net\/learn\/course\/130<br>\r\nIf the course requires multiple module enrolments (for example level 6 diplomas) add each course ID separated by commas. For example: 400,410,420",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -51,5 +171,8 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1746782055
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1788333913
 }
