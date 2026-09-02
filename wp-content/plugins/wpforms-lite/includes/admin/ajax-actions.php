@@ -272,10 +272,15 @@ function wpforms_new_form() { // phpcs:ignore Generic.Metrics.CyclomaticComplexi
 
 	check_ajax_referer( 'wpforms-builder', 'nonce' );
 
-	// Prevent the second form creating if a user has no license set.
-	// Redirect will lead to the warning page.
+	// An unlicensed Pro install is limited to a single form. The old redirect target (the builder
+	// license overlay) is deprecated, so the limit is reported as a regular error message instead.
 	if ( wpforms()->is_pro() && empty( wpforms_get_license_type() ) && wp_count_posts( 'wpforms' )->publish >= 1 ) {
-		wp_send_json_success( [ 'redirect' => admin_url( 'admin.php?page=wpforms-builder&view=setup' ) ] );
+		wp_send_json_error(
+			[
+				'error_type' => 'license_required',
+				'message'    => esc_html__( 'A WPForms license key is required. To create more forms, please verify your WPForms license.', 'wpforms-lite' ),
+			]
+		);
 	}
 
 	if ( empty( $_POST['title'] ) ) {
@@ -879,10 +884,23 @@ function wpforms_activate_addon() {
 add_action( 'wp_ajax_wpforms_activate_addon', 'wpforms_activate_addon' );
 
 /**
- * Install addon.
+ * AJAX handler for installing a plugin or addon from the WPForms admin UI.
+ *
+ * Registered on the `wp_ajax_wpforms_install_addon` action and driven by the admin
+ * Addons / Settings pages. It expects a download URL already resolved by the page in
+ * `$_POST['plugin']` and the kind of package in `$_POST['type']` (`addon` by default, or
+ * `plugin`), then downloads, installs, and silently activates it, returning a JSON
+ * response for the browser.
+ *
+ * This is a browser endpoint, not a programmatic API: it does not resolve addon download
+ * URLs or check the license level itself. To install or upgrade a plugin or addon from
+ * PHP, call `wpforms_install_plugin()` instead, which resolves the addon URL and enforces
+ * the license level on your behalf.
  *
  * @since 1.0.0
  * @since 1.6.2.3 Updated the permissions checking.
+ *
+ * @see wpforms_install_plugin()
  *
  * @noinspection HtmlUnknownTarget
  */

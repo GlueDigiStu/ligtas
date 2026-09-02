@@ -247,7 +247,7 @@ jQuery(document).ready(function($) {
 
     $('#eps-pro-dialog').dialog('open');
 
-    $('#eps-pro-table .button-buy').each(function(ind, el) {
+    $('#eps-pro-table .button-buy, .link-buy').each(function(ind, el) {
       tmp = $(el).data('href-org');
       tmp = tmp.replace('pricing-table', pro_feature);
       $(el).attr('href', tmp);
@@ -266,7 +266,7 @@ jQuery(document).ready(function($) {
       pro_feature = 'unknown';
     }
 
-    $('#eps-pro-table .button-buy').each(function(ind, el) {
+    $('#eps-pro-table .button-buy, .link-buy').each(function(ind, el) {
       tmp = $(el).data('href-org');
       tmp = tmp.replace('pricing-table', pro_feature);
       $(el).attr('href', tmp);
@@ -293,12 +293,12 @@ jQuery(document).ready(function($) {
     closeOnEscape: true,
   });
 
-  // show upsell popup every 4 months
+  // show upsell popup every 3 months
   if (window.localStorage.getItem('wp301_upsell_timestamp') === null ||
-      (new Date().getTime() / 1000 - window.localStorage.getItem('wp301_upsell_timestamp')) > (86400 * 120)) {
+      (new Date().getTime() / 1000 - window.localStorage.getItem('wp301_upsell_timestamp')) > (86400 * 90)) {
     window.localStorage.setItem('wp301_upsell_timestamp', Math.round(new Date().getTime() / 1000));
 
-    $('#eps-pro-table .button-buy').each(function(ind, el) {
+    $('#eps-pro-table .button-buy, .link-buy').each(function(ind, el) {
       tmp = $(el).data('href-org');
       tmp = tmp.replace('pricing-table', 'welcome');
       $(el).attr('href', tmp);
@@ -311,7 +311,7 @@ jQuery(document).ready(function($) {
 
     $('#eps-pro-dialog').dialog('open');
 
-    $('#eps-pro-table .button-buy').each(function(ind, el) {
+    $('#eps-pro-table .button-buy, .link-buy').each(function(ind, el) {
       tmp = $(el).data('href-org');
       tmp = tmp.replace('pricing-table', pro_feature);
       $(el).attr('href', tmp);

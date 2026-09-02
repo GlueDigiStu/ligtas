@@ -502,12 +502,14 @@ function pro_dialog() {
   $out .= '</tr>';
 
   $out .= '<tr>';
-  $out .= '<td><span>One-time payment</span><a class="button button-buy" data-href-org="https://wp301redirects.com/buy/?product=personal-repo&ref=pricing-table" href="https://wp301redirects.com/buy/?product=personal-repo&ref=pricing-table" target="_blank">BUY NOW</a></td>';
-  $out .= '<td><span>One-time payment</span><a class="button button-buy" data-href-org="https://wp301redirects.com/buy/?product=team-repo&ref=pricing-table" href="https://wp301redirects.com/buy/?product=team-repo&ref=pricing-table" target="_blank">BUY NOW</a></td>';
-  $out .= '<td><span>One-time payment</span><a class="button button-buy" data-href-org="https://wp301redirects.com/buy/?product=agency-launch&ref=pricing-table" href="https://wp301redirects.com/buy/?product=agency-launch&ref=pricing-table" target="_blank">BUY NOW</a></td>';
+  $out .= '<td><a class="button button-buy" data-href-org="https://wp301redirects.com/buy/?product=personal-repo&ref=pricing-table" href="https://wp301redirects.com/buy/?product=personal-repo&ref=pricing-table" target="_blank">BUY NOW<span>One-time payment</span></a></td>';
+  $out .= '<td><a class="button button-buy" data-href-org="https://wp301redirects.com/buy/?product=team-repo&ref=pricing-table" href="https://wp301redirects.com/buy/?product=team-repo&ref=pricing-table" target="_blank">BUY NOW<span>One-time payment</span></a></td>';
+  $out .= '<td><a class="button button-buy" data-href-org="https://wp301redirects.com/buy/?product=agency-launch&ref=pricing-table" href="https://wp301redirects.com/buy/?product=agency-launch&ref=pricing-table" target="_blank">BUY NOW<span>One-time payment</span></a></td>';
   $out .= '</tr>';
 
   $out .= '</table>';
+
+  $out .= '<div class="upsell-footer-2 center">Need the plugin only for a <b>short period of time</b>? <a class="link-buy" target="_blank" data-href-org="https://wp301redirects.com/buy/?product=personal-monthly&ref=pricing-table" href="https://wp301redirects.com/buy/?product=personal-monthly&ref=priciing-table"><b>Get it for ONLY $9.99</b><small> /month</small></a> &amp; cancel any time!</div>';
 
   $out .= '<div class="center footer"><b>100% No-Risk Money Back Guarantee!</b> If you don\'t like the plugin over the next 7 days, we will happily refund 100% of your money. No questions asked! Payments are processed by our merchant of records - <a href="https://paddle.com/" target="_blank">Paddle</a>.</div></div>';
 

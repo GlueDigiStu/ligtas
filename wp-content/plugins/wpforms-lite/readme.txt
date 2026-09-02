@@ -3,7 +3,7 @@ Contributors: wpforms, smub, slaFFik
 Tags: contact form, contact form plugin, forms, form builder, custom form
 Requires at least: 5.5
 Tested up to: 7.0
-Stable tag: 1.10.2.1
+Stable tag: 2.0.1.1
 Requires PHP: 7.2
 License: GNU General Public License v2.0 or later
 
@@ -68,7 +68,7 @@ Bloggers and publishers can use our WordPress post submission forms to accept gu
 
 While WPForms started out as a contact form plugin, it has evolved into a powerful custom forms solution for any type of payment or booking form.
 
-WPForms integrates with PayPal, Stripe, Square Payments, and Authorize.Net so you can easily accept credit card payments or take payments via PayPal. Bonus: you can also take signatures.
+WPForms integrates with PayPal, Stripe, Square Payments, Authorize.Net, and Mercado Pago so you can easily accept credit card payments or take payments via PayPal. Bonus: you can also take signatures.
 
 We're proud to be a Stripe Verified Partner. This partnership allows us to build the best Stripe integration with early access to features. You can use our Stripe integration to accept both one-time payments as well as recurring payments while syncing all form data to your Stripe account.
 
@@ -135,6 +135,7 @@ We also know that our developer friends may want more control, so we added tons 
 * [Stripe](https://wpforms.com/features/stripe-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin) - We're a Stripe Verified Partner for Payments.
 * [Square](https://wpforms.com/features/square-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin)
 * [Authorize.Net](https://wpforms.com/features/authorize-net-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin)
+* [Mercado Pago](https://wpforms.com/features/mercado-pago-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin)
 * [Mailchimp](https://wpforms.com/features/mailchimp-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin)
 * [AWeber](https://wpforms.com/features/aweber-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin)
 * [Campaign Monitor](https://wpforms.com/features/campaign-monitor-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin)
@@ -150,6 +151,7 @@ We also know that our developer friends may want more control, so we added tons 
 * [MailPoet](https://wpforms.com/features/mailpoet-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin)
 * [ConvertKit](https://wpforms.com/features/convertkit-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin)
 * [Klaviyo](https://wpforms.com/features/klaviyo-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin)
+* [SendGrid](https://wpforms.com/features/sendgrid-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin)
 * [Salesforce](https://wpforms.com/features/salesforce-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin)
 * [Slack](https://wpforms.com/features/slack-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin)
 * [Dropbox](https://wpforms.com/features/dropbox-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin)
@@ -279,7 +281,7 @@ Here is a list of our Payment Fields that will help you create an order form, do
 * Checkbox Items
 * Dropdown Items
 * Total (Calculation Field)
-* Credit Card (Stripe, Square, and Authorize.Net)
+* Credit Card (Stripe, Square, Authorize.Net, and Mercado Pago)
 * PayPal
 
 = Can I integrate WPForms with my CRM or Email Marketing Service? =
@@ -302,21 +304,20 @@ Here is a list of our popular marketing integrations:
 * Brevo (ex Sendinblue)
 * MailerLite
 * MailPoet
-
-Using our Zapier integration, you can easily connect WPForms with over 7,000+ marketing apps including:
-
-* PipeDrive CRM
+* Pipedrive
 * Google Sheets
-* Active Campaign
+* Slack
+* Dropbox
+
+Using our Zapier integration, you can easily connect WPForms with over 9,000+ marketing apps including:
+
 * Zoho CRM
 * Zoho Mail
 * Zoho Invoice
 * Agile CRM
-* Slack
 * Trello
 * Infusionsoft by Keap
 * Microsoft Excel
-* Dropbox
 * HelpScout
 * Zendesk
 * Freshbooks
@@ -338,9 +339,9 @@ Note: WPForms was voted Zapier's 6th fastest-growing app in the world.
 
 Yes, WPForms is not your average contact form plugin. You can use it to create any type of form including payment forms.
 
-We make it easy for you to accept payments using Stripe, Square, Authorize.Net, and PayPal Commerce.
+We make it easy for you to accept payments using Stripe, Square, Authorize.Net, Mercado Pago, and PayPal Commerce.
 
-Both our Stripe and Authorize.Net integrations help you easily accept credit card payments online.
+Our Stripe, Authorize.Net, and Mercado Pago integrations help you easily accept credit card payments online.
 
 Our PayPal integration allows you to accept PayPal payments online.
 
@@ -391,6 +392,66 @@ Thank you,
 Syed Balkhi
 
 == Changelog ==
+= 2.0.1.1 =
+- Added: New QR Code setting generates a downloadable code for a chosen page or URL.
+- Added: New Add Media button in the Confirmation Message editor allows inserting images from the Media Library.
+- Added: Buttons in the Form Builder and on WPForms admin pages now show a visible focus indicator during keyboard navigation, and it no longer appears on mouse click.
+- Changed: Stripe Radar-blocked payments now appear in the payment log with a distinct label instead of the generic decline message.
+- Changed: Updated DOMPurify library to 3.4.13.
+- Fixed: The Smart Tags widget in the Form Builder did not highlight required fields with a red border when validation failed.
+- Fixed: A PHP notice was logged on the front-end when a payment field (Multiple Items, Checkbox Items, or Dropdown Items) contained a choice saved without a label.
+- Fixed: Form templates in the Form Builder Setup panel were not filtered by the form's selected category, showing all templates instead.
+- Fixed: Some button icons were misaligned on WordPress 7.0.
+- Fixed: Incorrect spacing between the icon and text in the Form Builder top bar buttons.
+- Fixed: Choice checkboxes and radio buttons in the Form Builder had no visible border and appeared stretched into ovals in Safari.
+- Fixed: Collapsible settings sections in the Form Builder, such as AI MCP, did not stay closed after the page was reloaded.
+- Fixed: Reordering choices in a Checkbox field in the Form Builder caused a browser console error and stopped the field preview from updating.
+- Fixed: Square payments failed on every retry after a submission with an invalid credit card expiration date, even once the card details were corrected.
+- Fixed: The Payments page showed too much space between elements when no payments had been collected yet.
+- Fixed: PayPal Commerce subscription checkout failed with a fatal error when the account was disconnected while the form was loaded.
+- Fixed: Visitors were not taken to the destination set in the form's Confirmations settings after submitting a form when a plugin or custom code supplied an invalid redirect address.
+- Fixed: No warning appeared for empty or invalid notification email addresses in the Form Builder.
+- Fixed: Various buttons across plugin admin pages showed the default blue focus outline instead of their custom focus styles after being clicked.
+- Fixed: Pages rendered in response to a form submission are no longer cacheable, and submitted values are no longer written back into the form when a submission is rejected.
+
+= 2.0.0.5 =
+- Fixed: The WPForms admin menu left a large empty gap below it on mobile screens when viewing non-WPForms admin pages.
+
+= 2.0.0.4 =
+- Fixed: Lite Connect site registration failed permanently when the admin user profile had an empty first or last name, blocking entry backups.
+- Fixed: The Onboarding Wizard would time out in some cases.
+
+= 2.0.0.3 =
+- Added: New supported currencies.
+- Fixed: Permission handling in the Export Forms tool was improved.
+- Fixed: Form data handling in the Block Editor was improved.
+
+= 2.0.0.2 =
+- Fixed: Form submissions could still be blocked by stricter web application firewall configurations that flagged the JSON structure of the Form Analytics data; the data attached to each submission is now base64-encoded.
+- Fixed: A cross-site scripting vulnerability when a page combined a WPForms captcha with a specially crafted OptinMonster campaign.
+
+= 2.0.0.1 =
+- Fixed: Form submissions could be blocked by a web application firewall, such as Cloudflare's OWASP ruleset, because of the format of the Form Analytics data attached to each submission.
+
+= 2.0.0 =
+- Added: New Onboarding Wizard and Setup Checklist page in the WPForms admin menu to guide users through essential configuration steps.
+- Added: New Reconnect button for invalid payment connections in the Form Builder Payments Settings panel.
+- Changed: The Form Builder Setup panel now opens significantly faster.
+- Changed: Updated DOMPurify library to 3.4.11.
+- Changed: The AI Chat button in the Form Builder is now shown in grey and displays a tooltip explaining that WPForms AI is not available on local sites.
+- Changed: Updated woocommerce/action-scheduler library to 4.0.0.
+- Changed: Stripe payment security is enhanced with automatic detection and blocking of card testing attacks and other fraudulent activity.
+- Fixed: Randomize the position of the correct answer in AI-generated graded quizzes.
+- Fixed: Admin notices about incompatible WPForms versions are now shown only to users who can update plugins.
+- Fixed: A choice deleted in the Form Builder could still appear as an empty option on the front-end and triggered PHP warnings on the form view.
+- Fixed: The settings gear icon on the Payments, and Dashboard pages was displayed in the wrong color and oversized when Elementor plugin was active.
+- Fixed: Form elements could appear disabled after a Stripe 3D Secure authentication failure, even though they remained editable.
+- Fixed: The connection icon was displayed in the Builder settings for payment methods even when no account was connected.
+- Fixed: Stripe subscription renewals could remain in the Pending status and display an outdated renewal date on the Payment Single page.
+- Fixed: Connected payment methods checkmark could still appear in the Form Builder Payments panel after switching to a template without a payment field.
+- Fixed: The Weekly Email Summary email content was displayed right-aligned instead of centered in the web version of Gmail.
+- Fixed: The Themes panel in the Form Builder Settings did not re-open when its menu item was clicked again after navigating away and back.
+- Fixed: A PHP warning was logged when restoring a trashed form on PHP 8.3 and higher.
 
 = 1.10.2.1 =
 - Added: AI MCP settings section in the Form Builder with the MCP write-access toggle.

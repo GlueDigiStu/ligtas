@@ -515,6 +515,17 @@ a.button.eps-redirect-remove:hover {
   padding: 20px;
 }
 
+.eps-pro-dialog .upsell-footer-2 {
+  background-color: #ff6246;
+  color: white;
+  padding: 15px;
+  margin: 0 -16px 0 -16px;
+}
+
+.eps-pro-dialog .upsell-footer-2 a {
+  color: white;
+}
+
 .eps-pro-dialog .logo span {
   display: block;
   font-size: 18px;
@@ -527,7 +538,7 @@ a.button.eps-redirect-remove:hover {
 
 #eps-pro-table {
   width: 100%;
-  margin: 10px auto 10px auto;
+  margin: 10px auto 0 auto;
   border-collapse: collapse;
 }
 
@@ -617,7 +628,7 @@ x#eps-pro-table tr td:last-child {
 }
 
 #eps-pro-table tr:last-child td {
-  padding: 20px 0 25px 0;
+  padding: 20px 0 20px 0;
   vertical-align: top;
 }
 
@@ -639,9 +650,15 @@ a.button.button-buy {
   padding: 11px 40px;
   color: white;
   background: #FF6246;
-  font-weight: 600;
+  font-weight: 700;
   border: none;
   margin-bottom: 10px;
+  line-height: 1.5;
+}
+a.button.button-buy span {
+  font-weight: normal;
+  padding: 0 !important;
+  display: block !important;
 }
 
 a.button.button-buy:hover {
