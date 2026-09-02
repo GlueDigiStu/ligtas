@@ -151,6 +151,29 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_68b6a1c4e3f10",
+            "label": "Enrolment Duration (days)",
+            "name": "enrolment_days",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "How many days a learner keeps access to this course on the LMS after they buy it.\r\nLeave blank to use the default of 365 days. For example: 90 for three months, 180 for six months.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "default_value": "",
+            "min": 1,
+            "max": "",
+            "placeholder": "365",
+            "step": 1,
+            "prepend": "",
+            "append": "days"
         }
     ],
     "location": [
@@ -174,5 +197,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1788333913
+    "modified": 1788337655
 }
