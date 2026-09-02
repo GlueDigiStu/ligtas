@@ -6,6 +6,87 @@ class DoceboClass
     }
 
     /**
+     * Read a Docebo connection setting.
+     *
+     * Values are managed by the Ligtas Docebo Settings plugin, which stores them
+     * in the database and lets wp-config.php constants override them. They are
+     * deliberately not held in this file.
+     *
+     * @param  string $key base_url | client_id | client_secret | username | password
+     * @return string
+     */
+    protected function _setting($key) {
+        if (function_exists('ligtas_docebo_get_setting')) {
+            $value = (string) ligtas_docebo_get_setting($key);
+
+            if ($value !== '') return $value;
+        }
+
+        // Fall back to constants so the integration still works if the plugin
+        // is deactivated but the values are defined in wp-config.php.
+        $constants = array(
+            'base_url'      => 'LIGTAS_DOCEBO_BASE_URL',
+            'client_id'     => 'LIGTAS_DOCEBO_CLIENT_ID',
+            'client_secret' => 'LIGTAS_DOCEBO_CLIENT_SECRET',
+            'username'      => 'LIGTAS_DOCEBO_USERNAME',
+            'password'      => 'LIGTAS_DOCEBO_PASSWORD',
+        );
+
+        if (isset($constants[$key]) && defined($constants[$key])) {
+            return (string) constant($constants[$key]);
+        }
+
+        // Nothing configured yet, so fall back to the old hard-coded details
+        return $this->_legacy_setting($key);
+    }
+
+    /**
+     * The original hard-coded connection details.
+     *
+     * TEMPORARY. These are only here so the integration keeps working between
+     * this deployment and the new credentials being entered under
+     * Settings > Docebo API. They are already exposed in the Git history of this
+     * file, so they must be rotated in Docebo regardless.
+     *
+     * TODO: REMOVE THIS WHOLE METHOD, and the call to it above, once the
+     * credentials have been entered in the admin and the connection tested.
+     *
+     * @param  string $key
+     * @return string
+     */
+    protected function _legacy_setting($key) {
+        $legacy = array(
+            // TODO: remove on a future deployment - replaced by Settings > Docebo API
+            'base_url'      => 'https://ligtas.yourlms.net',
+            // TODO: remove on a future deployment - replaced by Settings > Docebo API
+            'client_id'     => 'ligtaslocal',
+            // TODO: remove on a future deployment - rotate this secret in Docebo, it is in the Git history
+            'client_secret' => '0afcb04259d55265b8d449dd859da1c8975a97ae',
+            // TODO: remove on a future deployment - this is Joe's personal login and should be a dedicated API account
+            'username'      => 'joe@designdough.co.uk',
+            // TODO: remove on a future deployment - rotate this password in Docebo, it is in the Git history
+            'password'      => 'zfm*ruj3DFJ2jbw2fyh',
+        );
+
+        if (!isset($legacy[$key])) return '';
+
+        error_log('DOCEBO: falling back to the old hard-coded ' . $key . '. Set the credentials under Settings > Docebo API.');
+
+        return $legacy[$key];
+    }
+
+    /**
+     * The root address of the Docebo platform, with no trailing slash.
+     *
+     * @return string
+     */
+    protected function _base_url() {
+        $url = $this->_setting('base_url');
+
+        return rtrim($url, '/');
+    }
+
+    /**
      * Add a user to the Ligtas Docebo LMS
      *
      * @return mixed
@@ -48,10 +129,13 @@ class DoceboClass
         $data["select_orgchart"] = array($branch_id => 1);
 
         // The URL needed to add user
-        $url = 'https://ligtas.yourlms.net/manage/v1/user';
+        $url = $this->_base_url() . '/manage/v1/user';
 
         // Get a token
         $token = $this->_get_token();
+
+        // No token means no working credentials, so there is nothing to send
+        if (!$token) return false;
 
         // Encode this json blob because it has a nested array (select_orgchart) // SUPER IMPORTANT
         $encoded_data = json_encode($data);
@@ -91,23 +175,34 @@ class DoceboClass
         if(!$this->_validate_course_id($course_id)) return false;
 
         // Work out the start / stop dates for $duration
+        // Guard against a blank or nonsense duration, which DateInterval rejects
+        $duration = (int) $duration;
+        if ($duration < 1) $duration = 365;
+
         $interval = new \DateInterval('P'.$duration.'D');
         $start = new DateTimeImmutable();
         $end = $start->add($interval);
 
         // Build data packet
+        $data = [];
         $data["level"] = 3;
-        $data["date_begin_validity"] = $start->format('Y-m-j');
+        $data["date_begin_validity"] = $start->format('Y-m-d');
         $data["date_expire_validity"] = $end->format('Y-m-d');
 
         // The URL needed to enroll user in a course
-        $url = 'https://ligtas.yourlms.net/learn/v1/enrollments/'.$course_id.'/'.$user_id;
+        $url = $this->_base_url() . '/learn/v1/enrollments/'.$course_id.'/'.$user_id;
 
         // Get a token
         $token = $this->_get_token();
 
+        // No token means no working credentials, so there is nothing to send
+        if (!$token) return false;
+
+        // Docebo only accepts JSON bodies on this endpoint // SUPER IMPORTANT
+        $encoded_data = json_encode($data);
+
         // Try to enroll the user using the Docebo API
-        $response = $this->_post_API($url, $data, $token);
+        $response = $this->_post_API($url, $encoded_data, $token);
 
         // I DON'T THINK THIS ERROR HANDLING MAKES ANY SENSE? REWRITE THIS SHIT ASAP - MARC
         // Did we get a sensible output?
@@ -148,6 +243,10 @@ class DoceboClass
         // if(!$this->_validate_course_id($course_id)) return false;
 
         // Work out the start / stop dates for $duration
+        // Guard against a blank or nonsense duration, which DateInterval rejects
+        $duration = (int) $duration;
+        if ($duration < 1) $duration = 365;
+
         $interval = new \DateInterval('P'.$duration.'D');
         $start = new DateTimeImmutable();
         $end = $start->add($interval);
@@ -156,14 +255,17 @@ class DoceboClass
         $data["course_ids"] = $course_ids;
         $data["user_ids"] = array($user_id);
         $data["level"] = 3;
-        $data["date_begin_validity"] = $start->format('Y-m-j');
+        $data["date_begin_validity"] = $start->format('Y-m-d');
         $data["date_expire_validity"] = $end->format('Y-m-d');
 
         // The URL needed to enroll user in a course
-        $url = 'https://ligtas.yourlms.net/learn/v1/enrollments';
+        $url = $this->_base_url() . '/learn/v1/enrollments';
 
         // Get a token
         $token = $this->_get_token();
+
+        // No token means no working credentials, so there is nothing to send
+        if (!$token) return false;
 
         // Encode this json blob because it has nested arrays // SUPER IMPORTANT
         $encoded_data = json_encode($data);
@@ -236,10 +338,13 @@ class DoceboClass
         $u_search_string = urlencode($search_string);
 
         // The URL needed to retrieve user list
-        $url = 'https://ligtas.yourlms.net/manage/v1/user?search_text='.$u_search_string;
+        $url = $this->_base_url() . '/manage/v1/user?search_text='.$u_search_string;
 
         // Get a token
         $token = $this->_get_token();
+
+        // No token means no working credentials, so there is nothing to send
+        if (!$token) return false;
 
         // Request the user list from the Docebo API
         $response = $this->_get_API($url, $token);
@@ -281,7 +386,7 @@ class DoceboClass
             // Do we have an API token?
             if($token) {
                 curl_setopt($ch, CURLOPT_HTTPHEADER, [ // Set auth headers
-                    'Authorization' => "Bearer " . $token
+                    'Authorization: Bearer ' . $token
                 ]);
                 curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, 'POST' ); // Set request method
             }
@@ -334,10 +439,13 @@ class DoceboClass
         $u_search_string = urlencode($search_string);
 
         // The URL needed to retrieve user list
-        $url = 'https://ligtas.yourlms.net/manage/v1/orgchart?search_text='.$u_search_string;
+        $url = $this->_base_url() . '/manage/v1/orgchart?search_text='.$u_search_string;
 
         // Get a token
         $token = $this->_get_token();
+
+        // No token means no working credentials, so there is nothing to send
+        if (!$token) return false;
 
         // Request the user list from the Docebo API
         $response = $this->_get_API($url, $token);
@@ -357,16 +465,16 @@ class DoceboClass
         $data["use_secondary_identifier"] = false;
 
         // The URL needed to create a branch
-        $url = 'https://ligtas.yourlms.net/manage/v1/orgchart';
+        $url = $this->_base_url() . '/manage/v1/orgchart';
 
         // See if we can create the branch
-        $response = $this->_post_API($url,$data,$token);
+        $response = $this->_post_API($url, json_encode($data), $token);
 
         // Get the code if we have one
         $branch_code = json_decode($response);
 
         // Did we get anything?
-        if (property_exists('data', $branch_code)) {
+        if (is_object($branch_code) && property_exists($branch_code, 'data')) {
             // Return the branch ID
             return $branch_code->data->items->id;
         } else {
@@ -438,9 +546,19 @@ class DoceboClass
      */
     public function _post_API($url, $data = null, $token = null) {
 
+		// Docebo expects a JSON body on every POST, so callers pass an
+		// already-encoded string. Encode here as a safety net if they didn't.
+		if (is_array($data) || is_object($data)) {
+			$data = json_encode($data);
+		}
+
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token")); 
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			"Authorization: Bearer $token",
+			"Content-Type: application/json",
+			"Accept: application/json",
+		));
 		curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1); // FORCE ACCEPTED PROTOCOL
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST' );
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -491,26 +609,42 @@ class DoceboClass
         // Collect up information required for the token call
         $data = [];
         // The OAuth2 server URL
-        $oauth2_server_url = 'https://ligtas.yourlms.net/oauth2/token';
+        $oauth2_server_url = $this->_base_url() . '/oauth2/token';
         // Set the client ID and secret
-        $data['client_id'] = 'ligtaslocal';
-        $data['client_secret'] = '0afcb04259d55265b8d449dd859da1c8975a97ae';
+        $data['client_id'] = $this->_setting('client_id');
+        $data['client_secret'] = $this->_setting('client_secret');
         // Set the grant type
         // $grant_type = 'client_credentials';
         $data['grant_type'] = 'password';
         // Set the scope
         $data['scope'] = 'api';
         // Set the user
-        $data['username'] = 'joe@designdough.co.uk';
-        $data['password'] = 'zfm*ruj3DFJ2jbw2fyh';
+        $data['username'] = $this->_setting('username');
+        $data['password'] = $this->_setting('password');
+
+        // Nothing to send if the credentials have not been entered yet.
+        // This cannot fire while _legacy_setting() is still in place - it is
+        // here for when that fallback is removed.
+        foreach (array('client_id', 'client_secret', 'username', 'password') as $required) {
+            if ($data[$required] === '') {
+                error_log('DOCEBO: no ' . $required . ' configured. Set the credentials under Settings > Docebo API.');
+                return false;
+            }
+        }
 
         // Send a POST request to the OAuth2 server to get a token
+        // NOTE: this call is form-encoded, not JSON. OAuth2 requires that.
         $response = $this->_curl_API($oauth2_server_url, $data, null);
 
         // Get the access token from the response
-        $api_key = json_decode($response)->access_token;
-    
-        return $api_key;
+        $token_response = json_decode($response);
+
+        if (!is_object($token_response) || !property_exists($token_response, 'access_token')) {
+            error_log("DOCEBO: could not get an access token => $response");
+            return false;
+        }
+
+        return $token_response->access_token;
     }
 
     /**
@@ -525,10 +659,13 @@ class DoceboClass
         $u_course_id = urlencode($course_id);
 
         // The URL needed to retrieve user list
-        $url = 'https://ligtas.yourlms.net/course/v1/courses/'.$u_course_id;
+        $url = $this->_base_url() . '/course/v1/courses/'.$u_course_id;
 
         // Get a token
         $token = $this->_get_token();
+
+        // No token means no working credentials, so there is nothing to send
+        if (!$token) return false;
 
         // Search the course list with the Docebo API
         $response = $this->_get_API($url, $token);

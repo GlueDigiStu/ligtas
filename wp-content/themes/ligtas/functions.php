@@ -742,7 +742,9 @@ $DOCEBO = new DoceboClass();
 
 function docebo_add_user_and_enrol($order_id) {
     global $DOCEBO;
-    $duration = 365; // Used for add_user_to_LMS_course variable
+
+    // Used when a variation has no Enrolment Duration of its own
+    $default_duration = 365;
     
     if (!$order_id) return;
 
@@ -761,6 +763,11 @@ function docebo_add_user_and_enrol($order_id) {
                 // Check for LMS course ID first to see if we need to create a user
                 $variation_id = $item->get_product()->get_id();
                 $course_id = get_post_meta($variation_id, 'course_code', true);
+
+                // How long this course's LMS access should last. Set per variation
+                // in the Enrolment Duration (days) field, otherwise use the default.
+                $duration = get_post_meta($variation_id, 'enrolment_days', true);
+                $duration = ($duration !== '' && (int) $duration > 0) ? (int) $duration : $default_duration;
                 
                 if ($course_id) {
                     // Cool, now get what we need to create a user
