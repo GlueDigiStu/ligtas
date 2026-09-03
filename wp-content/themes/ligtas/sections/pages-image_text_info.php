@@ -40,15 +40,17 @@
                             </a>
                             <?php } ?>
 
-                            <?php if(is_array(get_field('buttons'))) { ?>
+                            <?php if(is_array(get_field('buttons')) && count(get_field('buttons'))) { ?>
                                 <div class="buttons fade_in">
                                     <?php foreach(get_field('buttons') as $button) { ?>
+                                            <?php if(is_array($button) && is_array($button['link'])) { ?>
                                         <a class="btn" href="<?php echo esc_url($button['link']['url']); ?>"<?php if($button['link']['target'] == 'blank') { echo ' target="_blank"'; } ?>>
                                             <?php echo $button['link']['title']; ?>
                                             <svg class="svg_arrow_btn">
                                                 <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_btn"></use>
                                             </svg>
                                         </a>
+                                                <?php }?>
                                     <?php } ?>
                                 </div>
                             <?php } ?>
