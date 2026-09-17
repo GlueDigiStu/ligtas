@@ -717,6 +717,54 @@ if ($enable_in_company_courses):?>
         </div>
     </div>
 
+    <?php $testimonials = get_field('testimonials'); ?>
+    <?php if (!empty($testimonials)): ?>
+        <div class="testimonials_section testimonials_simple">
+            <div class="container">
+                <h3 class="title_category fade_in">Testimonial</h3>
+                <div class="testimonials_simple_slider swiper fade_in">
+                    <?php if (count($testimonials) > 1): ?>
+                        <div class="testimonials_nav">
+                            <div class="testimonials_arrow testimonials_simple_prev">
+                                <svg class="svg_arrow_back">
+                                    <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_back"></use>
+                                </svg>
+                            </div>
+                            <div class="testimonials_arrow testimonials_simple_next">
+                                <svg class="svg_arrow_small">
+                                    <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_small"></use>
+                                </svg>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    <div class="swiper-wrapper">
+                        <?php foreach ($testimonials as $testimonial): ?>
+                            <div class="testimonial_item swiper-slide">
+                                <div class="testimonial_simple_wrap">
+                                    <?php if (!empty($testimonial['text'])): ?>
+                                        <div class="testimonial_item_text">
+                                            <?= $testimonial['text'] ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if (!empty($testimonial['name']) || !empty($testimonial['position'])): ?>
+                                        <div class="testimonial_item_bottom">
+                                            <?php if (!empty($testimonial['name'])): ?>
+                                                <p class="testimonial_item_name"><?= esc_html($testimonial['name']) ?></p>
+                                            <?php endif; ?>
+                                            <?php if (!empty($testimonial['position'])): ?>
+                                                <p class="testimonial_item_position"><?= esc_html($testimonial['position']) ?></p>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <div class="cta_section " id="careers">
         <div class="cta_wrap">
             <div class="cta_img fade_left"
