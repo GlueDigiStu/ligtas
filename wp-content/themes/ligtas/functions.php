@@ -258,6 +258,28 @@ add_action( 'woocommerce_save_product_variation', function( $variation_id, $i = 
     }
 }, 10, 2 );
 
+// Hide legacy "Products" fields that custom-product-layout.php doesn't output, so editors don't fill in content that never appears.
+// Online/Virtual/Classroom/Workplace, Image and Testimonials stay visible as they're still used.
+$legacy_product_field_keys = array(
+    'field_681b3e61fa856', // title
+    'field_681b410c141f5', // prices_from
+    'field_681b4122141f6', // button_scroll
+    'field_681b490afe784', // course_overview
+    'field_681b4caf989f9', // learning_outcomes
+    'field_681b4e5b81965', // important_information
+);
+foreach ( $legacy_product_field_keys as $legacy_field_key ) {
+    add_filter( 'acf/prepare_field/key=' . $legacy_field_key, 'ligtas_hide_legacy_product_fields' );
+}
+
+function ligtas_hide_legacy_product_fields( $field ) {
+    $post = get_post();
+    if ( $post && $post->post_type === 'product' && get_page_template_slug( $post ) === 'custom-product-layout.php' ) {
+        return false;
+    }
+    return $field;
+}
+
 function kama_pagenavi( $args = [], $wp_query = null, $anchor = '' ){
     $default = [
         'before'          => '',           // Text before the navigation.

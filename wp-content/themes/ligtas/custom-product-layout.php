@@ -717,6 +717,63 @@ if ($enable_in_company_courses):?>
         </div>
     </div>
 
+    <?php if (have_rows('testimonials')): ?>
+        <div class="testimonials_section reverse">
+            <div class="testimonials_curve">
+                <picture>
+                    <source media="(max-width: 767px)" srcset="<?php bloginfo('template_url'); ?>/images/testimonials_mobile.png">
+                    <source media="(min-width: 768px)" srcset="<?php bloginfo('template_url'); ?>/images/testimonials_right.png">
+                    <img src="<?php bloginfo('template_url'); ?>/images/testimonials_right.png" alt="">
+                </picture>
+            </div>
+            <div class="container">
+                <h3 class="title_category fade_in">Testimonial</h3>
+                <div class="testimonials_slider swiper fade_in">
+                    <div class="swiper-wrapper">
+                        <?php while (have_rows('testimonials')): the_row(); ?>
+                            <div class="testimonial_item swiper-slide">
+                                <div class="testimonial_item_wrap">
+                                    <div class="testimonial_item_left"></div>
+                                    <div class="testimonial_item_info">
+                                        <?php if ($text = get_sub_field('text')): ?>
+                                            <div class="testimonial_item_text">
+                                                <?= $text ?>
+                                            </div>
+                                        <?php endif; ?>
+                                        <?php $name = get_sub_field('name'); ?>
+                                        <?php $position = get_sub_field('position'); ?>
+                                        <?php if ($name || $position): ?>
+                                            <div class="testimonial_item_bottom">
+                                                <?php if ($name): ?>
+                                                    <p class="testimonial_item_name"><?= esc_html($name) ?></p>
+                                                <?php endif; ?>
+                                                <?php if ($position): ?>
+                                                    <p class="testimonial_item_position"><?= esc_html($position) ?></p>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
+                    <div class="testimonials_nav">
+                        <div class="testimonials_arrow testimonials_prev">
+                            <svg class="svg_arrow_back">
+                                <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_back"></use>
+                            </svg>
+                        </div>
+                        <div class="testimonials_arrow testimonials_next">
+                            <svg class="svg_arrow_small">
+                                <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_small"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <div class="cta_section " id="careers">
         <div class="cta_wrap">
             <div class="cta_img fade_left"
