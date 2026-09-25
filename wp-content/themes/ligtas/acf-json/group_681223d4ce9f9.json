@@ -484,7 +484,7 @@
                 "id": ""
             },
             "relevanssi_exclude": 0,
-            "layout": "table",
+            "layout": "block",
             "pagination": 0,
             "min": 0,
             "max": 0,
@@ -690,5 +690,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1790319888
+    "modified": 1790320289
 }

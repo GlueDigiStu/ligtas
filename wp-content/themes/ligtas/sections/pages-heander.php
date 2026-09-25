@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <?php if(have_rows('links')): $large_links = get_field('large_links'); ?>
-                        <div class="top_row_right">
+                        <div class="top_row_right<?php if($large_links) { echo ' top_row_right_large'; } ?>">
                             <div class="top_boxes<?php if($large_links) { echo ' top_boxes_large'; } ?>">
                                 <?php while(have_rows('links')): the_row(); ?>
                                 <a <?php if(get_sub_field('new')) { echo ' target="_blank"'; } ?> class="top_box_item <?php echo get_sub_field('color'); ?> fade_in" href="<?php echo get_sub_field('link'); ?>">
