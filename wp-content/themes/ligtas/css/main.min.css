@@ -2026,6 +2026,16 @@ body {
         min-height: 93px;
     }
 }
+.top_boxes_large .top_box_curve {
+    width: auto;
+    aspect-ratio: 216 / 118;
+}
+@media screen and (max-width: 767px) {
+    .top_boxes_large .top_box_curve {
+        width: 83.07%;
+        aspect-ratio: auto;
+    }
+}
 .top_box_text {
     position: relative;
     z-index: 1;
