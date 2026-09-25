@@ -44,12 +44,21 @@
                                 <?php } ?>
                             </div>
                         </div>
-                        <?php if(have_rows('links')): ?>
+                        <?php if(have_rows('links')): $large_links = get_field('large_links'); ?>
                         <div class="top_row_right">
-                            <div class="top_boxes">
+                            <div class="top_boxes<?php if($large_links) { echo ' top_boxes_large'; } ?>">
                                 <?php while(have_rows('links')): the_row(); ?>
                                 <a <?php if(get_sub_field('new')) { echo ' target="_blank"'; } ?> class="top_box_item <?php echo get_sub_field('color'); ?> fade_in" href="<?php echo get_sub_field('link'); ?>">
+                                    <?php if($large_links) { ?>
+                                    <div class="top_box_text">
+                                        <p class="top_box_name"><?php echo get_sub_field('text'); ?></p>
+                                        <?php if(get_sub_field('subtitle')) { ?>
+                                        <p class="top_box_subtitle"><?php echo get_sub_field('subtitle'); ?></p>
+                                        <?php } ?>
+                                    </div>
+                                    <?php } else { ?>
                                     <p class="top_box_name"><?php echo get_sub_field('text'); ?></p>
+                                    <?php } ?>
                                     <div class="top_box_plus"></div>
                                     <?php if(get_sub_field('icon')) { $img = get_sub_field('icon'); ?>
                                     <img class="top_box_curve" src="<?php echo $img['url']; ?>" alt="<?php echo $img['alt']; ?>">
