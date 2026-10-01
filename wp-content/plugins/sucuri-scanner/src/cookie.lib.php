@@ -155,7 +155,7 @@ class SucuriScanCookie extends SucuriScan
      * @param string $path Path scope.
      * @param string $domain Domain scope (auto-detect if empty).
      * @param string $sameSite SameSite policy (None|Lax|Strict). Lower PHP versions ignore; gracefully degrade.
-     * 
+     *
      * @return bool True if the cookie header was successfully set.
      */
     public static function set($name, $value, $ttl = 0, $path = '/', $domain = '', $sameSite = 'Lax')
@@ -186,22 +186,16 @@ class SucuriScanCookie extends SucuriScan
             $secure = true;
         }
 
-        $supportsArray = version_compare(PHP_VERSION, '7.3', '>=');
+        $validSameSite = in_array($sameSite, array('None', 'Lax', 'Strict'), true) ? $sameSite : 'Lax';
 
-        if ($supportsArray) {
-            $validSameSite = in_array($sameSite, array('None', 'Lax', 'Strict'), true) ? $sameSite : 'Lax';
-
-            return setcookie($name, $value, array(
-                'expires' => $expire,
-                'path' => $path,
-                'domain' => $domain,
-                'secure' => $secure,
-                'httponly' => $httpOnly,
-                'samesite' => $validSameSite,
-            ));
-        }
-
-        return setcookie($name, $value, $expire, $path, $domain, $secure, $httpOnly);
+        return setcookie($name, $value, array(
+            'expires' => $expire,
+            'path' => $path,
+            'domain' => $domain,
+            'secure' => $secure,
+            'httponly' => $httpOnly,
+            'samesite' => $validSameSite,
+        ));
     }
 
     /**
