@@ -6,7 +6,7 @@ Tags: CRM, Marketing, Live Chat, Forms, Analytics
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.2
-Stable tag: 11.3.71
+Stable tag: 11.3.75
 
 The CRM, Sales, and Marketing WordPress plugin to grow your business better.
 
@@ -395,13 +395,12 @@ Please visit the <a href="https://community.hubspot.com/?utm_source=wordpress-pl
 == Changelog ==
 
 <a href="http://plugins.svn.wordpress.org/leadin/trunk/changelog.txt" target="_blank">Full changelog here</a>
-- Current version: 11.3.71
-- Version release date: 2026-08-20
+- Current version: 11.3.75
+- Version release date: 2026-09-16
 
-= 11.3.71 (2026-08-20) =
-* Fix TypeError crash when the HubSpot embedder script has not loaded by guarding against undefined IntegratedAppOptions in the background app
+= 11.3.75 (2026-09-16) =
+* Fix Elementor HubSpot form and meeting blocks not being selectable in the editor when the embed renders as an iframe
 
-= 11.3.70 (2026-08-12) =
-* Fix reverse proxy returning a 500 "Error retrieving content" error in browsers by not forwarding the client Accept-Encoding header, which caused Brotli responses WordPress cannot decode
-* Fix reverse proxy collapsing multiple Set-Cookie response headers into the literal "Set-Cookie: Array"
+= 11.3.74 (2026-09-16) =
+* Fix HubSpot widgets showing "Unable to load HubSpot" when the embedder script arrives late by waiting for it before failing, and report the failure when it does not arrive
 

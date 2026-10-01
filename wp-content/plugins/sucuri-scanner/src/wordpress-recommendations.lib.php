@@ -101,7 +101,7 @@ class SucuriWordPressRecommendations
          * Check PHP version.
          * @see https://www.php.net/supported-versions.php
          */
-        if (version_compare(phpversion(), '7.2', '>')) {
+        if (version_compare(phpversion(), '7.4', '>=')) {
             unset($recommendations['PHPVersionCheck']);
         }
 
@@ -135,7 +135,7 @@ class SucuriWordPressRecommendations
                 'role' => 'administrator',
                 'fields' => array('user_login'),
             ));
-        
+
             foreach($allUsers as $user) {
                 if (in_array($user->user_login, $adminUsernames)) {
                     $usersWithAdminLogin[] = $user->user_login;

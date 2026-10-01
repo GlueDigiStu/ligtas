@@ -7,6 +7,7 @@ import {
 } from '../constants/leadinConfig';
 import { initApp } from './appUtils';
 import { fetchAccessToken } from '../api/wordpressApiClient';
+import { isEmbedderReady } from './embedderReady';
 
 type CallbackFn = (...args: any[]) => void;
 
@@ -31,10 +32,10 @@ export const getOrCreateBackgroundApp = (accessToken = '', expiresIn = 0) => {
   if ((window as any).LeadinBackgroundApp) {
     return (window as any).LeadinBackgroundApp;
   }
-  const { IntegratedAppEmbedder, IntegratedAppOptions }: any = window;
-  if (!IntegratedAppEmbedder || typeof IntegratedAppOptions !== 'function') {
+  if (!isEmbedderReady()) {
     return null;
   }
+  const { IntegratedAppEmbedder, IntegratedAppOptions }: any = window;
   const options = new IntegratedAppOptions()
     .setLocale(locale)
     .setDeviceId(deviceId)
