@@ -901,6 +901,35 @@
             "ui": 1
         },
         {
+            "key": "field_6a7c1e2f3b9a1",
+            "label": "Hide Comparison Table",
+            "name": "hide_comparison_table",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Hide the Gold / Silver / Bronze comparison table in the Online Courses section.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69c505e3977b1",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
             "key": "field_6a21274a96425",
             "label": "Online Courses Title",
             "name": "online_courses_title",
@@ -1555,5 +1584,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1784896332
+    "modified": 1791817411
 }

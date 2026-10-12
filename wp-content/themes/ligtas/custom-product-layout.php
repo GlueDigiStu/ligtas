@@ -201,7 +201,7 @@ if ($enable_online_courses):
                                 $variations_type = 1;
                             }
                         }
-                        if ($variations_type) {
+                        if ($variations_type && !get_field('hide_comparison_table')) {
                             ?>
                             <table class=" x:w-full x:mx-auto x:mt-20 details_table x:[&_a]:text-[#a27fff]">
                                 <tbody>
