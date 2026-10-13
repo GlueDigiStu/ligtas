@@ -302,6 +302,27 @@ if ($enable_online_courses):
                     </div>
                 </div>
             </div>
+            <?php if ($variations_type && get_field('hide_comparison_table')): ?>
+                <?php // Comparison table (and its tier buy buttons) is hidden, so offer the Online variation(s) directly ?>
+                <div class="x:flex x:flex-wrap x:justify-start x:items-center x:gap-8 x:pt-12">
+                    <?php foreach ($product->get_available_variations() as $variations): ?>
+                        <?php if (get_field('type', $variations['variation_id']) == 'Online'): ?>
+                            <div class="x:flex x:flex-col x:items-start x:gap-4">
+                                <div class="x:md:text-2xl x:text-lg x:font-bold">
+                                    <?php
+                                    if (!empty($variations['price_html'])) {
+                                        echo $variations['price_html'];
+                                    } else {
+                                        echo wc_price(wc_get_product($variations['variation_id'])->get_price());
+                                    }
+                                    ?>
+                                </div>
+                                <?php echo do_shortcode("[custom_buy_now id=" . $variations['variation_id'] . "]") ?>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
             <?php if ($cta = get_field('online_courses_cta')): ?>
                 <!--            <div class="x:flex x:items-start x:gap-4">-->
                 <div class="x:flex x:flex-wrap x:justify-start x:items-center x:gap-4 x:pt-12">
