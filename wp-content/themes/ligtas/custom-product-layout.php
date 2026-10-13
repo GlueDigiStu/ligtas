@@ -677,7 +677,7 @@ if ($enable_in_company_courses):?>
             padding-left: 20px;
         }
 
-        .content p + p {
+        .content * + p {
             margin-top: 16px;
         }
     </style>
