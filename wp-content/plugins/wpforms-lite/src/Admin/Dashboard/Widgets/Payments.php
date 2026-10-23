@@ -160,6 +160,7 @@ class Payments extends AbstractWidget {
 				'connect_url'       => $connect_url,
 				'settings_url'      => StripeHelpers::get_settings_page_url(),
 				'show_mercado_pago' => $this->is_mercado_pago_supported(),
+				'show_paystack'     => $this->is_paystack_supported(),
 			],
 			true
 		);
@@ -180,6 +181,20 @@ class Payments extends AbstractWidget {
 	private function is_mercado_pago_supported(): bool {
 
 		$supported = [ 'ARS', 'BRL', 'CLP', 'COP', 'MXN', 'PEN', 'UYU' ];
+
+		return in_array( strtoupper( wpforms_get_currency() ), $supported, true );
+	}
+
+	/**
+	 * Whether the site currency is one Paystack can process.
+	 *
+	 * @since 2.0.2.2
+	 *
+	 * @return bool
+	 */
+	private function is_paystack_supported(): bool {
+
+		$supported = [ 'NGN', 'GHS', 'ZAR', 'KES' ];
 
 		return in_array( strtoupper( wpforms_get_currency() ), $supported, true );
 	}
@@ -591,7 +606,7 @@ class Payments extends AbstractWidget {
 			return '';
 		}
 
-		$amount = $this->split_tile_value( $value )['amount'];
+		$amount = PaymentStats::parse_amount_tile( $value )['amount'];
 
 		if ( in_array( 'is-amount', $button_classes, true ) ) {
 			return wpforms_format_amount( $amount, true );
@@ -616,43 +631,9 @@ class Payments extends AbstractWidget {
 			return '';
 		}
 
-		$count = $this->split_tile_value( $value )['count'];
+		$count = PaymentStats::parse_amount_tile( $value )['count'];
 
 		return $count !== null ? number_format_i18n( $count ) : '';
-	}
-
-	/**
-	 * Split a tile's raw cached value into its amount and row-count parts. The live
-	 * aggregator concatenates has-count tiles into a single "amount (count)" string
-	 * (`PaymentStats::normalize_tiles()`); the empty-state placeholder and the Pro
-	 * rollup path use an `[ 'amount' => …, 'count' => … ]` array instead. Handles both.
-	 *
-	 * @since 2.0.2
-	 *
-	 * @param int|string|array $value Raw cached tile value.
-	 *
-	 * @return array
-	 */
-	private function split_tile_value( $value ): array {
-
-		if ( is_array( $value ) ) {
-			return [
-				'amount' => (string) ( $value['amount'] ?? '0' ),
-				'count'  => isset( $value['count'] ) ? (int) $value['count'] : null,
-			];
-		}
-
-		if ( preg_match( '/^(.*?)\s*\((\d+)\)$/', (string) $value, $matches ) ) {
-			return [
-				'amount' => $matches[1],
-				'count'  => (int) $matches[2],
-			];
-		}
-
-		return [
-			'amount' => (string) $value,
-			'count'  => null,
-		];
 	}
 
 	/**
