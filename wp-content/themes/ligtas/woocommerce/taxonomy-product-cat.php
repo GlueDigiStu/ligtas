@@ -47,7 +47,7 @@
 								<a class="btn" href="<?php echo esc_url($link['url']); ?>">
 									<?php echo esc_html($link['title']); ?>
 									<svg class="svg_arrow_btn">
-                                        <use xlink:href="https://lig001.dd-staging.co.uk/wp-content/themes/ligtas/images/sprite/sprite.svg#arrow_btn"></use>
+                                        <use xlink:href="<?php bloginfo('template_url'); ?>/images/sprite/sprite.svg#arrow_btn"></use>
                                     </svg>
 								</a>
 							<?php } ?>
