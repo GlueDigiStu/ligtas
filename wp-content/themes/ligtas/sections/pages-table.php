@@ -8,7 +8,7 @@
     }  
 ?>
 
-<div class="content_section <?php echo $color.' '.get_field('indents'); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?>>
+<div class="content_section <?php echo $color.' '.get_field('indents'); ?>"<?php echo ligtas_section_id_attr(); ?>>
     <div class="container">
         <?php if(get_field('section')) { ?>
         <h2 class="title_category fade_in"><?php echo get_field('section'); ?></h2>

@@ -8,7 +8,7 @@
             $colortext = ' grey'; 
         } 
 ?>
-        <div class="sticky_section content_section <?php echo $color.' '.get_field('indents'); ?><?php echo ligtas_manual_padding_class(); ?>" id=<?php if(get_field('section')) { echo str_replace(' ', '-', strtolower(get_field('section')));} ?><?php echo ligtas_manual_padding_style(); ?>>
+        <div class="sticky_section content_section <?php echo $color.' '.get_field('indents'); ?><?php echo ligtas_manual_padding_class(); ?>"<?php echo ligtas_section_id_attr(); ?><?php echo ligtas_manual_padding_style(); ?>>
             <div class="container">
                 <div class="sticky_content">
                     <div class="sticky_content_left">

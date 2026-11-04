@@ -732,6 +732,29 @@ function ligtas_manual_padding_style() {
 }
 
 /**
+ * A block wrapper's id attribute, built from its "Section" field.
+ *
+ * Returns nothing when the field is empty. The templates used to print a bare
+ * id= with an unquoted value, and when that value was empty the browser read
+ * whatever came next as the id. When that was the manual padding style
+ * attribute, the style was lost and the block lost all its padding.
+ *
+ * @param string|string[] $search   Characters swapped for hyphens, as before.
+ * @param string          $fallback Value to use when the Section field is empty.
+ * @return string
+ */
+function ligtas_section_id_attr( $search = ' ', $fallback = '' ) {
+    $section = function_exists( 'get_field' ) ? get_field( 'section' ) : '';
+    $source  = $section ? $section : $fallback;
+
+    if ( ! $source ) {
+        return '';
+    }
+
+    return ' id="' . esc_attr( str_replace( $search, '-', strtolower( $source ) ) ) . '"';
+}
+
+/**
  * Initialize ACF date picker for WooCommerce product variations
  */
 function acf_init_date_picker_for_variations() {
