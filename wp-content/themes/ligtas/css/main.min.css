@@ -614,6 +614,10 @@ body {
 .typical_text.grey p {
     color: #fafafa;
 }
+.typical_text.grey li a,
+.typical_text.grey p a {
+    color: #fafafa;
+}
 .typical_text.purple_light h1,
 .typical_text.purple_light h2,
 .typical_text.purple_light h3,
