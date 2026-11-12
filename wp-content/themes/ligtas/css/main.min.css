@@ -5704,6 +5704,19 @@ body {
         margin-bottom: 67px;
     }
 }
+.why_section .faq_accordion + .intro_description {
+    margin-top: 102px;
+}
+@media screen and (max-width: 1440px) {
+    .why_section .faq_accordion + .intro_description {
+        margin-top: 77px;
+    }
+}
+@media screen and (max-width: 991px) {
+    .why_section .faq_accordion + .intro_description {
+        margin-top: 68px;
+    }
+}
 .why_description .title_section {
     margin-bottom: 40px;
 }
