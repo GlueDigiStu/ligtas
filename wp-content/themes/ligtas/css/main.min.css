@@ -8687,20 +8687,26 @@ body {
 .cs_solutions .intro_description:last-child {
     margin-bottom: 0;
 }
-.cs_solutions .faq_accordion,
-.why_section .faq_accordion {
+.cs_solutions .faq_accordion {
     margin-bottom: 102px;
 }
+.why_section .faq_accordion {
+    margin-bottom: 68px;
+}
 @media screen and (max-width: 1440px) {
-    .cs_solutions .faq_accordion,
-    .why_section .faq_accordion {
+    .cs_solutions .faq_accordion {
         margin-bottom: 77px;
+    }
+    .why_section .faq_accordion {
+        margin-bottom: 51px;
     }
 }
 @media screen and (max-width: 991px) {
-    .cs_solutions .faq_accordion,
-    .why_section .faq_accordion {
+    .cs_solutions .faq_accordion {
         margin-bottom: 68px;
+    }
+    .why_section .faq_accordion {
+        margin-bottom: 45px;
     }
 }
 .cs_solutions .faq_accordion:last-child,
