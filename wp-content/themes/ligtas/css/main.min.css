@@ -8687,20 +8687,24 @@ body {
 .cs_solutions .intro_description:last-child {
     margin-bottom: 0;
 }
-.cs_solutions .faq_accordion {
+.cs_solutions .faq_accordion,
+.why_section .faq_accordion {
     margin-bottom: 102px;
 }
 @media screen and (max-width: 1440px) {
-    .cs_solutions .faq_accordion {
+    .cs_solutions .faq_accordion,
+    .why_section .faq_accordion {
         margin-bottom: 77px;
     }
 }
 @media screen and (max-width: 991px) {
-    .cs_solutions .faq_accordion {
+    .cs_solutions .faq_accordion,
+    .why_section .faq_accordion {
         margin-bottom: 68px;
     }
 }
-.cs_solutions .faq_accordion:last-child {
+.cs_solutions .faq_accordion:last-child,
+.why_section .faq_accordion:last-child {
     margin-bottom: 0;
 }
 .filter_panel {
